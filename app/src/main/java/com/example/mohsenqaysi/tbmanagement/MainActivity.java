@@ -1,15 +1,20 @@
 package com.example.mohsenqaysi.tbmanagement;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
-
-    // This is a test that GitHub Works
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+    // Go to the signing page
+    public void displaySignInPage(View view){
+        Intent intent = new Intent(this,Login.class);
+        startActivity(intent);
     }
 }

@@ -17,8 +17,8 @@
         android:layout_marginBottom="16dp"
         android:layout_marginTop="22dp"
         android:gravity="center_horizontal"
-        android:text="Account Login"
-        android:textColor="#fff"
+        android:text="Help Us Saves Lives"
+        android:textColor="#000"
         android:textSize="26sp"
         android:textStyle="bold" />
 
@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-
+                    android:id="@+id/userName_ID"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:drawablePadding="20dp"
@@ -63,6 +63,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:id="@+id/userNamePassword_ID"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -79,6 +80,7 @@
                 android:layout_margin="0dp"
                 android:background="#d67601"
                 android:text="Sign in"
+                android:onClick="printLoginOutput"
                 android:textAllCaps="false"
                 android:textColor="#fff"
                 android:textSize="18sp" />
