@@ -106,8 +106,17 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             // stop function execution
             return;
         }
+        if (!isEmailValid(email)){
+            showToast("Please enter a valid email");
+            // stop function execution
+            return;
+        }
         if(TextUtils.isEmpty(password)){
             showToast("Please enter a password");
+            return;
+        }
+        if (!isPasswordValid(password)){
+            showToast("Please enter a password bigger the 6 digits");
             return;
         }
 
