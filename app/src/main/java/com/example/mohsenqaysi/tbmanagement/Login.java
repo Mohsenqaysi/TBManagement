@@ -11,6 +11,7 @@ import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -38,6 +39,12 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Hide the action bad and set the screen size to full
+        getSupportActionBar().hide();
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                             WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_login);
         // init the inputs fields
         signIn = (Button) findViewById(R.id.loginUser_ID);
@@ -181,6 +188,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                                 if (task.isSuccessful()) {
                                     Log.d(TAG, "Email sent.");
                                     showToast("Email sent");
+                                } else {
+                                    showToast("Please enter a correct email");
                                 }
                             }
                         });
