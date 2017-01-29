@@ -2,9 +2,12 @@ package com.example.mohsenqaysi.tbmanagement;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -29,6 +32,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     private EditText userPassword;
     private ProgressDialog progressDialog;
     private String TAG = "Status: ";
+    private String resetemailAddress = "";
 
 
     @Override
@@ -36,9 +40,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // init the inputs fields
-        signIn = (Button)findViewById(R.id.loginUser_ID);
-        email = (EditText)findViewById(R.id.userName_ID);
-        userPassword = (EditText)findViewById(R.id.userNamePassword_ID);
+        signIn = (Button) findViewById(R.id.loginUser_ID);
+        email = (EditText) findViewById(R.id.userName_ID);
+        userPassword = (EditText) findViewById(R.id.userNamePassword_ID);
         // init the progressDialog object
         progressDialog = new ProgressDialog(this);
 
@@ -47,23 +51,23 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         //init FirebseAuth
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
-        @Override
-        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-            FirebaseUser user = firebaseAuth.getCurrentUser();
-            if (user != null) {
-                // User is signed in
-                Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-            } else {
-                // User is signed out
-                Log.d(TAG, "onAuthStateChanged:signed_out");
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    // User is signed in
+                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                } else {
+                    // User is signed out
+                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                }
+                // ...
             }
-            // ...
-        }
-    };
-}
+        };
+    }
 
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
     }
@@ -76,20 +80,17 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
-
-
-
-
     private boolean isEmailValid(String email) {
         Log.e("email value: ", email);
         return email.contains("@");
     }
-    private boolean isPasswordValid(String password){
+
+    private boolean isPasswordValid(String password) {
         return password.length() >= 6;
     }
 
     // Display a toast message
-    private void showToast(String text ){
+    private void showToast(String text) {
         Context context = getApplicationContext();
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
@@ -99,23 +100,23 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     private void signInIntoFirebase() {
 
         String email = this.email.getText().toString().trim();
-        String  password = this.userPassword.getText().toString().trim();
+        String password = this.userPassword.getText().toString().trim();
 
-        if(TextUtils.isEmpty(email)){
+        if (TextUtils.isEmpty(email)) {
             showToast("Please enter an email");
             // stop function execution
             return;
         }
-        if (!isEmailValid(email)){
+        if (!isEmailValid(email)) {
             showToast("Please enter a valid email");
             // stop function execution
             return;
         }
-        if(TextUtils.isEmpty(password)){
+        if (TextUtils.isEmpty(password)) {
             showToast("Please enter a password");
             return;
         }
-        if (!isPasswordValid(password)){
+        if (!isPasswordValid(password)) {
             showToast("Please enter a password bigger the 6 digits");
             return;
         }
@@ -124,38 +125,75 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         progressDialog.setMessage("Login in user...");
         progressDialog.show();
 
-    mAuth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-        @Override
-        public void onComplete(@NonNull Task<AuthResult> task) {
-            Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
 
-            // If sign in fails, display a message to the user. If sign in succeeds
-            // the auth state listener will be notified and logic to handle the
-            // signed in user can be handled in the listener.
-            if (!task.isSuccessful()) {
-                Log.w(TAG, "signInWithEmail:failed", task.getException());
+                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // the auth state listener will be notified and logic to handle the
+                        // signed in user can be handled in the listener.
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "signInWithEmail:failed", task.getException());
 //                Toast.makeText(EmailPasswordActivity.this, R.string.auth_failed,
 //                        Toast.LENGTH_SHORT).show();
-                showToast("Log in failed");
-                progressDialog.hide();
-
-            } else {
-                showToast("Log in successful");
-                progressDialog.hide();
-            }
-
-        }
-    });
-}
+                            showToast("Log in failed");
+                            progressDialog.hide();
+                        } else {
+                            showToast("Log in successful");
+                            progressDialog.hide();
+                        }
+                    }
+                });
+    }
 
     @Override
     public void onClick(View view) {
-        if (view == signIn ){
+        if (view == signIn) {
             signInIntoFirebase();
         }
 
     }
 
 
+    // reaset user password
+    public void reasetPassword(View view) {
+        // Display input dialog to get the email
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Enter your emial");
+        // get the input string
+        final EditText input = new EditText(this);
+        //set the input type
+        input.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+        builder.setView(input);
+
+        // send buttons
+        builder.setPositiveButton("Send", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                resetemailAddress = input.getText().toString().trim();
+                // Sens the reset password to the user email
+                mAuth.sendPasswordResetEmail(resetemailAddress)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Log.d(TAG, "Email sent.");
+                                    showToast("Email sent");
+                                }
+                            }
+                        });
+            }
+        });
+
+        // Cancel buttons
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
+    }
 }

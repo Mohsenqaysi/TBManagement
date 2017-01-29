@@ -88,11 +88,13 @@ tools:context="com.example.mohsenqaysi.tbmanagement.Login">
                 android:textSize="18sp" />
 
             <Button
+                android:id="@+id/forgetPassword_ID"
                 android:layout_width="307dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:paddingTop="5dp"
                 android:background="@null"
+                android:onClick="reasetPassword"
                 android:text="@string/forgot_password" />
 
         </LinearLayout>
