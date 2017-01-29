@@ -170,6 +170,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         startActivity(intent);
     }
 
+    public void sigOutUSer(){
+        FirebaseAuth.getInstance().signOut();
+    }
+
     @Override
     public void onClick(View view) {
         if (view == signIn) {
