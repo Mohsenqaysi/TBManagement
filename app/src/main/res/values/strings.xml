@@ -3,7 +3,7 @@
     <string name="error_empty_email">Please enter an email</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="help_us_saves_lives">Help Us Save Lives</string>
-    <string name="user_name">User Name</string>
+    <string name="email">Email</string>
     <string name="sign_in">Sign in</string>
     <string name="password">Password</string>
     <string name="error_empty_password">Please enter an email</string>

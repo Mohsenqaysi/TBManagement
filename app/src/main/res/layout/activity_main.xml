@@ -10,12 +10,15 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.mohsenqaysi.tbmanagement.MainActivity">
 
-    <Button
+    <TextView
+        android:text="Hello Woeld"
+        android:textSize="30dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign in!"
-        android:onClick="displaySignInPage"
-        android:id="@+id/signinBT_ID"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="84dp"
+        android:id="@+id/textView" />
 </RelativeLayout>

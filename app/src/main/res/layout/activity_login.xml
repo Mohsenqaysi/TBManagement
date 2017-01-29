@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
+    android:orientation="vertical"
     tools:context="com.example.mohsenqaysi.tbmanagement.Login">
 
     <TextView
@@ -70,6 +71,7 @@
 
             <!--Data input-->
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/emailWrapper_ID"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -78,13 +80,14 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:drawablePadding="20dp"
-                    android:drawableTint="@color/colorAccent"
+                    android:drawableTint="@color/signInButtonColor"
                     android:maxLines="1"
-                    android:hint="@string/user_name"
+                    android:hint="@string/email"
                     android:inputType="textEmailAddress" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/passwordWrapper_ID"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -95,7 +98,7 @@
                     android:layout_marginTop="16dp"
                     android:maxLines="1"
                     android:drawablePadding="20dp"
-                    android:drawableTint="@color/colorAccent"
+                    android:drawableTint="@color/signInButtonColor"
                     android:hint="@string/password"
                     android:inputType="textPassword" />
             </android.support.design.widget.TextInputLayout>
@@ -105,7 +108,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="0dp"
-                android:background="#d67601"
+                android:background="@color/signInButtonColor"
                 android:text="@string/sign_in"
                 android:onClick="loginUser"
                 android:textAllCaps="false"

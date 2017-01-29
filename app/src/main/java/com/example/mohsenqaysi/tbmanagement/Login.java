@@ -3,8 +3,10 @@ package com.example.mohsenqaysi.tbmanagement;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
@@ -27,7 +29,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     //Fire base auth
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    //
+    //init
+    private TextInputLayout emailWrapper;
+    private TextInputLayout passwordWrapper;
     private Button signIn;
     private EditText email;
     private EditText userPassword;
@@ -89,7 +93,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
     private boolean isEmailValid(String email) {
         Log.e("email value: ", email);
-        return email.contains("@");
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     private boolean isPasswordValid(String password) {
@@ -105,28 +109,32 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void signInIntoFirebase() {
+        final TextInputLayout errorEmail = (TextInputLayout) findViewById(R.id.emailWrapper_ID);
+        errorEmail.setErrorEnabled(true);
+        final TextInputLayout errorPassword = (TextInputLayout) findViewById(R.id.passwordWrapper_ID);
+        errorPassword.setErrorEnabled(true);
 
         String email = this.email.getText().toString().trim();
         String password = this.userPassword.getText().toString().trim();
 
-        if (TextUtils.isEmpty(email)) {
-            showToast("Please enter an email");
+        if (TextUtils.isEmpty(email) || !isEmailValid(email)) {
+            errorEmail.setError("Please enter a valid");
             // stop function execution
             return;
+        } else {
+            errorEmail.setErrorEnabled(false);
         }
-        if (!isEmailValid(email)) {
-            showToast("Please enter a valid email");
+        if (TextUtils.isEmpty(password) || !isPasswordValid(password)) {
+            errorPassword.setError("Password is too short");
             // stop function execution
             return;
+        } else {
+            errorPassword.setErrorEnabled(false);
         }
-        if (TextUtils.isEmpty(password)) {
-            showToast("Please enter a password");
-            return;
-        }
-        if (!isPasswordValid(password)) {
-            showToast("Please enter a password bigger the 6 digits");
-            return;
-        }
+        errorEmail.setError(null);
+        errorPassword.setError(null);
+        errorEmail.setErrorEnabled(false);
+        errorPassword.setErrorEnabled(false);
 
         // if the validation is ok ... Do this ->
         progressDialog.setMessage("Login in user...");
@@ -143,16 +151,22 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.w(TAG, "signInWithEmail:failed", task.getException());
-//                Toast.makeText(EmailPasswordActivity.this, R.string.auth_failed,
-//                        Toast.LENGTH_SHORT).show();
                             showToast("Log in failed");
                             progressDialog.hide();
+                            errorEmail.setError("Email or Password is wrong");
+                            errorPassword.setError("Email or Password is wrong");
                         } else {
                             showToast("Log in successful");
                             progressDialog.hide();
+                            MainActivityPage();
                         }
                     }
                 });
+    }
+
+    private void MainActivityPage() {
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -160,9 +174,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         if (view == signIn) {
             signInIntoFirebase();
         }
-
     }
-
 
     // reaset user password
     public void reasetPassword(View view) {
