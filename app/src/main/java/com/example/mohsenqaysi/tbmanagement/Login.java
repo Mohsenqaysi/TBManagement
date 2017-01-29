@@ -29,6 +29,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     //Fire base auth
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private String userFirebaseAuth_ID = "";
     //init
     private TextInputLayout emailWrapper;
     private TextInputLayout passwordWrapper;
@@ -48,7 +49,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 //        requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                              WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         setContentView(R.layout.activity_login);
         // init the inputs fields
         signIn = (Button) findViewById(R.id.loginUser_ID);
@@ -56,7 +56,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         userPassword = (EditText) findViewById(R.id.userNamePassword_ID);
         // init the progressDialog object
         progressDialog = new ProgressDialog(this);
-
 
         signIn.setOnClickListener(this);
         //init FirebseAuth
@@ -67,12 +66,12 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
-                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                    userFirebaseAuth_ID = user.getUid();
+                    Log.e(TAG, "onAuthStateChanged:signed_in:" + userFirebaseAuth_ID);
                 } else {
                     // User is signed out
-                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                    Log.e(TAG, "onAuthStateChanged:signed_out");
                 }
-                // ...
             }
         };
     }
@@ -156,7 +155,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                             errorEmail.setError("Email or Password is wrong");
                             errorPassword.setError("Email or Password is wrong");
                         } else {
-                            showToast("Log in successful");
+//                            showToast("Log in successful");
+
                             progressDialog.hide();
                             MainActivityPage();
                         }
@@ -166,6 +166,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
     private void MainActivityPage() {
         Intent intent = new Intent(this,MainActivity.class);
+        intent.putExtra("ID", userFirebaseAuth_ID);
         startActivity(intent);
     }
 

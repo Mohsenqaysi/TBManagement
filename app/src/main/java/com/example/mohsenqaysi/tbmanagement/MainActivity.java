@@ -1,9 +1,9 @@
 package com.example.mohsenqaysi.tbmanagement;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -11,10 +11,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Intent intent = getIntent();
+        String userIDInFireBase = intent.getExtras().getString("ID");
+        TextView userIDLabel = (TextView) findViewById(R.id.userAuth_ID);
+        userIDLabel.setText("user ID: "+userIDInFireBase);
     }
-    // Go to the signing page
-    public void displaySignInPage(View view){
-        Intent intent = new Intent(this,Login.class);
-        startActivity(intent);
-    }
+
 }
