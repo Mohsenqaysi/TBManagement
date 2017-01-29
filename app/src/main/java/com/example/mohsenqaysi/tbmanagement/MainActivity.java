@@ -24,5 +24,6 @@ public class MainActivity extends AppCompatActivity {
         LoginObject.sigOutUSer();
         Intent intent = new Intent(this,Login.class);
         startActivity(intent);
+        finish();
     }
 }

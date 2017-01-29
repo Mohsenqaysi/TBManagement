@@ -80,7 +80,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:drawablePadding="20dp"
-                    android:drawableTint="@color/signInButtonColor"
+                    android:drawableTint="@color/textEditorColor"
                     android:maxLines="1"
                     android:hint="@string/email"
                     android:inputType="textEmailAddress" />
@@ -98,7 +98,7 @@
                     android:layout_marginTop="16dp"
                     android:maxLines="1"
                     android:drawablePadding="20dp"
-                    android:drawableTint="@color/signInButtonColor"
+                    android:drawableTint="@color/textEditorColor"
                     android:hint="@string/password"
                     android:inputType="textPassword" />
             </android.support.design.widget.TextInputLayout>

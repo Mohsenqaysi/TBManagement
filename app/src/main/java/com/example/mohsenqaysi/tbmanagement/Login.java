@@ -168,6 +168,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         Intent intent = new Intent(this,MainActivity.class);
         intent.putExtra("ID", userFirebaseAuth_ID);
         startActivity(intent);
+        finish();
     }
 
     public void sigOutUSer(){
