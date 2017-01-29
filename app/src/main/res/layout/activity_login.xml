@@ -76,12 +76,13 @@ tools:context="com.example.mohsenqaysi.tbmanagement.Login">
             </android.support.design.widget.TextInputLayout>
 
             <Button
+                android:id="@+id/loginUser_ID"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="0dp"
                 android:background="#d67601"
                 android:text="@string/sign_in"
-                android:onClick="printLoginOutput"
+                android:onClick="loginUser"
                 android:textAllCaps="false"
                 android:textColor="#fff"
                 android:textSize="18sp" />
