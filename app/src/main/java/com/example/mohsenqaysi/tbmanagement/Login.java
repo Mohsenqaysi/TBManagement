@@ -156,7 +156,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                             errorPassword.setError("Email or Password is wrong");
                         } else {
 //                            showToast("Log in successful");
-
                             progressDialog.hide();
                             MainActivityPage();
                         }
