@@ -9,8 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@drawable/bg"
-
-    tools:context="com.example.mohsenqaysi.tbmanagement.Login">
+tools:context="com.example.mohsenqaysi.tbmanagement.Login">
 
     <TextView
         android:id="@+id/login_title"
@@ -54,7 +53,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:drawablePadding="20dp"
-                    android:drawableTint="#000000"
+                    android:drawableTint="@color/colorAccent"
                     android:maxLines="1"
                     android:hint="@string/user_name"
                     android:inputType="textEmailAddress" />
@@ -71,7 +70,7 @@
                     android:layout_marginTop="16dp"
                     android:maxLines="1"
                     android:drawablePadding="20dp"
-                    android:drawableTint="#000000"
+                    android:drawableTint="@color/colorAccent"
                     android:hint="@string/password"
                     android:inputType="textPassword" />
             </android.support.design.widget.TextInputLayout>
