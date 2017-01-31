@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     public void signOut(View view) {
         LoginObject.sigOutUSer();
         Intent intent = new Intent(this,Login.class);
-        startActivity(intent);
         finish();
+        startActivity(intent);
     }
 }

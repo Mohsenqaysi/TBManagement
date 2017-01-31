@@ -29,7 +29,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     //Fire base auth
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseUser mUser;
     private String userFirebaseAuth_ID = "";
+
     //init
     private TextInputLayout emailWrapper;
     private TextInputLayout passwordWrapper;
@@ -58,6 +60,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         progressDialog = new ProgressDialog(this);
 
         signIn.setOnClickListener(this);
+
         //init FirebseAuth
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -68,12 +71,47 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     // User is signed in
                     userFirebaseAuth_ID = user.getUid();
                     Log.e(TAG, "onAuthStateChanged:signed_in:" + userFirebaseAuth_ID);
+                    MainActivityPage();
                 } else {
                     // User is signed out
                     Log.e(TAG, "onAuthStateChanged:signed_out");
+                    signInIntoFirebase();
                 }
             }
         };
+
+//        // Get the user authantication token form the server
+//        mUser = FirebaseAuth.getInstance().getCurrentUser();
+//
+//        mUser.getToken(false)
+//                .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+//                    public void onComplete(@NonNull Task<GetTokenResult> task) {
+//                        if (task.isSuccessful()) {
+//                            String idToken = task.getResult().getToken();
+//                            Log.e(TAG, "idToken: "+idToken);
+//                            // Send token to your backend via HTTPS
+//                            // ...
+//                        } else {
+//                            task.getException();
+//                        }
+//                    }
+//                });
+
+
+//        mAuth.signInWithCustomToken(userFirebaseAuth_ID)
+//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<AuthResult> task) {
+//                        Log.d(TAG, "signInWithCustomToken:onComplete:" + task.isSuccessful());
+//
+//                        // If sign in fails, display a message to the user. If sign in succeeds
+//                        // the auth state listener will be notified and logic to handle the
+//                        // signed in user can be handled in the listener.
+//                        if (!task.isSuccessful()) {
+//                            showToast("custom token: failed to log you in...");
+//                        }
+//                    }
+//                });
     }
 
     @Override
@@ -156,7 +194,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                             errorPassword.setError("Email or Password is wrong");
                         } else {
 //                            showToast("Log in successful");
-                            progressDialog.hide();
+                            progressDialog.dismiss();
                             MainActivityPage();
                         }
                     }
