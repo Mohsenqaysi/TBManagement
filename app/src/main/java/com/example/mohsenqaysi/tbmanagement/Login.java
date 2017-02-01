@@ -33,8 +33,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     private String userFirebaseAuth_ID = "";
 
     //init
-    private TextInputLayout emailWrapper;
-    private TextInputLayout passwordWrapper;
     private Button signIn;
     private EditText email;
     private EditText userPassword;
@@ -46,11 +44,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Hide the action bad and set the screen size to full
-        getSupportActionBar().hide();
-//        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                             WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        hideNavigationBar();
+
         setContentView(R.layout.activity_login);
         // init the inputs fields
         signIn = (Button) findViewById(R.id.loginUser_ID);
@@ -112,6 +108,14 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 //                        }
 //                    }
 //                });
+    }
+
+    private void hideNavigationBar() {
+        // Hide the action bad and set the screen size to full
+        getSupportActionBar().hide();
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
     @Override
