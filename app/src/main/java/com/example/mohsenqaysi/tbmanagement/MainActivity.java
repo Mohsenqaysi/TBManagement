@@ -6,13 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -47,43 +48,46 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void SaveUserDateToFirebase(View view) {
+        writeNewPost(userIDInFireBase, "Mohsen Barri Qaysi","Al-gisi@hotmail.com");
 
-        mDatabase.child("users").child(userIDInFireBase).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // make the user data object ready to be saved
-                User user = dataSnapshot.getValue(User.class);
 
-                // [START_EXCLUDE]
-                if (user == null) {
-                    // User is null, error out
-                    // TODO: // FIXME: 2/2/17
-                    Log.w(TAG, "User " + userIDInFireBase + "" );
-                    Toast.makeText(MainActivity.this,
-                            "Error: could not fetch user.",
-                            Toast.LENGTH_SHORT).show();
-                } else {
-                    // Write new post
-                    writeNewPost(userIDInFireBase, user.username_ID);
+              Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
+//                String users = (String) map.get("Al-gisi@hotmail.com");
+//                String email = (String) map.get("email");
+//                 String All_users = dataSnapshot.getRef().getKey();
+//                String id = map.keySet().toString();
+//                String object_Value = map.get(id).toString();
+                for (Map.Entry<String, Object> child : ((Map<String, Object>) dataSnapshot.getValue()).entrySet()) {
+                    System.out.println("child: " + child.getValue().+"\n");
+
                 }
+//                Log.w(TAG, "All_users: " + id );
+//                Log.w(TAG, "object_value: " + object_Value);
 
-                // Finish this Activity, back to the stream
-                finish();
-                // [END_EXCLUDE]
+
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.w(TAG, "getUser:onCancelled", databaseError.toException());
+
             }
-        }
-    );
+        });
+
+
     }
 
     // [START write_fan_out]
-    private void writeNewPost(String userIDInFireBase, String username_id) {
-        User user = new User(username_id);
-        mDatabase.child("users").child(userIDInFireBase).setValue(user);
+    private void writeNewPost(String userIDInFireBase, String username_id, String email) {
+        User user = new User(username_id,email);
+        mDatabase.child("FR").child("users").child(userIDInFireBase).setValue(user);
+//        mDatabase.child("FR").child("users").child(userIDInFireBase).child("Data Of Diagnosis").setValue(user);
+//        mDatabase.child("FR").child("users").push({"name: Mohsen"});
+
+
+//        mDatabase.setValue(user);
     }
     // [END write_fan_out]
 }

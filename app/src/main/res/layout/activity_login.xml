@@ -113,7 +113,6 @@
                 android:layout_margin="0dp"
                 android:background="@color/signInButtonColor"
                 android:text="@string/sign_in"
-                android:onClick="loginUser"
                 android:textAllCaps="false"
                 android:textColor="#fff"
                 android:textSize="18sp" />
