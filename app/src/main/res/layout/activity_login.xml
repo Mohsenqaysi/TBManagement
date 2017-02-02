@@ -83,6 +83,7 @@
                     android:drawableTint="@color/textEditorColor"
                     android:maxLines="1"
                     android:hint="@string/email"
+                    android:drawableLeft="@drawable/user"
                     android:inputType="textEmailAddress" />
             </android.support.design.widget.TextInputLayout>
 
@@ -99,7 +100,9 @@
                     android:maxLines="1"
                     android:drawablePadding="20dp"
                     android:drawableTint="@color/textEditorColor"
+                    android:drawableLeft="@drawable/lock"
                     android:hint="@string/password"
+
                     android:inputType="textPassword" />
             </android.support.design.widget.TextInputLayout>
 
