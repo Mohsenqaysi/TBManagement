@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 //                String id = map.keySet().toString();
 //                String object_Value = map.get(id).toString();
                 for (Map.Entry<String, Object> child : ((Map<String, Object>) dataSnapshot.getValue()).entrySet()) {
-                    System.out.println("child: " + child.getValue().+"\n");
+                    System.out.println("child: " + child.getValue()+"\n");
 
                 }
 //                Log.w(TAG, "All_users: " + id );
