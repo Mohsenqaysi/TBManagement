@@ -29,7 +29,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     //Fire base auth
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    private FirebaseUser mUser;
     private String userFirebaseAuth_ID = "";
 
     //init
@@ -44,10 +43,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        // Hide the top part of the screen
         hideNavigationBar();
-
         setContentView(R.layout.activity_login);
+
         // init the inputs fields
         signIn = (Button) findViewById(R.id.loginUser_ID);
         email = (EditText) findViewById(R.id.userName_ID);
@@ -76,44 +75,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             }
         };
 
-//        // Get the user authantication token form the server
-//        mUser = FirebaseAuth.getInstance().getCurrentUser();
-//
-//        mUser.getToken(false)
-//                .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
-//                    public void onComplete(@NonNull Task<GetTokenResult> task) {
-//                        if (task.isSuccessful()) {
-//                            String idToken = task.getResult().getToken();
-//                            Log.e(TAG, "idToken: "+idToken);
-//                            // Send token to your backend via HTTPS
-//                            // ...
-//                        } else {
-//                            task.getException();
-//                        }
-//                    }
-//                });
-
-
-//        mAuth.signInWithCustomToken(userFirebaseAuth_ID)
-//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        Log.d(TAG, "signInWithCustomToken:onComplete:" + task.isSuccessful());
-//
-//                        // If sign in fails, display a message to the user. If sign in succeeds
-//                        // the auth state listener will be notified and logic to handle the
-//                        // signed in user can be handled in the listener.
-//                        if (!task.isSuccessful()) {
-//                            showToast("custom token: failed to log you in...");
-//                        }
-//                    }
-//                });
     }
 
     private void hideNavigationBar() {
-        // Hide the action bad and set the screen size to full
+        // Hide the action bar and set the screen size to full
         getSupportActionBar().hide();
-//        requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
@@ -159,14 +125,14 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         String password = this.userPassword.getText().toString().trim();
 
         if (TextUtils.isEmpty(email) || !isEmailValid(email)) {
-            errorEmail.setError("Please enter a valid");
+            errorEmail.setError("Please enter a valid email");
             // stop function execution
             return;
         } else {
             errorEmail.setErrorEnabled(false);
         }
         if (TextUtils.isEmpty(password) || !isPasswordValid(password)) {
-            errorPassword.setError("Password is too short");
+            errorPassword.setError("Please enter a valid password");
             // stop function execution
             return;
         } else {
@@ -207,9 +173,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void MainActivityPage() {
-        Intent intent = new Intent(this,MainActivity.class);
-        intent.putExtra("ID", userFirebaseAuth_ID);
-        startActivity(intent);
+        startActivity(new Intent(this,MainActivity.class).putExtra("ID", userFirebaseAuth_ID));
         finish();
     }
 
