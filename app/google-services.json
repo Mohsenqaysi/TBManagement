@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1082393966325",
+    "firebase_url": "https://tbmanagement-aff8e.firebaseio.com",
+    "project_id": "tbmanagement-aff8e",
+    "storage_bucket": "tbmanagement-aff8e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1082393966325:android:4533f9248beafd45",
+        "android_client_info": {
+          "package_name": "com.example.mohsenqaysi.tbmanagement"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1082393966325-1ndm4ohhmi0blrmedu231hecp3d33nni.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXWKc2o3dkX92Hh1ttZneU4oLmKFC2UJ0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1082393966325-1ndm4ohhmi0blrmedu231hecp3d33nni.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

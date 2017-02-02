@@ -189,6 +189,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                         if (!task.isSuccessful()) {
                             Log.w(TAG, "signInWithEmail:failed", task.getException());
                             showToast("Log in failed");
+                            Log.w(TAG,task.getException().fillInStackTrace());
                             progressDialog.hide();
                             errorEmail.setError("Email or Password is wrong");
                             errorPassword.setError("Email or Password is wrong");
