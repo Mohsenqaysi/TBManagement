@@ -66,6 +66,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     // User is signed in
                     userFirebaseAuth_ID = user.getUid();
                     Log.e(TAG, "onAuthStateChanged:signed_in:" + userFirebaseAuth_ID);
+
+                    // TODO: Check is the user is logied in for the first time and ask the to fill their details
+
                     MainActivityPage();
                 } else {
                     // User is signed out
