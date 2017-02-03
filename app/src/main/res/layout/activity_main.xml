@@ -17,7 +17,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="84dp"
-        android:text="Hello Woeld"
+        android:text="Hello"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="30dp"
         android:textStyle="bold" />
@@ -52,5 +52,5 @@
         android:layout_alignStart="@+id/signOut_ID"
         android:layout_centerVertical="true"
         android:onClick="SaveUserDateToFirebase"
-        android:text="Button" />
+        android:text="Save Data" />
 </RelativeLayout>

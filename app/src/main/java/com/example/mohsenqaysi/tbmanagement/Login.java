@@ -31,7 +31,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     //init
     private Button signIn;
     private EditText email;
-    private EditText userPassword;
+    private EditText password;
+
+    private String userEmail = "";
+    private String userPassword = "";
     private ProgressDialog progressDialog;
     private String TAG = "Status: ";
     private String resetemailAddress = "";
@@ -47,7 +50,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         // init the inputs fields
         signIn = (Button) findViewById(R.id.loginUser_ID);
         email = (EditText) findViewById(R.id.userName_ID);
-        userPassword = (EditText) findViewById(R.id.userNamePassword_ID);
+        password = (EditText) findViewById(R.id.userNamePassword_ID);
         // init the progressDialog object
         progressDialog = new ProgressDialog(this);
 
@@ -65,7 +68,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     Log.e(TAG, "onAuthStateChanged:signed_in:" + userFirebaseAuth_ID);
 
                     // TODO: Check is the user is logied in for the first time and ask the to fill their details
-
                     MainActivityPage();
                 } else {
                     // User is signed out
@@ -77,6 +79,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
     }
 
+
+
     private void hideNavigationBar() {
         // Hide the action bar and set the screen size to full
         getSupportActionBar().hide();
@@ -87,9 +91,27 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onStart() {
         super.onStart();
+        // Clear all value here
+        email.setText("");
+        password.setText("");
         mAuth.addAuthStateListener(mAuthListener);
     }
 
+    @Override
+    protected void onPause(){
+        super.onPause();
+        // Clear all value here
+        email.setText("");
+        password.setText("");
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        // Clear all value here
+        email.setText("");
+        password.setText("");
+    }
     @Override
     public void onStop() {
         super.onStop();
@@ -121,17 +143,17 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         final TextInputLayout errorPassword = (TextInputLayout) findViewById(R.id.passwordWrapper_ID);
         errorPassword.setErrorEnabled(true);
 
-        String email = this.email.getText().toString().trim();
-        String password = this.userPassword.getText().toString().trim();
+         userEmail = this.email.getText().toString().trim();
+         userPassword = this.password.getText().toString().trim();
 
-        if (TextUtils.isEmpty(email) || !isEmailValid(email)) {
+        if (TextUtils.isEmpty(userEmail) || !isEmailValid(userEmail)) {
             errorEmail.setError("Please enter a valid email");
             // stop function execution
             return;
         } else {
             errorEmail.setErrorEnabled(false);
         }
-        if (TextUtils.isEmpty(password) || !isPasswordValid(password)) {
+        if (TextUtils.isEmpty(userPassword) || !isPasswordValid(userPassword)) {
             errorPassword.setError("Please enter a valid password");
             // stop function execution
             return;
@@ -148,7 +170,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         progressDialog.setMessage("Login in user...");
         progressDialog.show();
 
-        mAuth.signInWithEmailAndPassword(email, password)
+        mAuth.signInWithEmailAndPassword(userEmail, userPassword)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
