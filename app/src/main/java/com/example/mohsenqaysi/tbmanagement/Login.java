@@ -2,14 +2,11 @@ package com.example.mohsenqaysi.tbmanagement;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -193,43 +190,52 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
     // reaset user password
     public void reasetPassword(View view) {
-        // Display input dialog to get the email
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Enter your emial");
-        // get the input string
-        final EditText input = new EditText(this);
-        //set the input type
-        input.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
-        builder.setView(input);
+//        // Display input dialog to get the email
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setTitle("Enter your emial");
+//        // get the input string
+//        final EditText input = new EditText(this);
+//        //set the input type
+//        input.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+//        builder.setView(input);
+//
+//        // send buttons
+//        builder.setPositiveButton("Send", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                resetemailAddress = input.getText().toString().trim();
+//                // Sens the reset password to the user email
+//                mAuth.sendPasswordResetEmail(resetemailAddress)
+//                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                            @Override
+//                            public void onComplete(@NonNull Task<Void> task) {
+//                                if (task.isSuccessful()) {
+//                                    Log.d(TAG, "Email sent.");
+//                                    showToast("Email sent");
+//                                } else {
+//                                    showToast("Please enter a correct email");
+//                                }
+//                            }
+//                        });
+//            }
+//        });
+//
+//        // Cancel buttons
+//        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                dialog.cancel();
+//            }
+//        });
+//        builder.show();
 
-        // send buttons
-        builder.setPositiveButton("Send", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                resetemailAddress = input.getText().toString().trim();
-                // Sens the reset password to the user email
-                mAuth.sendPasswordResetEmail(resetemailAddress)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    Log.d(TAG, "Email sent.");
-                                    showToast("Email sent");
-                                } else {
-                                    showToast("Please enter a correct email");
-                                }
-                            }
-                        });
-            }
-        });
-
-        // Cancel buttons
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-        builder.show();
+        // goto the reset activity page
+        startActivity(new Intent(this,reasetPassword.class));
     }
+
+
+
+
+
+
 }
