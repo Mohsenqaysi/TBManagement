@@ -11,6 +11,6 @@
     <string name="forgot_password">Forgot Password?</string>
     <string name="send_forgot_password_link">Send Login Link</string>
     <string name="send_forgot_password_info">Trouble logging in?</string>
-    <string name="send_email_info">Enter you email and we’ll send you alink to get back into your account.</string>
+    <string name="send_email_info">Enter you email and we’ll send you a link to get back into your account.</string>
 
 </resources>
