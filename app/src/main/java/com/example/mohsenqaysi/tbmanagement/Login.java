@@ -144,6 +144,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         errorPassword.setErrorEnabled(false);
 
         // if the validation is ok ... Do this ->
+        progressDialog.setTitle("Connecting");
         progressDialog.setMessage("Login in user...");
         progressDialog.show();
 
@@ -188,54 +189,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
-    // reaset user password
-    public void reasetPassword(View view) {
-//        // Display input dialog to get the email
-//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//        builder.setTitle("Enter your emial");
-//        // get the input string
-//        final EditText input = new EditText(this);
-//        //set the input type
-//        input.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
-//        builder.setView(input);
-//
-//        // send buttons
-//        builder.setPositiveButton("Send", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                resetemailAddress = input.getText().toString().trim();
-//                // Sens the reset password to the user email
-//                mAuth.sendPasswordResetEmail(resetemailAddress)
-//                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                            @Override
-//                            public void onComplete(@NonNull Task<Void> task) {
-//                                if (task.isSuccessful()) {
-//                                    Log.d(TAG, "Email sent.");
-//                                    showToast("Email sent");
-//                                } else {
-//                                    showToast("Please enter a correct email");
-//                                }
-//                            }
-//                        });
-//            }
-//        });
-//
-//        // Cancel buttons
-//        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                dialog.cancel();
-//            }
-//        });
-//        builder.show();
-
+    // reset user password
+    public void resetPassword(View view) {
         // goto the reset activity page
-        startActivity(new Intent(this,reasetPassword.class));
+        startActivity(new Intent(this,ResetPassword.class));
     }
-
-
-
-
-
-
 }

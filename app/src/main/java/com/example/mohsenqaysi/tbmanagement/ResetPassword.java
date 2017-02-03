@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -16,7 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class reasetPassword extends AppCompatActivity {
+public class ResetPassword extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private Button sendloginUserEmail_ID;
@@ -28,6 +29,8 @@ public class reasetPassword extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reaset_password);
+        hideNavigationBar();
+
 
         mAuth = FirebaseAuth.getInstance();
         sendloginUserEmail_ID = (Button) findViewById(R.id.sendloginUserEmail_ID);
@@ -36,41 +39,50 @@ public class reasetPassword extends AppCompatActivity {
 
 
         sendloginUserEmail_ID.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 String resetEmail = email.getText().toString();
-
-                if( resetEmail != null){
+                Log.w(TAG, "reset email: " + resetEmail);
+                if (!resetEmail.isEmpty()) {
                     progressDialog.setMessage("Sending an email...");
                     progressDialog.show();
-                    Log.w(TAG,"reset email: "+ resetEmail);
-
                     mAuth.sendPasswordResetEmail(resetEmail)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    Log.d(TAG, "Email sent.");
-                                    progressDialog.hide();
-                                    showToast("Email sent");
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.d(TAG, "Email sent.");
+                                        progressDialog.hide();
+                                        showToast("Email sent");
 //                                    progressDialog.
-                                    LogInActivityPage();
-                                } else {
-                                    progressDialog.hide();
-                                    showToast("Please enter a valid email");
+//                                    LogInActivityPage();
+                                    } else {
+                                        progressDialog.hide();
+                                        showToast("Please enter a valid email");
+                                    }
                                 }
-                            }
-                        });
+                            });
+                } else {
+                    showToast("Please enter an email");
                 }
             }
         });
 
     }
 
+    private void hideNavigationBar() {
+        // Hide the action bar and set the screen size to full
+        getSupportActionBar().hide();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
+
     private void LogInActivityPage() {
-        startActivity(new Intent(this,Login.class));
+        startActivity(new Intent(this, Login.class));
         finish();
     }
+
     // Display a toast message
     private void showToast(String text) {
         Context context = getApplicationContext();
