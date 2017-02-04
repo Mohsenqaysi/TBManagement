@@ -1,10 +1,10 @@
 package com.example.mohsenqaysi.tbmanagement;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -39,6 +38,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     private String TAG = "Status: ";
     private String resetemailAddress = "";
 
+    private ConstraintLayout parentLayout;
+
+    //get an instance of the SncakBarMessages Class
+    SnackBarMessages snackBarMessages = new SnackBarMessages();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +50,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         // Hide the top part of the screen
         hideNavigationBar();
         setContentView(R.layout.activity_login);
+        parentLayout = (ConstraintLayout) findViewById(R.id.activity_login_ID);
 
         // init the inputs fields
         signIn = (Button) findViewById(R.id.loginUser_ID);
@@ -129,13 +134,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         return password.length() >= 6;
     }
 
-    // Display a toast message
-    private void showToast(String text) {
-        Context context = getApplicationContext();
-        int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
-    }
 
     private void signInIntoFirebase() {
         final TextInputLayout errorEmail = (TextInputLayout) findViewById(R.id.emailWrapper_ID);
@@ -181,7 +179,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.w(TAG, "signInWithEmail:failed", task.getException());
-                            showToast("Log in failed");
+                            snackBarMessages.SnackBarMessages(parentLayout,"Log in failed");
+                            snackBarMessages.showToast();
                             Log.w(TAG,task.getException().fillInStackTrace());
                             progressDialog.hide();
                             errorEmail.setError("Email or Password is wrong");

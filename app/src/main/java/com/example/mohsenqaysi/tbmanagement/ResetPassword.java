@@ -1,17 +1,16 @@
 package com.example.mohsenqaysi.tbmanagement;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,11 +23,16 @@ public class ResetPassword extends AppCompatActivity {
     private EditText email;
     private ProgressDialog progressDialog;
     private String TAG = "Status: ";
+    private ConstraintLayout parentLayout;
+
+    //get an instance of the SncakBarMessages Class
+    SnackBarMessages snackBarMessages = new SnackBarMessages();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reaset_password);
+        parentLayout = (ConstraintLayout) findViewById(R.id.activity_reaset_password_ID);
         hideNavigationBar();
 
 
@@ -54,17 +58,21 @@ public class ResetPassword extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         Log.d(TAG, "Email sent.");
                                         progressDialog.hide();
-                                        showToast("Email sent");
+                                        snackBarMessages.SnackBarMessages(parentLayout,"Email sent");
+                                        snackBarMessages.showToast();
+//                                        showToast(parentLayout,"Email sent");
 //                                    progressDialog.
 //                                    LogInActivityPage();
                                     } else {
                                         progressDialog.hide();
-                                        showToast("Please enter a valid email");
+                                        snackBarMessages.SnackBarMessages(parentLayout,"Please enter a valid email");
+                                        snackBarMessages.showToast();
                                     }
                                 }
                             });
                 } else {
-                    showToast("Please enter an email");
+                    snackBarMessages.SnackBarMessages(parentLayout,"Please enter an email");
+                    snackBarMessages.showToast();
                 }
             }
         });
@@ -83,11 +91,8 @@ public class ResetPassword extends AppCompatActivity {
         finish();
     }
 
-    // Display a toast message
-    private void showToast(String text) {
-        Context context = getApplicationContext();
-        int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
-    }
+//    //show messages in a SnackBar
+//    private void showToast(String text) {
+//        Snackbar.make(parentLayout, text, Snackbar.LENGTH_LONG).show();
+//    }
 }
