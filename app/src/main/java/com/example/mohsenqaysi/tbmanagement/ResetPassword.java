@@ -48,7 +48,7 @@ public class ResetPassword extends AppCompatActivity {
             public void onClick(View v) {
                 String resetEmail = email.getText().toString();
                 Log.w(TAG, "reset email: " + resetEmail);
-                if (!resetEmail.isEmpty()) {
+                if (!resetEmail.isEmpty() && android.util.Patterns.EMAIL_ADDRESS.matcher(resetEmail).matches()) {
                     progressDialog.setMessage("Sending an email...");
                     progressDialog.show();
                     mAuth.sendPasswordResetEmail(resetEmail)
@@ -65,12 +65,15 @@ public class ResetPassword extends AppCompatActivity {
 //                                    LogInActivityPage();
                                     } else {
                                         progressDialog.hide();
-                                        snackBarMessages.SnackBarMessages(parentLayout,"Please enter a valid email");
+                                        snackBarMessages.SnackBarMessages(parentLayout,"Sorry, the email does not exists");
                                         snackBarMessages.showToast();
                                     }
                                 }
                             });
-                } else {
+                } else if(!android.util.Patterns.EMAIL_ADDRESS.matcher(resetEmail).matches()) {
+                    snackBarMessages.SnackBarMessages(parentLayout,"Please enter a valid email");
+                    snackBarMessages.showToast();
+                }else {
                     snackBarMessages.SnackBarMessages(parentLayout,"Please enter an email");
                     snackBarMessages.showToast();
                 }
