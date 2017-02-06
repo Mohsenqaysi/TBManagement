@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void writeNewPost(String userIDInFireBase, String username_id, String email) {
         User user = new User(username_id, email);
-        mDatabase.child(userIDInFireBase).setValue(user);
+//        mDatabase.child(userIDInFireBase).setValue(user);
 //        mDatabase.child("users").setValue(user);
     }
 
@@ -114,5 +114,10 @@ public class MainActivity extends AppCompatActivity {
             Log.e(TAG,"object: " + object);
 
         }
+    }
+
+    public void showUsersList(View view) {
+        startActivity(new Intent(this,UserList.class));
+//        finish();
     }
 }

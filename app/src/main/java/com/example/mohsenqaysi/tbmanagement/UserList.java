@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -30,10 +31,13 @@ public class UserList extends AppCompatActivity {
         ) {
             @Override
             protected void populateView(View v, String model, int position) {
-
+                TextView textView = (TextView) v.findViewById(android.R.id.text1);
+                textView.setText(model);
             }
         };
 
+        // pass the data to the adapter
+        mListView.setAdapter(listAdapter);
 
     }
 }

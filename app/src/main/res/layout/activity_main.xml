@@ -48,9 +48,21 @@
         android:id="@+id/SaveData_ID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="SaveUserDateToFirebase"
+        android:text="Save Data"
+        android:layout_below="@+id/signOut_ID"
         android:layout_alignLeft="@+id/signOut_ID"
         android:layout_alignStart="@+id/signOut_ID"
-        android:layout_centerVertical="true"
-        android:onClick="SaveUserDateToFirebase"
-        android:text="Save Data" />
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/showUsersList_ID"
+        android:onClick="showUsersList"
+        android:text="Show users list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/SaveData_ID"
+        android:layout_alignLeft="@+id/SaveData_ID"
+        android:layout_alignStart="@+id/SaveData_ID"
+        android:layout_marginTop="21dp"/>
 </RelativeLayout>
