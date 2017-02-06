@@ -7,12 +7,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private String userIDInFireBase = "";
     private String TAG = "Status: ";
 
-
+    Map<String, Object> childUpdates = new HashMap<>();
     Login LoginObject = new Login();
 
     @Override
@@ -35,9 +36,8 @@ public class MainActivity extends AppCompatActivity {
         userIDLabel.setText("user ID: " + userIDInFireBase);
         Log.e(TAG, "user ID: " + userIDInFireBase);
 
-
-        // Test the database - real time database
         mDatabase = FirebaseDatabase.getInstance().getReference();
+
 
     }
 
@@ -48,46 +48,71 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void SaveUserDateToFirebase(View view) {
+
+        // Test the database - real time database
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
         writeNewPost(userIDInFireBase, "Mohsen Barri Qaysi", "Al-gisi@hotmail.com");
 
-        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+
+        mDatabase.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Log.e("onChildAdded","----------------------------------");
+                User users = dataSnapshot.getValue(User.class);
+                childUpdates.put("name",users.name);
+                childUpdates.put("email",users.email);
 
-                Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
-//                String users = (String) map.get("Al-gisi@hotmail.com");
-//                String email = (String) map.get("email");
-//                 String All_users = dataSnapshot.getRef().getKey();
-//                String id = map.keySet().toString();
-//                String object_Value = map.get(id).toString();
-                for (Map.Entry<String, Object> child : ((Map<String, Object>) dataSnapshot.getValue()).entrySet()) {
-                    System.out.println("child: " + child.getValue() + "\n");
+                Log.e(TAG,"Name: " + users.name);
+                Log.e(TAG,"Email: " + users.email);
+                Log.e(TAG,"prevChildKey: " + s);
+                fireBaseUsersInTheHashMap();
 
-                }
-//                Log.w(TAG, "All_users: " + id );
-//                Log.w(TAG, "object_value: " + object_Value);
 
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
+                Log.e("onChildChanged","----------------------------------");
+                User users = dataSnapshot.getValue(User.class);
+                childUpdates.put("name",users.name);
+                childUpdates.put("email",users.email);
+                Log.e(TAG,"Name: " + users.name);
+                Log.e(TAG,"Email: " + users.email);
+                Log.e(TAG,"prevChildKey: " + prevChildKey);
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
 
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
+                Log.e(TAG,"Error" + databaseError.getDetails());
             }
         });
 
 
     }
 
-    // [START write_fan_out]
     private void writeNewPost(String userIDInFireBase, String username_id, String email) {
         User user = new User(username_id, email);
-        mDatabase.child("FR").child("users").child(userIDInFireBase).setValue(user);
-//        mDatabase.child("FR").child("users").child(userIDInFireBase).child("Data Of Diagnosis").setValue(user);
-//        mDatabase.child("FR").child("users").push({"name: Mohsen"});
-
-
-//        mDatabase.setValue(user);
+        mDatabase.child(userIDInFireBase).setValue(user);
+//        mDatabase.child("users").setValue(user);
     }
-    // [END write_fan_out]
+
+    private void fireBaseUsersInTheHashMap(){
+
+        for (Object object : childUpdates.values()) {
+
+            Log.e(TAG,"object: " + object);
+
+        }
+    }
 }
