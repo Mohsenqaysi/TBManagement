@@ -44,20 +44,19 @@ public class UserList extends AppCompatActivity {
             protected void populateView(View v, String model, int position) {
                 textView = (TextView) v.findViewById(android.R.id.text1);
                 textView.setText(model);
-
             }
         };
 
 
         // pass the data to the adapter
         mListView.setAdapter(listAdapter);
+
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 String ItemSelectedFromList = (String) mListView.getItemAtPosition(position);
                 Toast.makeText(getApplicationContext(),"You clicked on -> " + ItemSelectedFromList,Toast.LENGTH_SHORT).show();
-
             }
         });
     }

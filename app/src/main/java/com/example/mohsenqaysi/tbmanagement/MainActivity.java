@@ -52,20 +52,28 @@ public class MainActivity extends AppCompatActivity {
 
         // Test the database - real time database
         mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
-        writeNewPost(userIDInFireBase, "Mohsen Barri Qaysi", "Al-gisi@hotmail.com");
+//        writeNewPost(userIDInFireBase, "Mohsen Barri Qaysi", "Al-gisi@hotmail.com");
+        String[] array = new String[]
+                {"Abbott", "Abbott", "Acevedo","Acosta", "Adams","Daenerys Targaryen", "Jon Snow",
+                        " Tyrion Lannister", " Joffrey Baratheon"};
+        for (String name : array) {
+            writeNewPost(userIDInFireBase, name);
+        }
+
 
 
         mDatabase.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Log.e("onChildAdded","----------------------------------");
-                User users = dataSnapshot.getValue(User.class);
-                childUpdates.put("name",users.name);
-                childUpdates.put("email",users.email);
+//                Log.e("onChildAdded","----------------------------------");
+//                User users = dataSnapshot.getValue(User.class);
+//                childUpdates.put("name",users.name);
+//                childUpdates.put("email",users.email);
+//
+//                Log.e(TAG,"Name: " + users.name);
+//                Log.e(TAG,"Email: " + users.email);
+//                Log.e(TAG,"prevChildKey: " + s);
 
-                Log.e(TAG,"Name: " + users.name);
-                Log.e(TAG,"Email: " + users.email);
-                Log.e(TAG,"prevChildKey: " + s);
                 fireBaseUsersInTheHashMap();
 
 
@@ -73,13 +81,13 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
-                Log.e("onChildChanged","----------------------------------");
-                User users = dataSnapshot.getValue(User.class);
-                childUpdates.put("name",users.name);
-                childUpdates.put("email",users.email);
-                Log.e(TAG,"Name: " + users.name);
-                Log.e(TAG,"Email: " + users.email);
-                Log.e(TAG,"prevChildKey: " + prevChildKey);
+//                Log.e("onChildChanged","----------------------------------");
+//                User users = dataSnapshot.getValue(User.class);
+//                childUpdates.put("name",users.name);
+//                childUpdates.put("email",users.email);
+//                Log.e(TAG,"Name: " + users.name);
+//                Log.e(TAG,"Email: " + users.email);
+//                Log.e(TAG,"prevChildKey: " + prevChildKey);
             }
 
             @Override
@@ -102,17 +110,22 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void writeNewPost(String userIDInFireBase, String username_id, String email) {
-        User user = new User(username_id, email);
+//    private void writeNewPost(String userIDInFireBase, String name, String email) {
+//        User user = new User(name, email);
+////        mDatabase.child(userIDInFireBase).setValue(user);
+//        mDatabase.push().setValue()
+//    }
+
+    private void writeNewPost(String userIDInFireBase, String name) {
 //        mDatabase.child(userIDInFireBase).setValue(user);
-//        mDatabase.child("users").setValue(user);
+        mDatabase.push().setValue(name);
     }
 
     private void fireBaseUsersInTheHashMap(){
 
         for (Object object : childUpdates.values()) {
 
-            Log.e(TAG,"object: " + object);
+            Log.w(TAG,"object: " + object);
 
         }
     }
@@ -120,5 +133,9 @@ public class MainActivity extends AppCompatActivity {
     public void showUsersList(View view) {
         startActivity(new Intent(this,UserList.class));
 //        finish();
+    }
+
+    public void showWebView(View view) {
+        startActivity(new Intent(this,showWebView.class));
     }
 }

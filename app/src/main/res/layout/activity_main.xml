@@ -61,8 +61,17 @@
         android:text="Show users list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:layout_below="@+id/SaveData_ID"
-        android:layout_alignLeft="@+id/SaveData_ID"
-        android:layout_alignStart="@+id/SaveData_ID"
-        android:layout_marginTop="21dp"/>
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/showWebView_ID"
+        android:text="Show WebPage"
+        android:onClick="showWebView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_below="@+id/showUsersList_ID"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
