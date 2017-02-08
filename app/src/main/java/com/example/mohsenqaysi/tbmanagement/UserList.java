@@ -19,6 +19,7 @@ public class UserList extends AppCompatActivity {
     TextView textView;
     private String USER_URL = "https://tbmanagement-aff8e.firebaseio.com/users";
     private ProgressDialog progressDialog;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -31,13 +32,13 @@ public class UserList extends AppCompatActivity {
 //        progressDialog.show();
 
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl(USER_URL);
+         databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl(USER_URL);
         databaseReference.keepSynced(true); // keep the offline data up to date
 
         FirebaseListAdapter<String> listAdapter = new FirebaseListAdapter<String>(
                 this,
                 String.class,
-                android.R.layout.simple_expandable_list_item_1,
+                android.R.layout.simple_list_item_1,
                 databaseReference
         ) {
             @Override

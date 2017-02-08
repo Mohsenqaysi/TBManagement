@@ -77,11 +77,11 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
+            // if Null only icons will be shown
             return mFragmentTitleList.get(position);
         }
     }
-
-
+    
     public void signOut() {
         login.sigOutUSer();
         startActivity(new Intent(this, Login.class));

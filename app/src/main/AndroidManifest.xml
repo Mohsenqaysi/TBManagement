@@ -23,7 +23,7 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/MyMaterialTheme"/>
+            android:theme="@style/MyMaterialTheme" />
         <activity
             android:name=".userDetails"
             android:screenOrientation="portrait" />
@@ -32,10 +32,12 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".UserList"
-            android:screenOrientation="portrait"
-            android:label="Patients"/>
-        <activity android:name=".showWebView"
-            android:theme="@style/Theme.Design.Light.NoActionBar"/>
+            android:label="Patients"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".showWebView"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
+        <activity android:name=".TBINFO"></activity>
     </application>
 
 </manifest>
