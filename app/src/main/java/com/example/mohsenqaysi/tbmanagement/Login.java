@@ -48,7 +48,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Hide the top part of the screen
-        hideNavigationBar();
+//        hideNavigationBar();
         setContentView(R.layout.activity_login);
         parentLayout = (ConstraintLayout) findViewById(R.id.activity_login_ID);
 
