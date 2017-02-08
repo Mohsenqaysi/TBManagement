@@ -80,6 +80,7 @@
                     android:id="@+id/userName_ID"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
                     android:drawableLeft="@drawable/user"
                     android:drawablePadding="20dp"
                     android:drawableTint="@color/textEditorColor"
@@ -103,7 +104,6 @@
                     android:drawableTint="@color/textEditorColor"
                     android:hint="@string/password"
                     android:inputType="textPassword"
-
                     android:maxLines="1" />
             </android.support.design.widget.TextInputLayout>
 

@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private int[] tabIcons = {R.drawable.today, R.drawable.pateints };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,13 @@ public class MainActivity extends AppCompatActivity {
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+        setupTabIcons();
+    }
+
+    // Set the tab icons
+    private void setupTabIcons() {
+        tabLayout.getTabAt(0).setIcon(tabIcons[0]);
+        tabLayout.getTabAt(1).setIcon(tabIcons[1]);
     }
 
     private void setupViewPager(ViewPager viewPager) {
