@@ -13,4 +13,24 @@
     <string name="send_forgot_password_info">Trouble logging in?</string>
     <string name="send_email_info">Enter you email and we’ll send you a link to get back into your account.</string>
 
+    <!-- Custom layout used for the tab bar design -->
+
+    <style name="MyMaterialTheme" parent="MyMaterialTheme.Base">
+
+    </style>
+
+    <style name="MyMaterialTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="Today_fragment">Hello Today fragment</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="Patient_fragment">Hello Patient fragment</string>
+
 </resources>
