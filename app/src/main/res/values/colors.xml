@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2D4E78</color>
-    <color name="colorPrimaryDark">#3A5C86</color>
-    <color name="colorAccent">#2D4E78</color>
-    <color name="signInButtonColor">#FE0000</color>
-    <color name="textEditorColor">#6585A8</color>
-    <color name="textColorPrimary">#FFFFFF</color>
+    <color name="colorPrimary">#125688</color>
+    <color name="colorPrimaryDark">#125688</color>
+    <color name="colorAccent">#6585A8</color>
+    <color name="textColorPrimary">#fcfcfc</color>
     <color name="windowBackground">#FFFFFF</color>
     <color name="navigationBarColor">#000000</color>
+    <color name="signInButtonColor">#FE0000</color>
+    <color name="textEditorColor">#6585A8</color>
+    <color name="tabTextColor">#e6e4e4</color>
+    <color name="tabSelectedTextColor">#ffffff</color>
 </resources>

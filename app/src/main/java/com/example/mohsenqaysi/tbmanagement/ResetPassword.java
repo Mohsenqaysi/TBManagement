@@ -8,7 +8,6 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -33,7 +32,6 @@ public class ResetPassword extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reaset_password);
         parentLayout = (ConstraintLayout) findViewById(R.id.activity_reaset_password_ID);
-        hideNavigationBar();
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -80,13 +78,6 @@ public class ResetPassword extends AppCompatActivity {
             }
         });
 
-    }
-
-    private void hideNavigationBar() {
-        // Hide the action bar and set the screen size to full
-        getSupportActionBar().hide();
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
     private void LogInActivityPage() {

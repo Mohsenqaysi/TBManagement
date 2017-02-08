@@ -27,10 +27,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <!-- TODO: Remove or change this placeholder text -->
+    <!-- Fragment Text -->
     <string name="Today_fragment">Hello Today fragment</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="Patient_fragment">Hello Patient fragment</string>
+
+    <!-- Action Menu Text -->
+    <string name="action_signOut">Sign Out</string>
+    <string name="action_about">About Us</string>
 
 </resources>
