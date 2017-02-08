@@ -31,8 +31,6 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
@@ -93,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
     // Action menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        // Inflate the menu ... adds items to the action bar
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -103,14 +101,12 @@ public class MainActivity extends AppCompatActivity {
 
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.signOut_ID) {
             //Sign Out the user
             signOut();
             return true;
         } else if (id == R.id.about_ID) {
             startActivity(new Intent(this,showWebView.class));
-            finish();
             return true;
         }
 
