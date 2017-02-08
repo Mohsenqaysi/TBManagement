@@ -16,7 +16,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class showWebView extends AppCompatActivity {
 
     private ListView Info_ListView;
-    TextView textView;
+    private TextView textView;
     private String FIREBASE_URL_PATH = "https://tbmanagement-aff8e.firebaseio.com/info";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,17 +64,25 @@ public class showWebView extends AppCompatActivity {
         Info_ListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String itemSelectedFromList = (String) Info_ListView.getItemAtPosition(position);
-//                Toast.makeText(getApplicationContext(),"You clicked on -> " + itemSelectedFromList,Toast.LENGTH_SHORT).show();
 
-                Log.w("Info: ", itemSelectedFromList);
+//                TextView txt = (TextView) parent.getChildAt(position - lv.firstVisiblePosition()).findViewById(R.id.mylistviewtextview);
+//                String keyword = txt.getText().toString();
+
+
+                String itemSelectedFromListTitle = ((TextView)view).getText().toString();
+                String itemSelectedFromListDescription = (String) Info_ListView.getItemAtPosition(position);
+
+                Log.w("title: ", itemSelectedFromListTitle);
+                Log.w("Info: ", itemSelectedFromListDescription);
+
                 // GOTO the info activity to show more detail about the TB
-//                startActivity(new Intent(showWebView.this,TBINFO.class).putExtra("info",itemSelectedFromList));
                 Intent intent = new Intent(getApplicationContext(), TBINFO.class);
-                intent.putExtra("info", itemSelectedFromList);  // pass your values and retrieve them in the other Activity using keyName
+                intent.putExtra("title",itemSelectedFromListTitle);
+                intent.putExtra("info", itemSelectedFromListDescription);  // pass your values and retrieve them in the other Activity using keyName
                 startActivity(intent);
             }
         });
+
 
     }
 }

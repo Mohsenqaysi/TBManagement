@@ -36,8 +36,11 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".showWebView"
-            android:theme="@style/Theme.Design.Light.NoActionBar" />
-        <activity android:name=".TBINFO"></activity>
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".TBINFO"
+            android:theme="@style/AppTheme"
+            android:label="General Information"/>
     </application>
 
 </manifest>
