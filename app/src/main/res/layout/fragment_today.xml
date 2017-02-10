@@ -20,4 +20,12 @@
         android:layout_height="wrap_content"
         android:id="@+id/info_ID" />
 
+    <Button
+        android:text="save data"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/save_data_ID" />
+
 </FrameLayout>

@@ -2,6 +2,7 @@ package com.example.mohsenqaysi.tbmanagement;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.widget.TextView;
 
 public class TBINFO extends AppCompatActivity {
@@ -21,6 +22,7 @@ public class TBINFO extends AppCompatActivity {
         title_text = (TextView) findViewById(R.id.InfoTitle_ID);
         info = (TextView) findViewById(R.id.tb_info_ID);
 
+        info.setMovementMethod(new ScrollingMovementMethod());
         if (description != null) {
             info.setText(description);
             title_text.setText(title);

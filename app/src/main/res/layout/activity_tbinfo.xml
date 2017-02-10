@@ -1,64 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_tbinfo"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.mohsenqaysi.tbmanagement.TBINFO">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:layout_width="174dp"
-        android:layout_height="130dp"
-        app:srcCompat="@drawable/red_cross_logo"
+    <android.support.constraint.ConstraintLayout
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
         android:id="@+id/imageView2"
-        android:layout_marginStart="16dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:text="Title"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/InfoTitle_ID"
-        android:layout_marginTop="8dp"
-        android:textSize="24dp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintLeft_toLeftOf="@+id/imageView2"
-        app:layout_constraintRight_toRightOf="@+id/imageView2" />
-
-    <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="16dp"
+        android:layout_height="200dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/red_cross_logo"
+        android:layout_marginTop="16dp"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintHorizontal_bias="0.33"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/InfoTitle_ID">
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp" />
 
         <TextView
-            android:text="TextView"
-            android:layout_width="match_parent"
+            android:id="@+id/InfoTitle_ID"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Title"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="@+id/imageView2"
+            app:layout_constraintRight_toRightOf="@+id/imageView2"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2"
+            tools:layout_constraintRight_creator="1"
+            tools:layout_constraintLeft_creator="1"
+            android:layout_marginTop="16dp" />
+
+        <TextView
             android:id="@+id/tb_info_ID"
-            tools:layout_editor_absoluteY="202dp"
-            tools:layout_editor_absoluteX="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp" />
-    </ScrollView>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:layout_margin="@dimen/activity_vertical_margin"
+            android:textStyle="normal"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            app:layout_constraintTop_toBottomOf="@+id/InfoTitle_ID"
+            android:layout_marginTop="16dp"
+            android:textSize="18sp" />
 
-
-</android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

@@ -85,8 +85,4 @@ public class ResetPassword extends AppCompatActivity {
         finish();
     }
 
-//    //show messages in a SnackBar
-//    private void showToast(String text) {
-//        Snackbar.make(parentLayout, text, Snackbar.LENGTH_LONG).show();
-//    }
 }
