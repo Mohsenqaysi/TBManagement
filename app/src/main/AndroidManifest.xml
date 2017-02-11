@@ -12,7 +12,7 @@
         android:supportsRtl="false"
         android:theme="@style/MyMaterialTheme">
         <activity
-            android:name=".Login"
+            android:name=".Authatications.Login"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,22 +25,23 @@
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme" />
         <activity
-            android:name=".userDetails"
+            android:name=".patientsDetails"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ResetPassword"
+            android:name=".Authatications.ResetPassword"
             android:screenOrientation="portrait" />
         <activity
             android:name=".UserList"
             android:label="Patients"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".GeneralInfoAboutTBList"
+            android:name=".TB_General_Info.GeneralInfoAboutTBList"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".GeneralInfoAboutTB"
-            android:theme="@style/AppTheme"
-            android:label="General Information"/>
+            android:name=".TB_General_Info.GeneralInfoAboutTB"
+            android:label="General Information"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".patientsDetailsRegistrationForm"></activity>
     </application>
 
 </manifest>

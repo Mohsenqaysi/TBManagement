@@ -1,10 +1,12 @@
-package com.example.mohsenqaysi.tbmanagement;
+package com.example.mohsenqaysi.tbmanagement.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.mohsenqaysi.tbmanagement.R;
 
 public class PatientFragment extends Fragment {
 

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg"
     android:orientation="vertical"
-    tools:context="com.example.mohsenqaysi.tbmanagement.Login">
+    tools:context="com.example.mohsenqaysi.tbmanagement.Authatications.Login">
 
     <TextView
         android:id="@+id/login_title"

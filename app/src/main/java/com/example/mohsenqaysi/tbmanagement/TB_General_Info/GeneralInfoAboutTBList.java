@@ -1,4 +1,4 @@
-package com.example.mohsenqaysi.tbmanagement;
+package com.example.mohsenqaysi.tbmanagement.TB_General_Info;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.mohsenqaysi.tbmanagement.R;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -30,11 +31,10 @@ public class GeneralInfoAboutTBList extends AppCompatActivity {
 
 
 
-        /* TODO: Read data from a local JSON file into a string
+        /* TODO: Read data from a fire base into a string
            TODO: populate a list view with Title as the cell name and
            TODO pass the description in and intent put extra to another view for the user to read it
         */
-
 
         Info_ListView = (ListView) findViewById(R.id.Info_ListView_ID);
 

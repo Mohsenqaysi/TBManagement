@@ -1,9 +1,11 @@
-package com.example.mohsenqaysi.tbmanagement;
+package com.example.mohsenqaysi.tbmanagement.TB_General_Info;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.widget.TextView;
+
+import com.example.mohsenqaysi.tbmanagement.R;
 
 public class GeneralInfoAboutTB extends AppCompatActivity {
 

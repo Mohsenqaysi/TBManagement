@@ -3,7 +3,7 @@ package com.example.mohsenqaysi.tbmanagement;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class userDetails extends AppCompatActivity {
+public class patientsDetails extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
