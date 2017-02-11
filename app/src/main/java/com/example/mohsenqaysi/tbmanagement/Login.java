@@ -22,27 +22,22 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
+    //get an instance of the SncakBarMessages Class
+    SnackBarMessages snackBarMessages = new SnackBarMessages();
     //Fire base auth
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private String userFirebaseAuth_ID = "";
-
     //init
     private Button signIn;
     private EditText email;
     private EditText password;
-
     private String userEmail = "";
     private String userPassword = "";
     private ProgressDialog progressDialog;
     private String TAG = "Status: ";
     private String resetemailAddress = "";
-
     private ConstraintLayout parentLayout;
-
-    //get an instance of the SncakBarMessages Class
-    SnackBarMessages snackBarMessages = new SnackBarMessages();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,13 +63,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    // UserDataObject is signed in
+                    // PatientsDataObject is signed in
                     userFirebaseAuth_ID = user.getUid();
                     Log.e(TAG, "onAuthStateChanged:signed_in:" + userFirebaseAuth_ID);
                     // TODO: Check is the user is logged in for the first time and ask the to fill their full details
                     MainActivityPage();
                 } else {
-                    // UserDataObject is signed out
+                    // PatientsDataObject is signed out
                     Log.e(TAG, "onAuthStateChanged:signed_out");
                     signInIntoFirebase();
                 }
@@ -82,7 +77,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         };
 
     }
-
 
 
     private void hideNavigationBar() {
@@ -102,7 +96,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
 
     @Override
-    protected void onPause(){
+    protected void onPause() {
         super.onPause();
         // Clear all value here
         email.setText("");
@@ -110,12 +104,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         // Clear all value here
         email.setText("");
         password.setText("");
     }
+
     @Override
     public void onStop() {
         super.onStop();
@@ -140,8 +135,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         final TextInputLayout errorPassword = (TextInputLayout) findViewById(R.id.passwordWrapper_ID);
         errorPassword.setErrorEnabled(true);
 
-         userEmail = this.email.getText().toString().trim();
-         userPassword = this.password.getText().toString().trim();
+        userEmail = this.email.getText().toString().trim();
+        userPassword = this.password.getText().toString().trim();
 
         if (TextUtils.isEmpty(userEmail) || !isEmailValid(userEmail)) {
             errorEmail.setError("Please enter a valid email");
@@ -178,9 +173,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.w(TAG, "signInWithEmail:failed", task.getException());
-                            snackBarMessages.SnackBarMessages(parentLayout,"Log in failed");
+                            snackBarMessages.SnackBarMessages(parentLayout, "Log in failed");
                             snackBarMessages.showToast();
-                            Log.w(TAG,task.getException().fillInStackTrace());
+                            Log.w(TAG, task.getException().fillInStackTrace());
                             progressDialog.hide();
                             errorEmail.setError("Email or Password is wrong");
                             errorPassword.setError("Email or Password is wrong");
@@ -194,11 +189,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void MainActivityPage() {
-        startActivity(new Intent(this,MainActivity.class).putExtra("ID", userFirebaseAuth_ID));
+        startActivity(new Intent(this, MainActivity.class).putExtra("ID", userFirebaseAuth_ID));
         finish();
     }
 
-    public void sigOutUSer(){
+    public void sigOutUSer() {
         FirebaseAuth.getInstance().signOut();
     }
 
@@ -212,6 +207,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     // reset user password
     public void resetPassword(View view) {
         // goto the reset activity page
-        startActivity(new Intent(this,ResetPassword.class));
+        startActivity(new Intent(this, ResetPassword.class));
     }
 }

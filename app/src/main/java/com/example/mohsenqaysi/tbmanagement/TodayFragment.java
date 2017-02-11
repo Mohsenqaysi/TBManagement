@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.mohsenqaysi.tbmanagement.FirebaseDataObjects.PatientsDetailsRegistrationDataObject;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -42,8 +43,7 @@ public class TodayFragment extends Fragment {
         show_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                startActivity(new Intent(getContext(), GeneralInfoAboutTB.class));
+                startActivity(new Intent(getContext(), GeneralInfoAboutTBList.class));
             }
         });
 
@@ -54,7 +54,6 @@ public class TodayFragment extends Fragment {
                 Log.w("Hi", "I am working ;)");
 
                 saveUserDataToFirebaseDatabase();
-
             }
         });
 
@@ -84,7 +83,7 @@ public class TodayFragment extends Fragment {
         String key = rootRef.child("users").push().getKey();
         Log.w("Hi", "I am working ;)");
 
-        UserDetailsRegistrationDataObject post = new UserDetailsRegistrationDataObject(fullName, age, gender, phoneNumber, stageDiagnosis, flatNumber, address, city, postalCode);
+        PatientsDetailsRegistrationDataObject post = new PatientsDetailsRegistrationDataObject(fullName, age, gender, phoneNumber, stageDiagnosis, flatNumber, address, city, postalCode);
         Map<String, Object> postValues = post.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();

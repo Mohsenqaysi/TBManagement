@@ -17,15 +17,14 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class ResetPassword extends AppCompatActivity {
 
+    //get an instance of the SncakBarMessages Class
+    SnackBarMessages snackBarMessages = new SnackBarMessages();
     private FirebaseAuth mAuth;
     private Button sendloginUserEmail_ID;
     private EditText email;
     private ProgressDialog progressDialog;
     private String TAG = "Status: ";
     private ConstraintLayout parentLayout;
-
-    //get an instance of the SncakBarMessages Class
-    SnackBarMessages snackBarMessages = new SnackBarMessages();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,23 +55,23 @@ public class ResetPassword extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         Log.d(TAG, "Email sent.");
                                         progressDialog.hide();
-                                        snackBarMessages.SnackBarMessages(parentLayout,"Email sent");
+                                        snackBarMessages.SnackBarMessages(parentLayout, "Email sent");
                                         snackBarMessages.showToast();
 //                                        showToast(parentLayout,"Email sent");
 //                                    progressDialog.
 //                                    LogInActivityPage();
                                     } else {
                                         progressDialog.hide();
-                                        snackBarMessages.SnackBarMessages(parentLayout,"Sorry, the email does not exists");
+                                        snackBarMessages.SnackBarMessages(parentLayout, "Sorry, the email does not exists");
                                         snackBarMessages.showToast();
                                     }
                                 }
                             });
-                } else if(!android.util.Patterns.EMAIL_ADDRESS.matcher(resetEmail).matches()) {
-                    snackBarMessages.SnackBarMessages(parentLayout,"Please enter a valid email");
+                } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(resetEmail).matches()) {
+                    snackBarMessages.SnackBarMessages(parentLayout, "Please enter a valid email");
                     snackBarMessages.showToast();
-                }else {
-                    snackBarMessages.SnackBarMessages(parentLayout,"Please enter an email");
+                } else {
+                    snackBarMessages.SnackBarMessages(parentLayout, "Please enter an email");
                     snackBarMessages.showToast();
                 }
             }

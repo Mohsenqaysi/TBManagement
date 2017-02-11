@@ -1,4 +1,4 @@
-package com.example.mohsenqaysi.tbmanagement;
+package com.example.mohsenqaysi.tbmanagement.FirebaseDataObjects;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -7,7 +7,7 @@ import java.util.Map;
  * Created by mohsenqaysi on 2/9/17.
  */
 
-public class UserDetailsRegistrationDataObject {
+public class PatientsDetailsRegistrationDataObject {
 
     public String fullName;
     public int age;
@@ -21,7 +21,7 @@ public class UserDetailsRegistrationDataObject {
 
     public Map<String, Object> UserDetails = new HashMap<>();
 
-    public UserDetailsRegistrationDataObject(String fullName, int age, String gender, String phoneNumber, int stageDiagnosis, String flatNumber, String address, String city, String postalCode) {
+    public PatientsDetailsRegistrationDataObject(String fullName, int age, String gender, String phoneNumber, int stageDiagnosis, String flatNumber, String address, String city, String postalCode) {
         this.fullName = fullName;
         this.age = age;
         this.gender = gender;

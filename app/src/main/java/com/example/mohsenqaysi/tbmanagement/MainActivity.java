@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private int[] tabIcons = {R.drawable.today, R.drawable.pateints };
+    private int[] tabIcons = {R.drawable.today, R.drawable.pateints};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +52,37 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
     }
 
+    public void signOut() {
+        login.sigOutUSer();
+        startActivity(new Intent(this, Login.class));
+        finish();
+    }
+
+    // Action menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu ... adds items to the action bar
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == R.id.signOut_ID) {
+            //Sign Out the user
+            signOut();
+            return true;
+        } else if (id == R.id.about_ID) {
+            startActivity(new Intent(this, GeneralInfoAboutTBList.class));
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
@@ -80,37 +111,6 @@ public class MainActivity extends AppCompatActivity {
             // if Null only icons will be shown
             return mFragmentTitleList.get(position);
         }
-    }
-    
-    public void signOut() {
-        login.sigOutUSer();
-        startActivity(new Intent(this, Login.class));
-        finish();
-    }
-
-    // Action menu
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu ... adds items to the action bar
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-
-        if (id == R.id.signOut_ID) {
-            //Sign Out the user
-            signOut();
-            return true;
-        } else if (id == R.id.about_ID) {
-            startActivity(new Intent(this,GeneralInfoAboutTB.class));
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
 

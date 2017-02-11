@@ -13,7 +13,7 @@ import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class GeneralInfoAboutTB extends AppCompatActivity {
+public class GeneralInfoAboutTBList extends AppCompatActivity {
 
     private ListView Info_ListView;
     private TextView textView;
