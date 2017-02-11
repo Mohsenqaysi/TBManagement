@@ -42,7 +42,9 @@
     <string name="Patient">Flat Number</string>
     <string name="Flat_Number">Flat Number</string>
     <string name="Address">Address</string>
-    <string name="City">city/town/locality</string>
+    <string name="City">city/town</string>
+    <string name="post_code">Post Code</string>
+
     <string name="Stage_of_Diagnosis">Stage of Diagnosis</string>
 
 
