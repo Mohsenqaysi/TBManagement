@@ -25,7 +25,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme" />
         <activity
-            android:name=".patientsDetails"
+            android:name=".PatientsDetails"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Authatications.ResetPassword"
@@ -41,7 +41,7 @@
             android:name=".TB_General_Info.GeneralInfoAboutTB"
             android:label="General Information"
             android:theme="@style/AppTheme" />
-        <activity android:name=".patientsDetailsRegistrationForm"></activity>
+        <activity android:name=".PatientsDetailsRegistrationForm"></activity>
     </application>
 
 </manifest>

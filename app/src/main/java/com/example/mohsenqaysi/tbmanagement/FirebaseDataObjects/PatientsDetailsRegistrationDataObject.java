@@ -17,11 +17,14 @@ public class PatientsDetailsRegistrationDataObject {
     public String flatNumber;
     public String address;
     public String city;
+    public String area;
     public String postalCode;
+
+    //TODO: Add area variable and Image URL from Firebase Storge
 
     public Map<String, Object> UserDetails = new HashMap<>();
 
-    public PatientsDetailsRegistrationDataObject(String fullName, int age, String gender, String phoneNumber, int stageDiagnosis, String flatNumber, String address, String city, String postalCode) {
+    public PatientsDetailsRegistrationDataObject(String fullName, int age, String gender, String phoneNumber, int stageDiagnosis, String flatNumber, String address, String city, String area, String postalCode) {
         this.fullName = fullName;
         this.age = age;
         this.gender = gender;
@@ -30,11 +33,14 @@ public class PatientsDetailsRegistrationDataObject {
         this.flatNumber = flatNumber;
         this.address = address;
         this.city = city;
+        this.area = area;
         this.postalCode = postalCode;
     }
 
 
+    // TODO: concatinate the address into one line
     public Map <String, Object> toMap(){
+        String fullAddress = "";
         HashMap<String, Object> result = new HashMap<>();
 
         result.put("fullName", fullName);
@@ -42,10 +48,12 @@ public class PatientsDetailsRegistrationDataObject {
         result.put("gender", gender);
         result.put("phoneNumber", phoneNumber);
         result.put("stageDiagnosis", stageDiagnosis);
-        result.put("flatNumber", flatNumber);
-        result.put("address", address);
-        result.put("city", city);
-        result.put("postalCode", postalCode);
+         fullAddress = "Flat "+flatNumber +"-" + address + " " + city + " "+ area + " "+ postalCode;
+        result.put("address",fullAddress);
+//        result.put("flatNumber", flatNumber);
+//        result.put("address", address);
+//        result.put("city", city);
+//        result.put("postalCode", postalCode);
         return  result;
     }
 

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.mohsenqaysi.tbmanagement.FirebaseDataObjects.PatientsDetailsRegistrationDataObject;
+import com.example.mohsenqaysi.tbmanagement.PatientsDetailsRegistrationForm;
 import com.example.mohsenqaysi.tbmanagement.R;
 import com.example.mohsenqaysi.tbmanagement.TB_General_Info.GeneralInfoAboutTBList;
 import com.google.firebase.database.DatabaseReference;
@@ -23,6 +24,7 @@ public class TodayFragment extends Fragment {
     private DatabaseReference rootRef;
     private Button show_button;
     private Button save_button;
+    private Button NewRegistaration;
 
     public TodayFragment() {
         // Required empty public constructor
@@ -41,6 +43,7 @@ public class TodayFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_today, container, false);
 
+        NewRegistaration = (Button) view.findViewById(R.id.Registar_ID);
         show_button = (Button) view.findViewById(R.id.info_ID);
         show_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,7 +61,13 @@ public class TodayFragment extends Fragment {
                 saveUserDataToFirebaseDatabase();
             }
         });
+        NewRegistaration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), PatientsDetailsRegistrationForm.class));
 
+            }
+        });
 
         return view;
     }
@@ -73,19 +82,20 @@ public class TodayFragment extends Fragment {
         String flatNumber = "26";
         String address = "75 Pembroke road";
         String city = "Dublin";
+        String area = "BallsBridge";
         String postalCode = "D4";
-        writeNewPost(fullName, age, gender, phoneNumber, stageDiagnosis, flatNumber, address, city, postalCode);
+        writeNewPost(fullName, age, gender, phoneNumber, stageDiagnosis, flatNumber, address, city, area, postalCode);
 
 
     }
 
-    private void writeNewPost(String fullName, int age, String gender, String phoneNumber, int stageDiagnosis, String flatNumber, String address, String city, String postalCode) {
+    private void writeNewPost(String fullName, int age, String gender, String phoneNumber, int stageDiagnosis, String flatNumber, String address, String city,String area, String postalCode) {
 
         rootRef = FirebaseDatabase.getInstance().getReference();
         String key = rootRef.child("users").push().getKey();
         Log.w("Hi", "I am working ;)");
 
-        PatientsDetailsRegistrationDataObject post = new PatientsDetailsRegistrationDataObject(fullName, age, gender, phoneNumber, stageDiagnosis, flatNumber, address, city, postalCode);
+        PatientsDetailsRegistrationDataObject post = new PatientsDetailsRegistrationDataObject(fullName, age, gender, phoneNumber, stageDiagnosis, flatNumber, address, city, area, postalCode);
         Map<String, Object> postValues = post.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();
@@ -96,6 +106,8 @@ public class TodayFragment extends Fragment {
 
 
     }
+
+
 }
 
 
