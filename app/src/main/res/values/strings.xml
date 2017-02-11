@@ -35,4 +35,16 @@
     <string name="action_signOut">Sign Out</string>
     <string name="action_about">About Us</string>
 
+    <!-- Registration Form-->
+    <string name="Full_Name">Full Name</string>
+    <string name="Age">Age</string>
+    <string name="Phone_Number">Phone Number</string>
+    <string name="Patient">Flat Number</string>
+    <string name="Flat_Number">Flat Number</string>
+    <string name="Address">Address</string>
+    <string name="City">city/town/locality</string>
+    <string name="Stage_of_Diagnosis">Stage of Diagnosis</string>
+
+
+
 </resources>
