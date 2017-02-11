@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.widget.TextView;
 
-public class TBINFO extends AppCompatActivity {
+public class GeneralInfoAboutTB extends AppCompatActivity {
 
     private TextView info;
     private TextView title_text;
@@ -15,7 +15,7 @@ public class TBINFO extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tbinfo);
+        setContentView(R.layout.activity_general_info_about_tb);
 
         title = getIntent().getExtras().getString("title");
         description = getIntent().getExtras().getString("info");

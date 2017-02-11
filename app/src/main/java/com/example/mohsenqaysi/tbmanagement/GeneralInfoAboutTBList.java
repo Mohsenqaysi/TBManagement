@@ -21,7 +21,7 @@ public class GeneralInfoAboutTBList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tbinfo_list);
+        setContentView(R.layout.activity_general_info_about_tb_list);
 //        webView = (WebView) findViewById(R.id.webView_ID);
 //        WebSettings webSettings = webView.getSettings();
 //        webSettings.setJavaScriptEnabled(true);
@@ -76,7 +76,7 @@ public class GeneralInfoAboutTBList extends AppCompatActivity {
                 Log.w("Info: ", itemSelectedFromListDescription);
 
                 // GOTO the info activity to show more detail about the TB
-                Intent intent = new Intent(getApplicationContext(), TBINFO.class);
+                Intent intent = new Intent(getApplicationContext(), GeneralInfoAboutTB.class);
                 intent.putExtra("title",itemSelectedFromListTitle);
                 intent.putExtra("info", itemSelectedFromListDescription);  // pass your values and retrieve them in the other Activity using keyName
                 startActivity(intent);
