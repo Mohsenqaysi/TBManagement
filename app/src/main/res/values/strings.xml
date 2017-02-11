@@ -37,7 +37,7 @@
 
     <!-- Registration Form-->
     <string name="Full_Name">Full Name</string>
-    <string name="Age">Age</string>
+    <string name="Date_Of_Birth">Date of birth</string>
     <string name="Phone_Number">Phone Number</string>
     <string name="Patient">Flat Number</string>
     <string name="Flat_Number">Flat Number</string>
