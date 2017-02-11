@@ -43,7 +43,7 @@ public class TodayFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(getContext(), showWebView.class));
+                startActivity(new Intent(getContext(), GeneralInfoAboutTB.class));
             }
         });
 
@@ -84,7 +84,7 @@ public class TodayFragment extends Fragment {
         String key = rootRef.child("users").push().getKey();
         Log.w("Hi", "I am working ;)");
 
-        UserDetailsRegistration post = new UserDetailsRegistration(fullName, age, gender, phoneNumber, stageDiagnosis, flatNumber, address, city, postalCode);
+        UserDetailsRegistrationDataObject post = new UserDetailsRegistrationDataObject(fullName, age, gender, phoneNumber, stageDiagnosis, flatNumber, address, city, postalCode);
         Map<String, Object> postValues = post.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();

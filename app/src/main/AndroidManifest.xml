@@ -35,7 +35,7 @@
             android:label="Patients"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".showWebView"
+            android:name=".GeneralInfoAboutTB"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".TBINFO"

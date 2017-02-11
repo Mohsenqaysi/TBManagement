@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
             signOut();
             return true;
         } else if (id == R.id.about_ID) {
-            startActivity(new Intent(this,showWebView.class));
+            startActivity(new Intent(this,GeneralInfoAboutTB.class));
             return true;
         }
 

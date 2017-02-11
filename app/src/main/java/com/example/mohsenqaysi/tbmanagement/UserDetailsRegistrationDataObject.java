@@ -7,7 +7,7 @@ import java.util.Map;
  * Created by mohsenqaysi on 2/9/17.
  */
 
-public class UserDetailsRegistration {
+public class UserDetailsRegistrationDataObject {
 
     public String fullName;
     public int age;
@@ -21,7 +21,7 @@ public class UserDetailsRegistration {
 
     public Map<String, Object> UserDetails = new HashMap<>();
 
-    public UserDetailsRegistration(String fullName, int age, String gender, String phoneNumber, int stageDiagnosis, String flatNumber, String address, String city, String postalCode) {
+    public UserDetailsRegistrationDataObject(String fullName, int age, String gender, String phoneNumber, int stageDiagnosis, String flatNumber, String address, String city, String postalCode) {
         this.fullName = fullName;
         this.age = age;
         this.gender = gender;
