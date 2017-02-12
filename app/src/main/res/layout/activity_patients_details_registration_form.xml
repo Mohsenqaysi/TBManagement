@@ -18,7 +18,7 @@
         app:layout_constraintLeft_toLeftOf="@+id/constraintLayout"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintLeft_creator="1"
-        android:layout_width="65dp" />
+        android:layout_width="88dp" />
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="0dp"
@@ -52,7 +52,7 @@
             android:layout_marginEnd="8dp" />
 
         <Spinner
-            android:layout_width="279dp"
+            android:layout_width="0dp"
             android:id="@+id/IndianStates_spinner_ID"
             android:entries="@array/india_states"
             app:layout_constraintRight_toRightOf="parent"
@@ -72,12 +72,10 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/StageofDiagnosis_ID"
             tools:layout_constraintRight_creator="1"
             tools:layout_constraintLeft_creator="1"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="48dp" />
 
         <!--Full name input-->
 
@@ -92,7 +90,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="5dp"
             tools:layout_constraintRight_creator="1"
             tools:layout_constraintLeft_creator="1">
 
@@ -241,14 +239,14 @@
         <!-- PostCode input-->
         <android.support.design.widget.TextInputLayout
             android:id="@+id/PostCode_ID"
-            android:layout_height="wrap_content"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_width="0dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="32dp"
             app:layout_constraintLeft_toRightOf="@+id/city_ID"
             android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/IndianStates_spinner_ID">
+            app:layout_constraintTop_toBottomOf="@+id/IndianStates_spinner_ID"
+            android:layout_height="48dp">
 
             <EditText
                 android:id="@+id/PostCode__InputText_ID"
