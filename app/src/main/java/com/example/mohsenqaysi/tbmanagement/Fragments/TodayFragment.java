@@ -57,7 +57,6 @@ public class TodayFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.w("Hi", "I am working ;)");
-
                 saveUserDataToFirebaseDatabase();
             }
         });
@@ -75,27 +74,26 @@ public class TodayFragment extends Fragment {
     private void saveUserDataToFirebaseDatabase() {
 
         String fullName = "Mohsen Qaysi";
-        int age = 24;
         String gender = "Meal";
         String phoneNumber = "0871310812";
-        int stageDiagnosis = 3;
+        String stageDiagnosis = "3";
         String flatNumber = "26";
         String address = "75 Pembroke road";
         String city = "Dublin";
         String area = "BallsBridge";
         String postalCode = "D4";
-        writeNewPost(fullName, age, gender, phoneNumber, stageDiagnosis, flatNumber, address, city, area, postalCode);
+        writeNewPost(fullName, gender, phoneNumber, stageDiagnosis, flatNumber, address, city, area, postalCode);
 
 
     }
 
-    private void writeNewPost(String fullName, int age, String gender, String phoneNumber, int stageDiagnosis, String flatNumber, String address, String city,String area, String postalCode) {
+    private void writeNewPost(String fullName, String gender, String phoneNumber, String stageDiagnosis, String flatNumber, String address, String city, String area, String postalCode) {
 
         rootRef = FirebaseDatabase.getInstance().getReference();
         String key = rootRef.child("users").push().getKey();
         Log.w("Hi", "I am working ;)");
 
-        PatientsDetailsRegistrationDataObject post = new PatientsDetailsRegistrationDataObject(fullName, age, gender, phoneNumber, stageDiagnosis, flatNumber, address, city, area, postalCode);
+        PatientsDetailsRegistrationDataObject post = new PatientsDetailsRegistrationDataObject(fullName, gender, phoneNumber, stageDiagnosis, flatNumber, address, city, area, postalCode);
         Map<String, Object> postValues = post.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();

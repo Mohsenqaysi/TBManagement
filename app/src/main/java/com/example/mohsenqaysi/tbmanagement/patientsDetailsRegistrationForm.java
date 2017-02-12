@@ -2,21 +2,69 @@ package com.example.mohsenqaysi.tbmanagement;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.example.mohsenqaysi.tbmanagement.FirebaseDataObjects.PatientsDetailsRegistrationDataObject;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.example.mohsenqaysi.tbmanagement.R.array.gender;
 import static com.example.mohsenqaysi.tbmanagement.R.array.india_states;
 
-public class PatientsDetailsRegistrationForm extends AppCompatActivity {
+public class PatientsDetailsRegistrationForm extends AppCompatActivity implements View.OnClickListener {
+
+    // init all the inputs fields
+    private Button profileImage_button;
+    private ImageView profileImage;
+    private EditText fullname;
+    private String genderType;
+    private EditText dateOfBirth;
+    private EditText phoneNumber;
+    private EditText flatNumber;
+    private EditText address;
+    private String state;
+    private EditText city;
+    private EditText postCode;
+    private EditText stageOfDiagnosis;
+    private Button saveData_button;
+
+    // Firebase refrence
+    private DatabaseReference rootRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patients_details_registration_form);
+
+
+//        profileImage = (ImageView) findViewById(R.id.prifileImage_ID);
+        fullname = (EditText) findViewById(R.id.fullName_InputText_ID);
+        phoneNumber = (EditText) findViewById(R.id.phoneNumber_InputText_ID);
+        dateOfBirth = (EditText) findViewById(R.id.dateOfBirth_InputText_ID);
+        phoneNumber = (EditText) findViewById(R.id.phoneNumber_InputText_ID);
+        flatNumber = (EditText) findViewById(R.id.flatNumber_InputText_ID);
+        address = (EditText) findViewById(R.id.address_InputText_ID);
+        city = (EditText) findViewById(R.id.city__InputText_ID);
+        postCode = (EditText) findViewById(R.id.PostCode__InputText_ID);
+        stageOfDiagnosis = (EditText) findViewById(R.id.StageofDiagnosis__InputText_ID);
+
+        // TODO: profileImage --> leave it for now. Add a click action for the image profile button
+        profileImage_button = (Button) findViewById(R.id.prifileImage_ID);
+        profileImage_button.setOnClickListener(this);
+        saveData_button = (Button) findViewById(R.id.saveData_PatientForm_ID);
+        saveData_button.setOnClickListener(this);
+
 
         // Get the type of the gender from the spinner
         Spinner genders_spinner = (Spinner) findViewById(R.id.gender_spinner_ID);
@@ -30,8 +78,9 @@ public class PatientsDetailsRegistrationForm extends AppCompatActivity {
         genders_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = parent.getItemAtPosition(position).toString();
-                Toast.makeText(getApplicationContext(),"You clicked on: "+ item ,Toast.LENGTH_SHORT).show();
+                String genderSelectedType = parent.getItemAtPosition(position).toString();
+                genderType = genderSelectedType;
+                Toast.makeText(getApplicationContext(),"You clicked on: "+ genderSelectedType ,Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -52,8 +101,9 @@ public class PatientsDetailsRegistrationForm extends AppCompatActivity {
         indian_States_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = parent.getItemAtPosition(position).toString();
-                Toast.makeText(getApplicationContext(),"You clicked on: "+ item ,Toast.LENGTH_SHORT).show();
+                String stateSelectedName = parent.getItemAtPosition(position).toString();
+                        state = stateSelectedName;
+                Toast.makeText(getApplicationContext(),"You clicked on: "+ stateSelectedName ,Toast.LENGTH_SHORT).show();
 
             }
 
@@ -64,4 +114,57 @@ public class PatientsDetailsRegistrationForm extends AppCompatActivity {
         });
 
     }
+
+    private void saveUserDataToFirebaseDatabase() {
+        Log.w("Hi", "I am prifileImage_ID ;)");
+
+//        profileImage; TODO: leave it for now
+        String Patient_full_Name = fullname.getText().toString();
+        String Patient_gender = genderType;
+        String Patient_phone_Number = phoneNumber.getText().toString();
+        String Patient_stage_Diagnosis = stageOfDiagnosis.getText().toString();
+        String Patient_flat_Number = flatNumber.getText().toString();
+        String Patient_address = address.getText().toString();
+        String Patient_city = city.getText().toString();
+        String Patient_area = state;
+        String Patient_postalCode = postCode.getText().toString();
+
+        writeNewPost(Patient_full_Name, Patient_gender, Patient_phone_Number, Patient_stage_Diagnosis,
+                Patient_flat_Number, Patient_address, Patient_city, Patient_area, Patient_postalCode);
+
+    }
+
+    private void writeNewPost(String fullName, String gender, String phoneNumber, String stageDiagnosis, String flatNumber, String address, String city, String area, String postalCode) {
+
+        rootRef = FirebaseDatabase.getInstance().getReference();
+        String key = rootRef.child("users").push().getKey();
+        Log.w("Hi", "I am working ;)");
+
+        PatientsDetailsRegistrationDataObject post = new PatientsDetailsRegistrationDataObject(fullName, gender, phoneNumber, stageDiagnosis, flatNumber, address, city, area, postalCode);
+        Map<String, Object> postValues = post.toMap();
+
+        Map<String, Object> childUpdates = new HashMap<>();
+
+        childUpdates.put("/users/" + key, postValues);
+        childUpdates.put("/user-posts/" + key, "False");
+        rootRef.updateChildren(childUpdates);
+
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+        switch (id){
+            case R.id.prifileImage_ID:
+                Log.w("Hi", "I am prifileImage_ID ;)");
+                break;
+            case R.id.saveData_PatientForm_ID:
+                saveUserDataToFirebaseDatabase();
+                break;
+            default:
+                break;
+        }
+    }
+
 }

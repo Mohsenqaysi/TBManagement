@@ -10,10 +10,10 @@ import java.util.Map;
 public class PatientsDetailsRegistrationDataObject {
 
     public String fullName;
-    public int dateOfBirth;
+    public String dateOfBirth;
     public String gender;
     public String phoneNumber;
-    public int stageDiagnosis;
+    public String stageDiagnosis;
     public String flatNumber;
     public String address;
     public String city;
@@ -24,7 +24,10 @@ public class PatientsDetailsRegistrationDataObject {
 
     public Map<String, Object> UserDetails = new HashMap<>();
 
-    public PatientsDetailsRegistrationDataObject(String fullName, int dateOfBirth, String gender, String phoneNumber, int stageDiagnosis, String flatNumber, String address, String city, String area, String postalCode) {
+    public PatientsDetailsRegistrationDataObject() {
+    }
+
+    public PatientsDetailsRegistrationDataObject(String fullName, String gender, String phoneNumber, String stageDiagnosis, String flatNumber, String address, String city, String area, String postalCode) {
         this.fullName = fullName;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
@@ -37,7 +40,6 @@ public class PatientsDetailsRegistrationDataObject {
         this.postalCode = postalCode;
     }
 
-
     // TODO: concatinate the address into one line
     public Map <String, Object> toMap(){
         String fullAddress = "";
@@ -48,12 +50,12 @@ public class PatientsDetailsRegistrationDataObject {
         result.put("gender", gender);
         result.put("phoneNumber", phoneNumber);
         result.put("stageDiagnosis", stageDiagnosis);
-         fullAddress = "Flat "+flatNumber +"-" + address + " " + city + " "+ area + " "+ postalCode;
+//         fullAddress = "Flat "+flatNumber +"-" + address + " " + city + " "+ area + " "+ postalCode;
         result.put("address",fullAddress);
-//        result.put("flatNumber", flatNumber);
-//        result.put("address", address);
-//        result.put("city", city);
-//        result.put("postalCode", postalCode);
+        result.put("flatNumber", flatNumber);
+        result.put("address", address);
+        result.put("city", city);
+        result.put("postalCode", postalCode);
         return  result;
     }
 
