@@ -8,15 +8,20 @@
     tools:context="com.example.mohsenqaysi.tbmanagement.PatientsDetailsRegistrationForm"
     android:background="@color/colorAccent">
 
-    <Button
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:src="@drawable/profileplcaeholder"
         android:id="@+id/prifileImage_ID"
-        android:background="@drawable/profileplcaeholder"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="visible"
-        android:layout_height="65dp"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:clickable="true"
+        android:layout_marginEnd="16dp"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_width="65dp" />
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="2dp"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="0dp"

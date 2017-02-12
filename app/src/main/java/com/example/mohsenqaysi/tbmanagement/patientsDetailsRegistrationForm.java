@@ -1,6 +1,11 @@
 package com.example.mohsenqaysi.tbmanagement;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -8,25 +13,31 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.mohsenqaysi.tbmanagement.FirebaseDataObjects.PatientsDetailsRegistrationDataObject;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.example.mohsenqaysi.tbmanagement.R.array.gender;
 import static com.example.mohsenqaysi.tbmanagement.R.array.india_states;
 
 public class PatientsDetailsRegistrationForm extends AppCompatActivity implements View.OnClickListener {
 
+    private static final int REQUEST_IMAGE_LOAD = 1; // request code used in the call EXTERNAL_CONTENT_URI
+    ProgressDialog mProgressDialog;
+
     // init all the inputs fields
     private Button profileImage_button;
-    private ImageView profileImage;
+    private CircleImageView profileImage;
     private EditText fullname;
     private String genderType;
     private EditText dateOfBirth;
@@ -47,8 +58,8 @@ public class PatientsDetailsRegistrationForm extends AppCompatActivity implement
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patients_details_registration_form);
 
+        mProgressDialog = new ProgressDialog(this);
 
-//        profileImage = (ImageView) findViewById(R.id.prifileImage_ID);
         fullname = (EditText) findViewById(R.id.fullName_InputText_ID);
         phoneNumber = (EditText) findViewById(R.id.phoneNumber_InputText_ID);
         dateOfBirth = (EditText) findViewById(R.id.dateOfBirth_InputText_ID);
@@ -60,8 +71,8 @@ public class PatientsDetailsRegistrationForm extends AppCompatActivity implement
         stageOfDiagnosis = (EditText) findViewById(R.id.StageofDiagnosis__InputText_ID);
 
         // TODO: profileImage --> leave it for now. Add a click action for the image profile button
-        profileImage_button = (Button) findViewById(R.id.prifileImage_ID);
-        profileImage_button.setOnClickListener(this);
+        profileImage = (CircleImageView) findViewById(R.id.prifileImage_ID);
+        profileImage.setOnClickListener(this);
         saveData_button = (Button) findViewById(R.id.saveData_PatientForm_ID);
         saveData_button.setOnClickListener(this);
 
@@ -137,18 +148,20 @@ public class PatientsDetailsRegistrationForm extends AppCompatActivity implement
     private void writeNewPost(String fullName, String gender, String phoneNumber, String stageDiagnosis, String flatNumber, String address, String city, String area, String postalCode) {
 
         rootRef = FirebaseDatabase.getInstance().getReference();
-        // push() generates a unique key for the new added patient
-//        String key = rootRef.child("info").push().getKey();
+        /* push() generates a unique key for the new added patient
+        String key = rootRef.child("info").push().getKey();
+        */
         String key = rootRef.child("patients").push().getKey();
         Log.w("Hi", "I am working ;)");
 
         PatientsDetailsRegistrationDataObject newPatient = new PatientsDetailsRegistrationDataObject(fullName, gender, phoneNumber, stageDiagnosis, flatNumber, address, city, area, postalCode);
-        Map<String, Object> patientData = newPatient.toMapObject(); // value object
+        Map<String, Object> patientData = newPatient.toMapObject(); // patientData object
 
 
         Map<String, Object> childUpdates = new HashMap<>();
-//        childUpdates takes in  (key) as the unique key and patientData as the object
-        // /patients/ + key is the path you add, patientData into
+        /* childUpdates takes in  (key) as the unique key and patientData as the object
+         "/patients/" + key is the path where  patientData is add into
+        */
         childUpdates.put("/patients/" + key, patientData);
         rootRef.updateChildren(childUpdates);
     }
@@ -158,13 +171,65 @@ public class PatientsDetailsRegistrationForm extends AppCompatActivity implement
         int id = view.getId();
         switch (id){
             case R.id.prifileImage_ID:
+                //TODO: get the image from the user and uplaod it to firebase and pass its URL to the PatientsDetailsRegistrationDataObject
                 Log.w("Hi", "I am prifileImage_ID ;)");
+                loadImage();
                 break;
             case R.id.saveData_PatientForm_ID:
                 saveUserDataToFirebaseDatabase();
                 break;
             default:
                 break;
+        }
+    }
+
+    private void loadImage() {
+        Intent takePictureIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_LOAD);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == REQUEST_IMAGE_LOAD && resultCode == RESULT_OK) {
+            mProgressDialog.setMessage("Loading image...");
+            mProgressDialog.show();
+            final Uri uri = data.getData(); // get the picked image
+
+            String[] filePAth = { MediaStore.Images.Media.DATA};
+            Cursor cursor = getContentResolver().query(uri, filePAth,null,null,null);
+            cursor.moveToFirst();
+
+            // Get the full image path
+            String imagePath = cursor.getString(cursor.getColumnIndex(filePAth[0]));
+            Log.w("data!", imagePath);
+
+            cursor.close();
+            // pass the imagePath to Picasso as File object
+            // "converting the given pathname string into an abstract pathname." <-- source File doc
+            Picasso.with(this).load(new File(imagePath)).placeholder(R.drawable.profileplcaeholder).into(profileImage,
+                    new com.squareup.picasso.Callback() {
+                        @Override
+                        public void onSuccess() {
+                            mProgressDialog.dismiss();
+                        }
+                        @Override
+                        public void onError() {
+                            mProgressDialog.dismiss();
+                            Log.w("Error!", uri.getEncodedPath());
+                        }
+                    });
+
+//            if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+//                Bundle extras = data.getExtras();
+//                Bitmap imageBitmap = (Bitmap) extras.get("data");
+//                ImageView.setImageBitmap(imageBitmap);
+//            }
+
+
         }
     }
 
