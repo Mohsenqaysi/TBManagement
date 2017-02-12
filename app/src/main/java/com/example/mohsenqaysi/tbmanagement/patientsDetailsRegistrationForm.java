@@ -137,19 +137,20 @@ public class PatientsDetailsRegistrationForm extends AppCompatActivity implement
     private void writeNewPost(String fullName, String gender, String phoneNumber, String stageDiagnosis, String flatNumber, String address, String city, String area, String postalCode) {
 
         rootRef = FirebaseDatabase.getInstance().getReference();
-        String key = rootRef.child("users").push().getKey();
+        // push() generates a unique key for the new added patient
+//        String key = rootRef.child("info").push().getKey();
+        String key = rootRef.child("patients").push().getKey();
         Log.w("Hi", "I am working ;)");
 
-        PatientsDetailsRegistrationDataObject post = new PatientsDetailsRegistrationDataObject(fullName, gender, phoneNumber, stageDiagnosis, flatNumber, address, city, area, postalCode);
-        Map<String, Object> postValues = post.toMap();
+        PatientsDetailsRegistrationDataObject newPatient = new PatientsDetailsRegistrationDataObject(fullName, gender, phoneNumber, stageDiagnosis, flatNumber, address, city, area, postalCode);
+        Map<String, Object> patientData = newPatient.toMapObject(); // value object
+
 
         Map<String, Object> childUpdates = new HashMap<>();
-
-        childUpdates.put("/users/" + key, postValues);
-        childUpdates.put("/user-posts/" + key, "False");
+//        childUpdates takes in  (key) as the unique key and patientData as the object
+        // /patients/ + key is the path you add, patientData into
+        childUpdates.put("/patients/" + key, patientData);
         rootRef.updateChildren(childUpdates);
-
-
     }
 
     @Override
