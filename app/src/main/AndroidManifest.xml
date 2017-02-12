@@ -31,17 +31,15 @@
             android:name=".Authatications.ResetPassword"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".UserList"
-            android:label="Patients"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".TB_General_Info.GeneralInfoAboutTBList"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".TB_General_Info.GeneralInfoAboutTB"
-            android:label="General Information"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <activity android:name=".PatientsDetailsRegistrationForm"></activity>
+        <activity android:name=".PatientsDetailsRegistrationForm"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

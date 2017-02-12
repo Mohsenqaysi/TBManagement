@@ -3,6 +3,7 @@ package com.example.mohsenqaysi.tbmanagement.TB_General_Info;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.example.mohsenqaysi.tbmanagement.R;
@@ -17,6 +18,7 @@ public class GeneralInfoAboutTB extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        hideNavigationBar();
         setContentView(R.layout.activity_general_info_about_tb);
 
         title = getIntent().getExtras().getString("title");
@@ -34,5 +36,14 @@ public class GeneralInfoAboutTB extends AppCompatActivity {
             title_text.setText("Sorry there is no title for this topic!");
 
         }
+    }
+
+
+
+    private void hideNavigationBar() {
+        // Hide the action bar and set the screen size to full
+        getSupportActionBar().hide();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 }
