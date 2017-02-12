@@ -44,23 +44,23 @@
             tools:layout_constraintLeft_creator="1"
             tools:layout_constraintRight_creator="1"
             android:layout_below="@+id/imageView2"
-            android:layout_centerHorizontal="true" />
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:id="@+id/tb_info_ID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_vertical_margin"
+            android:layout_marginLeft="8dp"
             android:text="TextView"
             android:textSize="18sp"
             android:textStyle="normal"
             tools:layout_constraintLeft_creator="1"
             tools:layout_constraintRight_creator="1"
             tools:layout_editor_absoluteY="386dp"
-            android:layout_marginRight="@dimen/activity_vertical_margin"
-            android:layout_marginTop="16dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="14dp"
             android:layout_below="@+id/InfoTitle_ID"
-            android:layout_centerHorizontal="true" />
+            android:layout_alignParentStart="true" />
 
     </RelativeLayout>
 </ScrollView>
