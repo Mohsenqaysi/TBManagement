@@ -5,7 +5,7 @@
     android:id="@+id/activity_patients_details_registration_form"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.mohsenqaysi.tbmanagement.PatientsDetailsRegistrationForm"
+    tools:context="com.example.mohsenqaysi.tbmanagement.PatientDetailsRegistrationForm"
     android:background="@color/colorAccent">
 
 

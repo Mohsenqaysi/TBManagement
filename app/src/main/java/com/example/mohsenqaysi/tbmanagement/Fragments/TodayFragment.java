@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.mohsenqaysi.tbmanagement.FirebaseDataObjects.PatientsDetailsRegistrationDataObject;
-import com.example.mohsenqaysi.tbmanagement.PatientsDetailsRegistrationForm;
+import com.example.mohsenqaysi.tbmanagement.PatientDetailsRegistrationForm;
 import com.example.mohsenqaysi.tbmanagement.R;
 import com.example.mohsenqaysi.tbmanagement.TB_General_Info.GeneralInfoAboutTBList;
 import com.google.firebase.database.DatabaseReference;
@@ -63,7 +63,7 @@ public class TodayFragment extends Fragment {
         NewRegistaration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), PatientsDetailsRegistrationForm.class));
+                startActivity(new Intent(getContext(), PatientDetailsRegistrationForm.class));
 
             }
         });

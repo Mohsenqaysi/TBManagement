@@ -30,7 +30,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import static com.example.mohsenqaysi.tbmanagement.R.array.gender;
 import static com.example.mohsenqaysi.tbmanagement.R.array.india_states;
 
-public class PatientsDetailsRegistrationForm extends AppCompatActivity implements View.OnClickListener {
+public class PatientDetailsRegistrationForm extends AppCompatActivity implements View.OnClickListener {
 
     private static final int REQUEST_IMAGE_LOAD = 1; // request code used in the call EXTERNAL_CONTENT_URI
     ProgressDialog mProgressDialog;
@@ -113,7 +113,7 @@ public class PatientsDetailsRegistrationForm extends AppCompatActivity implement
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String stateSelectedName = parent.getItemAtPosition(position).toString();
-                        state = stateSelectedName;
+                state = stateSelectedName;
                 Toast.makeText(getApplicationContext(),"You clicked on: "+ stateSelectedName ,Toast.LENGTH_SHORT).show();
 
             }
@@ -228,8 +228,6 @@ public class PatientsDetailsRegistrationForm extends AppCompatActivity implement
 //                Bitmap imageBitmap = (Bitmap) extras.get("data");
 //                ImageView.setImageBitmap(imageBitmap);
 //            }
-
-
         }
     }
 
