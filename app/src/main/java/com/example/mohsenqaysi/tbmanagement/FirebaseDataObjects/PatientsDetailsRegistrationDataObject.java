@@ -63,4 +63,6 @@ public class PatientsDetailsRegistrationDataObject {
        return  "Flat NO. "+flatNumber +"-" + address + " " + city + " "+ area + " "+ postalCode;
     }
 
+
+
 }

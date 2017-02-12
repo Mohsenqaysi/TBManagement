@@ -14,7 +14,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.example.mohsenqaysi.tbmanagement.FirebaseDataObjects.PatientsDetailsRegistrationDataObject;
 import com.google.firebase.database.DatabaseReference;
@@ -36,7 +35,6 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
     ProgressDialog mProgressDialog;
 
     // init all the inputs fields
-    private Button profileImage_button;
     private CircleImageView profileImage;
     private EditText fullname;
     private String genderType;
@@ -91,7 +89,7 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String genderSelectedType = parent.getItemAtPosition(position).toString();
                 genderType = genderSelectedType;
-                Toast.makeText(getApplicationContext(),"You clicked on: "+ genderSelectedType ,Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(),"You clicked on: "+ genderSelectedType ,Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -114,8 +112,7 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String stateSelectedName = parent.getItemAtPosition(position).toString();
                 state = stateSelectedName;
-                Toast.makeText(getApplicationContext(),"You clicked on: "+ stateSelectedName ,Toast.LENGTH_SHORT).show();
-
+//                Toast.makeText(getApplicationContext(),"You clicked on: "+ stateSelectedName ,Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -129,7 +126,6 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
     private void saveUserDataToFirebaseDatabase() {
         Log.w("Hi", "I am prifileImage_ID ;)");
 
-//        profileImage; TODO: leave it for now
         String Patient_full_Name = fullname.getText().toString();
         String Patient_gender = genderType;
         String Patient_phone_Number = phoneNumber.getText().toString();

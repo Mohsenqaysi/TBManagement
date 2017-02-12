@@ -17,7 +17,8 @@ import com.google.firebase.database.FirebaseDatabase;
 public class GeneralInfoAboutTBList extends AppCompatActivity {
 
     private ListView Info_ListView;
-    private TextView textView;
+    private TextView TB_TopicsTitles;
+    private DatabaseReference  ref;
     private String FIREBASE_URL_PATH = "https://tbmanagement-aff8e.firebaseio.com/info";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +39,7 @@ public class GeneralInfoAboutTBList extends AppCompatActivity {
 
         Info_ListView = (ListView) findViewById(R.id.Info_ListView_ID);
 
-        final DatabaseReference  ref = FirebaseDatabase.getInstance().getReferenceFromUrl(FIREBASE_URL_PATH);
+        ref = FirebaseDatabase.getInstance().getReferenceFromUrl(FIREBASE_URL_PATH);
         ref.keepSynced(true);
 
         FirebaseListAdapter<String> firebaseListAdapter = new FirebaseListAdapter<String>(
@@ -49,11 +50,11 @@ public class GeneralInfoAboutTBList extends AppCompatActivity {
         ) {
             @Override
             protected void populateView(View v, String model, int position) {
-                textView = (TextView) v.findViewById(android.R.id.text1);
+                TB_TopicsTitles = (TextView) v.findViewById(android.R.id.text1);
                 // Get the key of the item at @position
                 DatabaseReference itemRef = getRef(position);
                 String itemKey = itemRef.getKey();
-                textView.setText(itemKey);
+                TB_TopicsTitles.setText(itemKey);
             }
         };
 
@@ -64,10 +65,6 @@ public class GeneralInfoAboutTBList extends AppCompatActivity {
         Info_ListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-//                TextView txt = (TextView) parent.getChildAt(position - lv.firstVisiblePosition()).findViewById(R.id.mylistviewtextview);
-//                String keyword = txt.getText().toString();
-
 
                 String itemSelectedFromListTitle = ((TextView)view).getText().toString();
                 String itemSelectedFromListDescription = (String) Info_ListView.getItemAtPosition(position);
