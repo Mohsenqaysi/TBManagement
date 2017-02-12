@@ -40,8 +40,7 @@ public class PatientsDetailsRegistrationDataObject {
         this.postalCode = postalCode;
     }
 
-    // TODO: concatinate the address into one line
-    public Map <String, Object> toMap(){
+    public Map <String, Object> toMapObject(){
         String fullAddress = "";
         HashMap<String, Object> result = new HashMap<>();
 
@@ -50,13 +49,18 @@ public class PatientsDetailsRegistrationDataObject {
         result.put("gender", gender);
         result.put("phoneNumber", phoneNumber);
         result.put("stageDiagnosis", stageDiagnosis);
-//         fullAddress = "Flat "+flatNumber +"-" + address + " " + city + " "+ area + " "+ postalCode;
         result.put("address",fullAddress);
         result.put("flatNumber", flatNumber);
         result.put("address", address);
         result.put("city", city);
+        result.put("area", area);
         result.put("postalCode", postalCode);
         return  result;
+    }
+
+    // TODO: concatenate the address into one line
+    public String fullAdress(){
+       return  "Flat NO. "+flatNumber +"-" + address + " " + city + " "+ area + " "+ postalCode;
     }
 
 }

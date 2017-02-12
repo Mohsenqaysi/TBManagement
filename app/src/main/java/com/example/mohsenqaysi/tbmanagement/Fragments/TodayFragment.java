@@ -94,12 +94,12 @@ public class TodayFragment extends Fragment {
         Log.w("Hi", "I am working ;)");
 
         PatientsDetailsRegistrationDataObject post = new PatientsDetailsRegistrationDataObject(fullName, gender, phoneNumber, stageDiagnosis, flatNumber, address, city, area, postalCode);
-        Map<String, Object> postValues = post.toMap();
+        Map<String, Object> postValues = post.toMapObject();
 
         Map<String, Object> childUpdates = new HashMap<>();
 
         childUpdates.put("/users/" + key, postValues);
-        childUpdates.put("/user-posts/" + key, "False");
+//        childUpdates.put("/user-posts/" + key, "False");
         rootRef.updateChildren(childUpdates);
 
 
