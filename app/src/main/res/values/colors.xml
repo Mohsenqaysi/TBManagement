@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- 3C4B5675 -->
     <color name="colorPrimary">#125688</color>
     <color name="colorPrimaryDark">#0c4773</color>
     <color name="colorAccent">#3c4b5675</color>
@@ -8,7 +10,6 @@
     <color name="navigationBarColor">#000000</color>
     <color name="signInButtonColor">#FE0000</color>
     <color name="saveDatanButtonColor">#429B58</color>
-
     <color name="textEditorColor">#6585A8</color>
     <color name="tabTextColor">#e6e4e4</color>
     <color name="tabSelectedTextColor">#ffffff</color>
