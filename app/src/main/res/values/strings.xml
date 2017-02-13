@@ -45,7 +45,6 @@
     <string name="save">Save</string>
     <string name="Complete_The_Form">Please complete the form fully</string>
 
-
     <!-- Login Activity-->
     <string name="Google_Services_missing">You need to have Google Services Installed to use the Application! or make sure it is up to date.</string>
     <string name= "Log_in_failed"> Login failed.</string>

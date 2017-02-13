@@ -117,7 +117,6 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
             }
         });
 
-
         // Get the name of the state from the spinner
         Spinner indian_States_spinner = (Spinner) findViewById(R.id.IndianStates_spinner_ID);
         String[] states = getResources().getStringArray(india_states);
