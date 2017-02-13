@@ -1,11 +1,13 @@
 package com.example.mohsenqaysi.tbmanagement.Authatications;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -17,6 +19,8 @@ import android.widget.EditText;
 import com.example.mohsenqaysi.tbmanagement.Helper.SnackBarMessages;
 import com.example.mohsenqaysi.tbmanagement.MainActivity;
 import com.example.mohsenqaysi.tbmanagement.R;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -203,7 +207,14 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view == signIn) {
-            signInIntoFirebase();
+
+            GoogleApiAvailability api = GoogleApiAvailability.getInstance();
+            int code = api.isGooglePlayServicesAvailable(this);
+            if (code == ConnectionResult.SUCCESS) {
+                signInIntoFirebase();
+            } else {
+                googleServicesCheck();
+            }
         }
     }
 
@@ -211,5 +222,21 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     public void resetPassword(View view) {
         // goto the reset activity page
         startActivity(new Intent(this, ResetPassword.class));
+    }
+
+    private void googleServicesCheck(){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Error!");
+        builder.setMessage("You need to have Google Services Installed to use the Application!")
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //do things
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+
     }
 }

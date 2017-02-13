@@ -6,10 +6,11 @@ android {
     defaultConfig {
         applicationId "com.example.mohsenqaysi.tbmanagement"
 //       TODO: Change it back to 16
-        minSdkVersion 23
+        minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
+        multiDexEnabled = true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -26,6 +27,9 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
         compile 'com.android.support:appcompat-v7:25.1.0'
         compile 'com.android.support:design:25.1.0'
+        compile 'com.google.android.gms:play-services:10.0.1'
+        compile'com.google.android.gms:play-services-auth:10.0.1'
+        compile 'com.android.support:multidex:1.0.1'
 
 //        Third party open_sources libraries
         compile 'de.hdodenhof:circleimageview:2.1.0'
