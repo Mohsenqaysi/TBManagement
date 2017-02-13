@@ -1,7 +1,11 @@
 package com.example.mohsenqaysi.tbmanagement.Helper;
 
+import android.content.DialogInterface;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
+
+import com.example.mohsenqaysi.tbmanagement.R;
 
 import static android.support.design.widget.Snackbar.LENGTH_LONG;
 
@@ -20,13 +24,29 @@ public class SnackBarMessages {
 
     }
 
-    public void SnackBarMessages(View layout, String meeage) {
+    public void SnackBarMessages(View layout, String message) {
         this.parentLayout = layout;
-        this.text = meeage;
+        this.text = message;
     }
 
     //show messages in a SnackBar
     public void showToast() {
         Snackbar.make(parentLayout, text, LENGTH_LONG).show();
+    }
+
+    public void googleServicesCheck(View layout){
+        AlertDialog.Builder builder = new AlertDialog.Builder(layout.getContext());
+        builder.setTitle("Error!");
+        builder.setIcon(R.drawable.ic_error_outline_black);
+        builder.setMessage("You need to have Google Services Installed to use the Application! or make sure it is up to date")
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //do things
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+
     }
 }

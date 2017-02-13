@@ -1,13 +1,11 @@
 package com.example.mohsenqaysi.tbmanagement.Authatications;
 
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -213,7 +211,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             if (code == ConnectionResult.SUCCESS) {
                 signInIntoFirebase();
             } else {
-                googleServicesCheck();
+                snackBarMessages.googleServicesCheck(parentLayout);
             }
         }
     }
@@ -224,19 +222,5 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         startActivity(new Intent(this, ResetPassword.class));
     }
 
-    private void googleServicesCheck(){
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Error!");
-        builder.setMessage("You need to have Google Services Installed to use the Application!")
-                .setCancelable(false)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        //do things
-                    }
-                });
-        AlertDialog alert = builder.create();
-        alert.show();
-
-    }
 }
