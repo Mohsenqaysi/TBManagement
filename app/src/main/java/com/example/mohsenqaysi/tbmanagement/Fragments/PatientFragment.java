@@ -83,7 +83,7 @@ public class PatientFragment extends Fragment {
         }
         public void setStage(String stage){
             TextView name = (TextView) mView.findViewById(R.id.patient_stage_ID);
-            name.setText(stage);
+            name.setText("Stage: "+stage);
         }
 //        public void setIamge(String image){
 //            TextView name = (TextView) mView.findViewById(R.id.patient_RecyclerView_ID);
