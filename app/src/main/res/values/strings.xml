@@ -14,11 +14,8 @@
     <string name="send_email_info">Enter you email and we’ll send you a link to get back into your account.</string>
 
     <!-- Custom layout used for the tab bar design -->
-
     <style name="MyMaterialTheme" parent="MyMaterialTheme.Base">
-
     </style>
-
     <style name="MyMaterialTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
@@ -44,9 +41,18 @@
     <string name="Address">Address</string>
     <string name="City">city/town</string>
     <string name="post_code">Post Code</string>
-
     <string name="Stage_of_Diagnosis">Stage of Diagnosis</string>
     <string name="save">Save</string>
+    <string name="Complete_The_Form">Please complete the form</string>
+
+
+    <!-- Login Activity-->
+    <string name="Google_Services_missing">You need to have Google Services Installed to use the Application! or make sure it is up to date.</string>
+    <string name= "Log_in_failed"> Login failed.</string>
+    <string name="Profile_Failed_TO_Creat">Something went wrong. The profile was not created.</string>
+
+    <string name= "Email_Sent">Email sent</string>
+
 
 
 </resources>

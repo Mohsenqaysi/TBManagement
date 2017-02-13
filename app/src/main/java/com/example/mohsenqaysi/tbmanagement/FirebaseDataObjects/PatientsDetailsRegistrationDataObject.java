@@ -9,6 +9,7 @@ import java.util.Map;
 
 public class PatientsDetailsRegistrationDataObject {
 
+    public String image;
     public String fullName;
     public String dateOfBirth;
     public String gender;
@@ -27,7 +28,8 @@ public class PatientsDetailsRegistrationDataObject {
     public PatientsDetailsRegistrationDataObject() {
     }
 
-    public PatientsDetailsRegistrationDataObject(String fullName, String gender, String phoneNumber, String stageDiagnosis, String flatNumber, String address, String city, String area, String postalCode) {
+    public PatientsDetailsRegistrationDataObject(String image, String fullName,String dateOfBirth, String gender, String phoneNumber, String stageDiagnosis, String flatNumber, String address, String city, String area, String postalCode) {
+        this.image = image;
         this.fullName = fullName;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
@@ -44,6 +46,7 @@ public class PatientsDetailsRegistrationDataObject {
         String fullAddress = "";
         HashMap<String, Object> result = new HashMap<>();
 
+        result.put("image", image);
         result.put("fullName", fullName);
         result.put("dateOfBirth", dateOfBirth);
         result.put("gender", gender);

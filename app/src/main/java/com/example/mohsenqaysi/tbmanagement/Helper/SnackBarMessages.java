@@ -18,13 +18,13 @@ import static android.support.design.widget.Snackbar.LENGTH_LONG;
 public class SnackBarMessages {
 
     private View parentLayout;
-    private String text;
+    private int text;
 
     public SnackBarMessages() {
 
     }
 
-    public void SnackBarMessages(View layout, String message) {
+    public void SnackBarMessages(View layout, int message) {
         this.parentLayout = layout;
         this.text = message;
     }
@@ -34,11 +34,11 @@ public class SnackBarMessages {
         Snackbar.make(parentLayout, text, LENGTH_LONG).show();
     }
 
-    public void googleServicesCheck(View layout){
+    public void googleServicesCheck(View layout, int message){
         AlertDialog.Builder builder = new AlertDialog.Builder(layout.getContext());
         builder.setTitle("Error!");
         builder.setIcon(R.drawable.ic_error_outline_black);
-        builder.setMessage("You need to have Google Services Installed to use the Application! or make sure it is up to date")
+        builder.setMessage(message)
                 .setCancelable(false)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {

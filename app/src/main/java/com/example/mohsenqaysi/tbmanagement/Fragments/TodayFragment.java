@@ -9,15 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.mohsenqaysi.tbmanagement.FirebaseDataObjects.PatientsDetailsRegistrationDataObject;
 import com.example.mohsenqaysi.tbmanagement.PatientDetailsRegistrationForm;
 import com.example.mohsenqaysi.tbmanagement.R;
 import com.example.mohsenqaysi.tbmanagement.TB_General_Info.GeneralInfoAboutTBList;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class TodayFragment extends Fragment {
 
@@ -57,7 +52,7 @@ public class TodayFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.w("Hi", "I am working ;)");
-                saveUserDataToFirebaseDatabase();
+//                saveUserDataToFirebaseDatabase();
             }
         });
         NewRegistaration.setOnClickListener(new View.OnClickListener() {
@@ -71,39 +66,39 @@ public class TodayFragment extends Fragment {
         return view;
     }
 
-    private void saveUserDataToFirebaseDatabase() {
+//    private void saveUserDataToFirebaseDatabase() {
+//
+//        String fullName = "Mohsen Qaysi";
+//        String gender = "Meal";
+//        String phoneNumber = "0871310812";
+//        String stageDiagnosis = "3";
+//        String flatNumber = "26";
+//        String address = "75 Pembroke road";
+//        String city = "Dublin";
+//        String area = "BallsBridge";
+//        String postalCode = "D4";
+//        writeNewPost(fullName, gender, phoneNumber, stageDiagnosis, flatNumber, address, city, area, postalCode);
+//
+//
+//    }
 
-        String fullName = "Mohsen Qaysi";
-        String gender = "Meal";
-        String phoneNumber = "0871310812";
-        String stageDiagnosis = "3";
-        String flatNumber = "26";
-        String address = "75 Pembroke road";
-        String city = "Dublin";
-        String area = "BallsBridge";
-        String postalCode = "D4";
-        writeNewPost(fullName, gender, phoneNumber, stageDiagnosis, flatNumber, address, city, area, postalCode);
-
-
-    }
-
-    private void writeNewPost(String fullName, String gender, String phoneNumber, String stageDiagnosis, String flatNumber, String address, String city, String area, String postalCode) {
-
-        rootRef = FirebaseDatabase.getInstance().getReference();
-        String key = rootRef.child("users").push().getKey();
-        Log.w("Hi", "I am working ;)");
-
-        PatientsDetailsRegistrationDataObject post = new PatientsDetailsRegistrationDataObject(fullName, gender, phoneNumber, stageDiagnosis, flatNumber, address, city, area, postalCode);
-        Map<String, Object> postValues = post.toMapObject();
-
-        Map<String, Object> childUpdates = new HashMap<>();
-
-        childUpdates.put("/users/" + key, postValues);
-//        childUpdates.put("/user-posts/" + key, "False");
-        rootRef.updateChildren(childUpdates);
-
-
-    }
+//    private void writeNewPost(String fullName, String gender, String phoneNumber, String stageDiagnosis, String flatNumber, String address, String city, String area, String postalCode) {
+//
+//        rootRef = FirebaseDatabase.getInstance().getReference();
+//        String key = rootRef.child("users").push().getKey();
+//        Log.w("Hi", "I am working ;)");
+//
+//        PatientsDetailsRegistrationDataObject post = new PatientsDetailsRegistrationDataObject(fullName, gender, phoneNumber, stageDiagnosis, flatNumber, address, city, area, postalCode);
+//        Map<String, Object> postValues = post.toMapObject();
+//
+//        Map<String, Object> childUpdates = new HashMap<>();
+//
+//        childUpdates.put("/users/" + key, postValues);
+////        childUpdates.put("/user-posts/" + key, "False");
+//        rootRef.updateChildren(childUpdates);
+//
+//
+//    }
 
 
 }

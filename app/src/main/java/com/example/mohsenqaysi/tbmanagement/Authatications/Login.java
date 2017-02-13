@@ -178,7 +178,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.w(TAG, "signInWithEmail:failed", task.getException());
-                            snackBarMessages.SnackBarMessages(parentLayout, "Log in failed");
+                            snackBarMessages.SnackBarMessages(parentLayout, R.string.Log_in_failed);
                             snackBarMessages.showToast();
                             Log.w(TAG, task.getException().fillInStackTrace());
                             progressDialog.hide();
@@ -211,7 +211,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             if (code == ConnectionResult.SUCCESS) {
                 signInIntoFirebase();
             } else {
-                snackBarMessages.googleServicesCheck(parentLayout);
+                snackBarMessages.googleServicesCheck(parentLayout,R.string.Google_Services_missing);
             }
         }
     }

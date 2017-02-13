@@ -57,23 +57,23 @@ public class ResetPassword extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         Log.d(TAG, "Email sent.");
                                         progressDialog.hide();
-                                        snackBarMessages.SnackBarMessages(parentLayout, "Email sent");
+                                        snackBarMessages.SnackBarMessages(parentLayout,R.string.Email_Sent );
                                         snackBarMessages.showToast();
 //                                        showToast(parentLayout,"Email sent");
 //                                    progressDialog.
 //                                    LogInActivityPage();
                                     } else {
                                         progressDialog.hide();
-                                        snackBarMessages.SnackBarMessages(parentLayout, "Sorry, the email does not exists");
+                                        snackBarMessages.SnackBarMessages(parentLayout, R.string.error_email_does_not_exist);
                                         snackBarMessages.showToast();
                                     }
                                 }
                             });
                 } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(resetEmail).matches()) {
-                    snackBarMessages.SnackBarMessages(parentLayout, "Please enter a valid email");
+                    snackBarMessages.SnackBarMessages(parentLayout, R.string.invalid_email_address);
                     snackBarMessages.showToast();
                 } else {
-                    snackBarMessages.SnackBarMessages(parentLayout, "Please enter an email");
+                    snackBarMessages.SnackBarMessages(parentLayout, R.string.invalid_email_address);
                     snackBarMessages.showToast();
                 }
             }
