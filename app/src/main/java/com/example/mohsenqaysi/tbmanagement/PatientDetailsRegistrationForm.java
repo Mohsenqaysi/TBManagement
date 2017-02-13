@@ -74,7 +74,6 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
         setContentView(R.layout.activity_patients_details_registration_form);
         parentLayout = (ConstraintLayout) findViewById(R.id.activity_patients_details_registration_form);
 
-
         mStorage = FirebaseStorage.getInstance().getReference(); // RootRef
         mProgressDialog = new ProgressDialog(this);
 
@@ -183,12 +182,13 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    snackBarMessages.googleServicesCheck(parentLayout,R.string.Profile_Failed_TO_Creat);
+                    snackBarMessages.googleServicesCheck(parentLayout,R.string.Profile_Failed_TO_Create);
                 }
             });
         } else {
             Log.w("Hi", "else :(");
-            snackBarMessages.SnackBarMessages(parentLayout, R.string.required_field);
+            snackBarMessages.googleServicesCheck(parentLayout, R.string.Complete_The_Form);
+
         }
     }
 
@@ -232,7 +232,6 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
     }
 
     private void loadImage() {
-
         Intent takePictureIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_LOAD);
