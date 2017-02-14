@@ -261,7 +261,7 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
             cursor.close();
             // pass the imagePath to Picasso as File object
             // "converting the given pathname string into an abstract pathname." <-- source File doc
-            Picasso.with(this).load(ImagePath).placeholder(R.drawable.profileplcaeholder).into(profileImage,
+            Picasso.with(this).load(ImagePath).centerCrop().resize(200,200).placeholder(R.drawable.profileplcaeholder).into(profileImage,
                     new com.squareup.picasso.Callback() {
                         @Override
                         public void onSuccess() {
