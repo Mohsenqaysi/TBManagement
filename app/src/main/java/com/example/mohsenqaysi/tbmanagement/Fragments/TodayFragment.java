@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.mohsenqaysi.tbmanagement.PatientDetailsRegistrationForm;
 import com.example.mohsenqaysi.tbmanagement.R;
 import com.example.mohsenqaysi.tbmanagement.TB_General_Info.GeneralInfoAboutTBList;
 import com.google.firebase.database.DatabaseReference;
@@ -19,7 +18,6 @@ public class TodayFragment extends Fragment {
     private DatabaseReference rootRef;
     private Button show_button;
     private Button save_button;
-    private Button NewRegistaration;
 
     public TodayFragment() {
         // Required empty public constructor
@@ -38,7 +36,6 @@ public class TodayFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_today, container, false);
 
-        NewRegistaration = (Button) view.findViewById(R.id.Registar_ID);
         show_button = (Button) view.findViewById(R.id.info_ID);
         show_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,14 +52,6 @@ public class TodayFragment extends Fragment {
 //                saveUserDataToFirebaseDatabase();
             }
         });
-        NewRegistaration.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getContext(), PatientDetailsRegistrationForm.class));
-
-            }
-        });
-
         return view;
     }
 

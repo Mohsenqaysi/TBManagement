@@ -1,7 +1,9 @@
 package com.example.mohsenqaysi.tbmanagement.Fragments;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.mohsenqaysi.tbmanagement.CustomCardView.Patients;
 import com.example.mohsenqaysi.tbmanagement.Helper.RoundedTransformation;
+import com.example.mohsenqaysi.tbmanagement.PatientDetailsRegistrationForm;
 import com.example.mohsenqaysi.tbmanagement.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -21,6 +24,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 public class PatientFragment extends Fragment {
+
+    private FloatingActionButton NewRegistaration;
 
     private RecyclerView mPatientList;
     private DatabaseReference mDatabase;
@@ -46,7 +51,14 @@ public class PatientFragment extends Fragment {
          view =  inflater.inflate(R.layout.fragment_patient, container, false);
          viewCotext = getActivity();
 
+        NewRegistaration = (FloatingActionButton) view.findViewById(R.id.FloatingActionButton_ID);
+        NewRegistaration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), PatientDetailsRegistrationForm.class));
 
+            }
+        });
         mPatientList = (RecyclerView) view.findViewById(R.id.patients_list_ID);
 
         // @param hasFixedSize true if adapter changes cannot affect the size of the RecyclerView.
