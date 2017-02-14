@@ -30,6 +30,9 @@
             android:name=".MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme" />
+        <Fragment
+            android:name=".Fragments.PatientFragment"
+            android:theme="@style/MyMaterialTheme" />
         <activity
             android:name=".PatientsDetails"
             android:screenOrientation="portrait" />

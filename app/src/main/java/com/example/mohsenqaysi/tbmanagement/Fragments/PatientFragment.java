@@ -1,10 +1,11 @@
 package com.example.mohsenqaysi.tbmanagement.Fragments;
 
-import android.content.Context;
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mohsenqaysi.tbmanagement.CustomCardView.Patients;
+import com.example.mohsenqaysi.tbmanagement.Helper.RoundedTransformation;
 import com.example.mohsenqaysi.tbmanagement.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -24,7 +26,8 @@ public class PatientFragment extends Fragment {
     private DatabaseReference mDatabase;
     private View view;
     private String FIREBASE_URL_PATH = "https://tbmanagement-aff8e.firebaseio.com/patientsName";
-    private static Context viewCotext;
+    private static Activity viewCotext;
+
 
 
     public PatientFragment() {
@@ -45,12 +48,12 @@ public class PatientFragment extends Fragment {
 
 
         mPatientList = (RecyclerView) view.findViewById(R.id.patients_list_ID);
-       // @param hasFixedSize true if adapter changes cannot affect the size of the RecyclerView.
+
+        // @param hasFixedSize true if adapter changes cannot affect the size of the RecyclerView.
         mPatientList.setHasFixedSize(true);
         mPatientList.setLayoutManager(new LinearLayoutManager(getContext()));
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("patients"); // gets all its children
-
 
 
         return view;
@@ -97,9 +100,22 @@ public class PatientFragment extends Fragment {
         }
         public void setIamge(String image){
 
-          ImageView display_eImage = (ImageView) mView.findViewById(R.id.patient_RecyclerView_ID);
+//          ImageView display_eImage = (ImageView) mView.findViewById(R.id.patient_RecyclerView_ID);
+            ImageView display_eImage = (ImageView) mView.findViewById(R.id.patient_RecyclerView_ID);
 
-            Picasso.with(viewCotext.getApplicationContext()).load(image).placeholder(R.drawable.profileplcaeholder).into(display_eImage);
+//            Picasso.with(viewCotext.getApplicationContext()).load(image).placeholder(R.drawable.profileplcaeholder).into(display_eImage);
+
+            Picasso.with(viewCotext.getApplicationContext()).load(image).centerCrop().resize(65,65).transform(new RoundedTransformation(0,0)).placeholder(R.drawable.profileplcaeholder).into( display_eImage,
+                    new com.squareup.picasso.Callback() {
+                        @Override
+                        public void onSuccess() {
+                            Log.w("Status: ", "Success!");
+                        }
+                        @Override
+                        public void onError() {
+                            Log.w("Error!", "The images are not loaded");
+                        }
+                    });
 
 
         }
