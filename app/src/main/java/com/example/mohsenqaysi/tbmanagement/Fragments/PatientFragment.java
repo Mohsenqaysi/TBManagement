@@ -15,6 +15,8 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class PatientFragment extends Fragment {
 
     private RecyclerView mPatientList;
@@ -63,6 +65,8 @@ public class PatientFragment extends Fragment {
             protected void populateViewHolder(PatientsViewHolder viewHolder, Patients model, int position) {
                 viewHolder.setName(model.getFullName());
                 viewHolder.setStage(model.getStageDiagnosis());
+                viewHolder.setStage(model.getImage());
+
             }
         };
         mPatientList.setAdapter(firebaseRecyclerAdapter);
@@ -78,16 +82,16 @@ public class PatientFragment extends Fragment {
         }
 
         public void setName(String fullName){
-            TextView name = (TextView) mView.findViewById(R.id.patient_fullname_ID);
-            name.setText(fullName);
+            TextView display_Name = (TextView) mView.findViewById(R.id.patient_fullname_ID);
+            display_Name.setText(fullName);
         }
         public void setStage(String stage){
-            TextView name = (TextView) mView.findViewById(R.id.patient_stage_ID);
-            name.setText("Stage: "+stage);
+            TextView display_Stage = (TextView) mView.findViewById(R.id.patient_stage_ID);
+            display_Stage.setText("Stage: "+stage);
         }
-//        public void setIamge(String image){
-//            TextView name = (TextView) mView.findViewById(R.id.patient_RecyclerView_ID);
-//            name.setText(image);
-//        }
+        public void setIamge(String image){
+            CircleImageView display_Image = (CircleImageView) mView.findViewById(R.id.patient_RecyclerView_ID);
+
+        }
     }
 }
