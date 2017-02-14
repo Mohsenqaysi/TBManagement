@@ -1,5 +1,6 @@
 package com.example.mohsenqaysi.tbmanagement.Fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mohsenqaysi.tbmanagement.CustomCardView.Patients;
@@ -14,14 +16,16 @@ import com.example.mohsenqaysi.tbmanagement.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import de.hdodenhof.circleimageview.CircleImageView;
+import com.squareup.picasso.Picasso;
 
 public class PatientFragment extends Fragment {
 
     private RecyclerView mPatientList;
     private DatabaseReference mDatabase;
+    private View view;
     private String FIREBASE_URL_PATH = "https://tbmanagement-aff8e.firebaseio.com/patientsName";
+    private static Context viewCotext;
+
 
     public PatientFragment() {
         // Required empty public constructor
@@ -36,7 +40,9 @@ public class PatientFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_patient, container, false);
+         view =  inflater.inflate(R.layout.fragment_patient, container, false);
+         viewCotext = getActivity();
+
 
         mPatientList = (RecyclerView) view.findViewById(R.id.patients_list_ID);
        // @param hasFixedSize true if adapter changes cannot affect the size of the RecyclerView.
@@ -65,7 +71,7 @@ public class PatientFragment extends Fragment {
             protected void populateViewHolder(PatientsViewHolder viewHolder, Patients model, int position) {
                 viewHolder.setName(model.getFullName());
                 viewHolder.setStage(model.getStageDiagnosis());
-                viewHolder.setStage(model.getImage());
+                viewHolder.setIamge(model.getImage());
 
             }
         };
@@ -87,10 +93,14 @@ public class PatientFragment extends Fragment {
         }
         public void setStage(String stage){
             TextView display_Stage = (TextView) mView.findViewById(R.id.patient_stage_ID);
-            display_Stage.setText("Stage: "+stage);
+            display_Stage.setText("Stage: "+ stage);
         }
         public void setIamge(String image){
-            CircleImageView display_Image = (CircleImageView) mView.findViewById(R.id.patient_RecyclerView_ID);
+
+          ImageView display_eImage = (ImageView) mView.findViewById(R.id.patient_RecyclerView_ID);
+
+            Picasso.with(viewCotext.getApplicationContext()).load(image).placeholder(R.drawable.profileplcaeholder).into(display_eImage);
+
 
         }
     }
