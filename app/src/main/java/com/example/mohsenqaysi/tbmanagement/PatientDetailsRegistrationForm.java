@@ -178,6 +178,7 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
                             Patient_flat_Number, Patient_address, Patient_city, Patient_area, Patient_postalCode);
                      mProgressDialog.dismiss();
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    finish();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
