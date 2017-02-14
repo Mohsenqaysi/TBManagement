@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -51,7 +52,7 @@ public class PatientFragment extends Fragment {
          view =  inflater.inflate(R.layout.fragment_patient, container, false);
          viewCotext = getActivity();
 
-        NewRegistaration = (FloatingActionButton) view.findViewById(R.id.FloatingActionButton_ID);
+        NewRegistaration = (FloatingActionButton) view.findViewById(R.id.FloatingActionButton_ID2);
         NewRegistaration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,6 +76,7 @@ public class PatientFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
+
         FirebaseRecyclerAdapter<Patients,PatientsViewHolder > firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Patients, PatientsViewHolder>(
                 Patients.class,
                 R.layout.patients_row, // this is the custom layout
@@ -90,6 +92,7 @@ public class PatientFragment extends Fragment {
 
             }
         };
+        ViewCompat.setNestedScrollingEnabled(getView(),false);
         mPatientList.setAdapter(firebaseRecyclerAdapter);
 
     }

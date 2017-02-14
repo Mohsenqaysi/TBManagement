@@ -87,7 +87,6 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
         postCode = (EditText) findViewById(R.id.PostCode__InputText_ID);
         stageOfDiagnosis = (EditText) findViewById(R.id.StageofDiagnosis__InputText_ID);
 
-        // TODO: profileImage --> leave it for now. Add a click action for the image profile button
         profileImage = (CircleImageView) findViewById(R.id.prifileImage_ID);
         profileImage.setOnClickListener(this);
         saveData_button = (Button) findViewById(R.id.saveData_PatientForm_ID);
@@ -220,7 +219,6 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
         int id = view.getId();
         switch (id){
             case R.id.prifileImage_ID:
-                //TODO: get the image from the user and upload it to firebase and pass its URL to the PatientsDetailsRegistrationDataObject
                 Log.w("Hi", "I am profile Image_ID ;)");
                 loadImage();
                 break;
