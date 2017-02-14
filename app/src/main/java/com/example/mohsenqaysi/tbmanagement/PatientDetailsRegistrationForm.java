@@ -255,7 +255,6 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
             Log.w("data!", Path);
              ImagePath = new File(Path);
             Log.w("ImagePath!", ImagePath.toString());
-
             cursor.close();
             // pass the imagePath to Picasso as File object
             // "converting the given pathname string into an abstract pathname." <-- source File doc
