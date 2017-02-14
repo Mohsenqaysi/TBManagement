@@ -105,7 +105,7 @@ public class PatientFragment extends Fragment {
 
 //            Picasso.with(viewCotext.getApplicationContext()).load(image).placeholder(R.drawable.profileplcaeholder).into(display_eImage);
 
-            Picasso.with(viewCotext.getApplicationContext()).load(image).centerCrop().resize(65,65).transform(new RoundedTransformation(0,0)).placeholder(R.drawable.profileplcaeholder).into( display_eImage,
+            Picasso.with(viewCotext.getApplicationContext()).load(image).centerCrop().resize(200,200).transform(new RoundedTransformation(100,35)).placeholder(R.drawable.profileplcaeholder).into( display_eImage,
                     new com.squareup.picasso.Callback() {
                         @Override
                         public void onSuccess() {
