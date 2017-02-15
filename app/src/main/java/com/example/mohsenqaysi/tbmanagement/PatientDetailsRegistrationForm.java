@@ -2,12 +2,15 @@ package com.example.mohsenqaysi.tbmanagement;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -15,9 +18,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.mohsenqaysi.tbmanagement.FirebaseDataObjects.PatientsDetailsRegistrationDataObject;
+import com.example.mohsenqaysi.tbmanagement.Helper.RoundedTransformation;
 import com.example.mohsenqaysi.tbmanagement.Helper.SnackBarMessages;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -33,8 +39,6 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 import static com.example.mohsenqaysi.tbmanagement.R.array.gender;
 import static com.example.mohsenqaysi.tbmanagement.R.array.india_states;
 
@@ -43,14 +47,16 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
     SnackBarMessages snackBarMessages = new SnackBarMessages();
     private ConstraintLayout parentLayout;
     private static final int REQUEST_IMAGE_LOAD = 1; // request code used in the call EXTERNAL_CONTENT_URI
+    //Permision code that will be checked in the method onRequestPermissionsResult
+    private static final int STORAGE_PERMISSION_CODE = 2;
     ProgressDialog mProgressDialog;
 
     // init all the inputs fields
-    private CircleImageView profileImage;
+    private ImageView profileImage;
     private Uri ImageUri;
     private File ImagePath;
     private Uri downladUri;
-    private  String URL_PATH;
+    private String URL_PATH;
     private EditText fullname;
     private String genderType;
     private EditText dateOfBirth;
@@ -74,6 +80,8 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
         setContentView(R.layout.activity_patients_details_registration_form);
         parentLayout = (ConstraintLayout) findViewById(R.id.activity_patients_details_registration_form);
 
+        requestionPermission();
+
         mStorage = FirebaseStorage.getInstance().getReference(); // RootRef
         mProgressDialog = new ProgressDialog(this);
 
@@ -87,7 +95,7 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
         postCode = (EditText) findViewById(R.id.PostCode__InputText_ID);
         stageOfDiagnosis = (EditText) findViewById(R.id.StageofDiagnosis__InputText_ID);
 
-        profileImage = (CircleImageView) findViewById(R.id.prifileImage_ID);
+        profileImage = (ImageView) findViewById(R.id.prifileImage_ID);
         profileImage.setOnClickListener(this);
         saveData_button = (Button) findViewById(R.id.saveData_PatientForm_ID);
         saveData_button.setOnClickListener(this);
@@ -138,6 +146,38 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
             }
         });
 
+    }
+
+    private void requestionPermission() {
+
+        int permissionCheck = ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE);
+
+        // Here, thisActivity is the current activity
+        if (ContextCompat.checkSelfPermission(this,
+                android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
+
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+
+            } else {
+
+                // No explanation needed, we can request the permission.
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},
+                        STORAGE_PERMISSION_CODE);
+
+                // STORAGE_PERMISSION_CODE is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+        }
     }
 
     private void saveUserDataToFirebaseDatabase() {
@@ -238,6 +278,24 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
     }
 
     @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        //Checking the request code of our request
+        if(requestCode == STORAGE_PERMISSION_CODE){
+
+            //If permission is granted
+            if(grantResults.length >0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+
+                //Displaying a toast
+                Toast.makeText(this,"Permission granted now you can read the storage",Toast.LENGTH_LONG).show();
+                loadImage();
+            }else{
+                //Displaying another toast if permission is not granted
+                Toast.makeText(this,"Oops you just denied the permission",Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -247,6 +305,7 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
             ImageUri = data.getData(); // get the picked image
 
             String[] filePAth = { MediaStore.Images.Media.DATA};
+
             Cursor cursor = getContentResolver().query(ImageUri, filePAth,null,null,null);
             cursor.moveToFirst();
 
@@ -258,7 +317,8 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
             cursor.close();
             // pass the imagePath to Picasso as File object
             // "converting the given pathname string into an abstract pathname." <-- source File doc
-            Picasso.with(this).load(ImagePath).centerCrop().resize(200,200).placeholder(R.drawable.profileplcaeholder).into(profileImage,
+            Picasso.with(this).load(ImagePath).centerCrop().resize(200, 200).
+                    transform(new RoundedTransformation(100, 35)).placeholder(R.drawable.profileplcaeholder).into(profileImage,
                     new com.squareup.picasso.Callback() {
                         @Override
                         public void onSuccess() {
