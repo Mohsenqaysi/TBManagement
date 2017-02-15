@@ -94,8 +94,19 @@ public class PatientFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
 
-                       Log.w("model.getFullName(): ",  model.getFullName());
-                        startActivity(new Intent(getContext(), PatientsDetails.class));
+                        Intent intent = new Intent(getContext(), PatientsDetails.class);
+                        intent.putExtra("image",model.getImage());
+                        intent.putExtra("fullName", model.getFullName());
+                        intent.putExtra("dataOfBirth",model.getDateOfBirth());
+                        intent.putExtra("gender", model.getGender());
+                        intent.putExtra("phoneNumber",model.getPhoneNumber());
+                        intent.putExtra("satge", model.getStageDiagnosis());
+                        intent.putExtra("flatNumber", model.getFlatNumber());
+                        intent.putExtra("address",model.getAddress());
+                        intent.putExtra("city", model.getCity());
+                        intent.putExtra("area", model.getArea());
+                        intent.putExtra("postCode",model.getPostalCode());
+                        startActivity(intent);
                     }
                 });
 

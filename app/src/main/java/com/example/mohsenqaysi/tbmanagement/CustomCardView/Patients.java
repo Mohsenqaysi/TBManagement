@@ -1,5 +1,8 @@
 package com.example.mohsenqaysi.tbmanagement.CustomCardView;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by mohsenqaysi on 2/13/17.
  */
@@ -122,5 +125,24 @@ public class Patients {
 
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
+    }
+
+    public Map<String, Object> toMapObject(){
+        String fullAddress = "";
+        HashMap<String, Object> result = new HashMap<>();
+
+        result.put("image", image);
+        result.put("fullName", fullName);
+        result.put("dateOfBirth", dateOfBirth);
+        result.put("gender", gender);
+        result.put("phoneNumber", phoneNumber);
+        result.put("stageDiagnosis", stageDiagnosis);
+        result.put("address",fullAddress);
+        result.put("flatNumber", flatNumber);
+        result.put("address", address);
+        result.put("city", city);
+        result.put("area", area);
+        result.put("postalCode", postalCode);
+        return  result;
     }
 }
