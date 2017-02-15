@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mohsenqaysi.tbmanagement.Helper.RoundedTransformation;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 public class PatientsDetails extends AppCompatActivity {
@@ -48,10 +49,10 @@ public class PatientsDetails extends AppCompatActivity {
         fullName = getIntent().getExtras().getString("fullName");
         dataOfBirth = getIntent().getExtras().getString("dataOfBirth");
         stage = getIntent().getExtras().getString("stage");
-        Picasso.with(getApplicationContext()).load(image).centerCrop().resize(440,440).
-                transform(new RoundedTransformation(300, 40)).
 
-                placeholder(R.drawable.profileplcaeholder).into(patient_Iamge,
+        // if the images are not alread saved offline load them
+        Picasso.with(getApplicationContext()).load(image).networkPolicy(NetworkPolicy.OFFLINE).centerCrop().resize(440,440).
+                transform(new RoundedTransformation(300, 40)).placeholder(R.drawable.profileplcaeholder).into(patient_Iamge,
                 new com.squareup.picasso.Callback() {
                     @Override
                     public void onSuccess() {
@@ -60,8 +61,11 @@ public class PatientsDetails extends AppCompatActivity {
                     @Override
                     public void onError() {
                         Log.w("Error!", "The images are not loaded");
+                        Picasso.with(getApplicationContext()).load(image).networkPolicy(NetworkPolicy.OFFLINE).centerCrop().resize(440,440).
+                                transform(new RoundedTransformation(300, 40)).placeholder(R.drawable.profileplcaeholder).into(patient_Iamge);
                     }
                 });
+
         patient_fullName.setText(fullName);
         patient_DataOfBirht.setText("Date of birth: "+ dataOfBirth);
         patient_stage.setText("Stage: " + stage);

@@ -51,7 +51,8 @@
     <string name="Profile_Failed_TO_Create">Something went wrong. The profile was not created.</string>
 
     <string name= "Email_Sent">Email sent</string>
-
+    <string name="you_are_Connected">You are connected to the internet</string>
+    <string name="you_are_NOT_Connected">Please make sure you are connected to the internet</string>
 
 
 </resources>

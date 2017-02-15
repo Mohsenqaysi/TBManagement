@@ -23,6 +23,7 @@ import com.example.mohsenqaysi.tbmanagement.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 public class PatientFragment extends Fragment {
@@ -66,8 +67,10 @@ public class PatientFragment extends Fragment {
         mPatientList.setHasFixedSize(true);
         mPatientList.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("patients"); // gets all its children
+//        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("patients"); // gets all its children
+        mDatabase.keepSynced(true);
 
         return view;
     }
@@ -135,11 +138,11 @@ public class PatientFragment extends Fragment {
             display_Stage.setText("Stage: " + stage);
         }
 
-        public void setIamge(String image) {
+        public void setIamge(final String image) {
 
-            ImageView display_eImage = (ImageView) mView.findViewById(R.id.patient_RecyclerView_ID);
+            final ImageView display_eImage = (ImageView) mView.findViewById(R.id.patient_RecyclerView_ID);
 
-            Picasso.with(viewCotext.getApplicationContext()).load(image).centerCrop().resize(200, 200).
+            Picasso.with(viewCotext.getApplicationContext()).load(image).networkPolicy(NetworkPolicy.OFFLINE).centerCrop().resize(200, 200).
                     transform(new RoundedTransformation(100, 35)).
                     placeholder(R.drawable.profileplcaeholder).into(display_eImage,
                     new com.squareup.picasso.Callback() {
@@ -150,6 +153,9 @@ public class PatientFragment extends Fragment {
                         @Override
                         public void onError() {
                             Log.w("Error!", "The images are not loaded");
+                            Picasso.with(viewCotext.getApplicationContext()).load(image).centerCrop().resize(200, 200).
+                                    transform(new RoundedTransformation(100, 35)).
+                                    placeholder(R.drawable.profileplcaeholder).into(display_eImage);
                         }
                     });
         }

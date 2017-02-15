@@ -1,9 +1,11 @@
 package com.example.mohsenqaysi.tbmanagement;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -33,6 +35,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -236,6 +239,7 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
                                String stageDiagnosis, String flatNumber, String address, String city, String area, String postalCode) {
 
         rootRef = FirebaseDatabase.getInstance().getReference();
+        rootRef.keepSynced(true);
         /* push() generates a unique key for the new added patient
         String key = rootRef.child("info").push().getKey();
         */
@@ -260,10 +264,15 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
         switch (id){
             case R.id.prifileImage_ID:
                 Log.w("Hi", "I am profile Image_ID ;)");
-                loadImage();
+                    loadImage();
                 break;
             case R.id.saveData_PatientForm_ID:
-                saveUserDataToFirebaseDatabase();
+                Log.w("Internet Status: ", String.valueOf(isConnected()));
+                if (isConnected() != false) {
+                    saveUserDataToFirebaseDatabase();
+                } else {
+                    snackBarMessages.googleServicesCheck(parentLayout,R.string.you_are_NOT_Connected);
+                }
                 break;
             default:
                 break;
@@ -287,7 +296,6 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
 
                 //Displaying a toast
                 Toast.makeText(this,"Permission granted now you can read the storage",Toast.LENGTH_LONG).show();
-                loadImage();
             }else{
                 //Displaying another toast if permission is not granted
                 Toast.makeText(this,"Oops you just denied the permission",Toast.LENGTH_LONG).show();
@@ -317,7 +325,7 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
             cursor.close();
             // pass the imagePath to Picasso as File object
             // "converting the given pathname string into an abstract pathname." <-- source File doc
-            Picasso.with(this).load(ImagePath).centerCrop().resize(200, 200).
+            Picasso.with(getApplicationContext()).load(ImagePath).networkPolicy(NetworkPolicy.OFFLINE).centerCrop().resize(200, 200).
                     transform(new RoundedTransformation(100, 35)).placeholder(R.drawable.profileplcaeholder).into(profileImage,
                     new com.squareup.picasso.Callback() {
                         @Override
@@ -326,10 +334,25 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
                         }
                         @Override
                         public void onError() {
-                            mProgressDialog.dismiss();
+                            mProgressDialog.show();
+                            Picasso.with(getApplicationContext()).load(ImagePath).centerCrop().resize(200, 200).
+                                    transform(new RoundedTransformation(100, 35)).placeholder(R.drawable.profileplcaeholder).into(profileImage);
                             Log.w("Error!", ImageUri.getEncodedPath());
                         }
                     });
         }
     }
+
+    // cehck for interent connect.
+    public boolean isConnected(){
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        boolean oline = connectivityManager.getActiveNetworkInfo() != null;
+        if(oline) {
+            return  true;
+        } else {
+            return false;
+        }
+    }
+
 }
