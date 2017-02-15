@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.example.mohsenqaysi.tbmanagement.CustomCardView.Patients;
 import com.example.mohsenqaysi.tbmanagement.Helper.RoundedTransformation;
 import com.example.mohsenqaysi.tbmanagement.PatientDetailsRegistrationForm;
+import com.example.mohsenqaysi.tbmanagement.PatientsDetails;
 import com.example.mohsenqaysi.tbmanagement.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -35,7 +36,6 @@ public class PatientFragment extends Fragment {
     private static Activity viewCotext;
 
 
-
     public PatientFragment() {
         // Required empty public constructor
     }
@@ -49,8 +49,8 @@ public class PatientFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-         view =  inflater.inflate(R.layout.fragment_patient, container, false);
-         viewCotext = getActivity();
+        view = inflater.inflate(R.layout.fragment_patient, container, false);
+        viewCotext = getActivity();
 
         NewRegistaration = (FloatingActionButton) view.findViewById(R.id.FloatingActionButton_ID2);
         NewRegistaration.setOnClickListener(new View.OnClickListener() {
@@ -77,7 +77,7 @@ public class PatientFragment extends Fragment {
         super.onStart();
 
 
-        FirebaseRecyclerAdapter<Patients,PatientsViewHolder > firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Patients, PatientsViewHolder>(
+        FirebaseRecyclerAdapter<Patients, PatientsViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Patients, PatientsViewHolder>(
                 Patients.class,
                 R.layout.patients_row, // this is the custom layout
                 PatientsViewHolder.class,
@@ -85,14 +85,23 @@ public class PatientFragment extends Fragment {
 
         ) {
             @Override
-            protected void populateViewHolder(PatientsViewHolder viewHolder, Patients model, int position) {
+            protected void populateViewHolder(PatientsViewHolder viewHolder, final Patients model, int position) {
                 viewHolder.setName(model.getFullName());
                 viewHolder.setStage(model.getStageDiagnosis());
                 viewHolder.setIamge(model.getImage());
 
+                viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                       Log.w("model.getFullName(): ",  model.getFullName());
+                        startActivity(new Intent(getContext(), PatientsDetails.class));
+                    }
+                });
+
             }
         };
-        ViewCompat.setNestedScrollingEnabled(getView(),false);
+        ViewCompat.setNestedScrollingEnabled(getView(), false);
         mPatientList.setAdapter(firebaseRecyclerAdapter);
 
     }
@@ -105,22 +114,23 @@ public class PatientFragment extends Fragment {
             mView = itemView;
         }
 
-        public void setName(String fullName){
+        public void setName(String fullName) {
             TextView display_Name = (TextView) mView.findViewById(R.id.patient_fullname_ID);
             display_Name.setText(fullName);
         }
-        public void setStage(String stage){
-            TextView display_Stage = (TextView) mView.findViewById(R.id.patient_stage_ID);
-            display_Stage.setText("Stage: "+ stage);
-        }
-        public void setIamge(String image){
 
-//          ImageView display_eImage = (ImageView) mView.findViewById(R.id.patient_RecyclerView_ID);
+        public void setStage(String stage) {
+            TextView display_Stage = (TextView) mView.findViewById(R.id.patient_stage_ID);
+            display_Stage.setText("Stage: " + stage);
+        }
+
+        public void setIamge(String image) {
+
             ImageView display_eImage = (ImageView) mView.findViewById(R.id.patient_RecyclerView_ID);
 
-//            Picasso.with(viewCotext.getApplicationContext()).load(image).placeholder(R.drawable.profileplcaeholder).into(display_eImage);
-
-            Picasso.with(viewCotext.getApplicationContext()).load(image).centerCrop().resize(200,200).transform(new RoundedTransformation(100,35)).placeholder(R.drawable.profileplcaeholder).into( display_eImage,
+            Picasso.with(viewCotext.getApplicationContext()).load(image).centerCrop().resize(200, 200).
+                    transform(new RoundedTransformation(100, 35)).
+                    placeholder(R.drawable.profileplcaeholder).into(display_eImage,
                     new com.squareup.picasso.Callback() {
                         @Override
                         public void onSuccess() {
@@ -131,8 +141,6 @@ public class PatientFragment extends Fragment {
                             Log.w("Error!", "The images are not loaded");
                         }
                     });
-
-
         }
     }
 }
