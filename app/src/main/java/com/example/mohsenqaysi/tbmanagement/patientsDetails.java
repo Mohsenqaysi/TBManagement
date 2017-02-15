@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.mohsenqaysi.tbmanagement.Helper.RoundedTransformation;
 import com.squareup.picasso.Picasso;
 
 public class PatientsDetails extends AppCompatActivity {
@@ -47,7 +48,8 @@ public class PatientsDetails extends AppCompatActivity {
         fullName = getIntent().getExtras().getString("fullName");
         dataOfBirth = getIntent().getExtras().getString("dataOfBirth");
         stage = getIntent().getExtras().getString("stage");
-        Picasso.with(getApplicationContext()).load(image).centerCrop().resize(700, 700).
+        Picasso.with(getApplicationContext()).load(image).centerCrop().resize(440,440).
+                transform(new RoundedTransformation(300, 40)).
 
                 placeholder(R.drawable.profileplcaeholder).into(patient_Iamge,
                 new com.squareup.picasso.Callback() {

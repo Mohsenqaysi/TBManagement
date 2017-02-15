@@ -21,7 +21,6 @@
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:background="@drawable/profileplcaeholder"
                 android:id="@+id/patientsDetails_Image_ID"
                 android:layout_marginStart="16dp"
                 app:layout_constraintLeft_toLeftOf="parent"
