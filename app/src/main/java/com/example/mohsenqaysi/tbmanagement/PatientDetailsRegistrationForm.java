@@ -197,8 +197,10 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
         final String Patient_area = state;
         final String Patient_postalCode = postCode.getText().toString();
 
-        if (ImageUri!= null && !Patient_full_Name.isEmpty() && !Patient_dateOfBirth.isEmpty() && !Patient_gender.isEmpty() && !Patient_phone_Number.isEmpty() && !Patient_stage_Diagnosis.isEmpty()
-                && !Patient_flat_Number.isEmpty() && !Patient_address.isEmpty() && !Patient_city.isEmpty() && !Patient_area.isEmpty() && !Patient_postalCode.isEmpty()){
+        if (ImageUri!= null && !Patient_full_Name.isEmpty() && !Patient_dateOfBirth.isEmpty() &&
+                !Patient_gender.isEmpty() && !Patient_phone_Number.isEmpty() && !Patient_stage_Diagnosis.isEmpty()
+                && !Patient_flat_Number.isEmpty() && !Patient_address.isEmpty() && !Patient_city.isEmpty() &&
+                !Patient_area.isEmpty() && !Patient_postalCode.isEmpty()){
 
 //           String id =  mAuth.getCurrentUser().getUid();
 //            Log.w("ImagePath ID: ", id);

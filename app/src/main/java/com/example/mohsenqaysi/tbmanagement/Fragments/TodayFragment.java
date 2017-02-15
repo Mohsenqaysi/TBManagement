@@ -34,6 +34,8 @@ public class TodayFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+//        TBManagement tbManagement = new TBManagement();
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_today, container, false);
 

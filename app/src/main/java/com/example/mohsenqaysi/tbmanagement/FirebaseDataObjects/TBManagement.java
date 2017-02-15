@@ -1,6 +1,6 @@
 package com.example.mohsenqaysi.tbmanagement.FirebaseDataObjects;
 
-import android.app.Application;
+import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 
 import com.google.firebase.database.FirebaseDatabase;
@@ -16,22 +16,15 @@ import okhttp3.OkHttpClient;
  * @Created by mohsenqaysi on 2/6/17.
  */
 
-public class TBManagement extends Application {
+public class TBManagement extends MultiDexApplication {
 
-    @Override
+     @Override
     public void onCreate() {
         super.onCreate();
         /* This is been called only ones
          * @return true to enable the offline data saving from FireBase
          */
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-
-//        Picasso.Builder builder = new Picasso.Builder(this);
-//        builder.downloader(new OkHttpDownloader(this,Integer.MAX_VALUE));
-//        Picasso built = builder.build();
-//        built.setIndicatorsEnabled(true); // TODO: chnage it back to flase to hide the indicator
-//        built.setLoggingEnabled(true);
-//        Picasso.setSingletonInstance(built);
 
         File httpCacheDirectory = new File(getCacheDir(), "picasso-cache");
         Cache cache = new Cache(httpCacheDirectory, 10 * 1024 * 1024);
@@ -46,4 +39,5 @@ public class TBManagement extends Application {
             Log.e("TAG; ", "Picasso instance already used");
         }
     }
+
 }
