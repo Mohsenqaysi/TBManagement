@@ -100,7 +100,7 @@ public class PatientFragment extends Fragment {
                         intent.putExtra("dataOfBirth",model.getDateOfBirth());
                         intent.putExtra("gender", model.getGender());
                         intent.putExtra("phoneNumber",model.getPhoneNumber());
-                        intent.putExtra("satge", model.getStageDiagnosis());
+                        intent.putExtra("stage", model.getStageDiagnosis());
                         intent.putExtra("flatNumber", model.getFlatNumber());
                         intent.putExtra("address",model.getAddress());
                         intent.putExtra("city", model.getCity());

@@ -1,6 +1,5 @@
 package com.example.mohsenqaysi.tbmanagement.FirebaseDataObjects;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,7 +7,7 @@ import java.util.Map;
  * Created by mohsenqaysi on 2/9/17.
  */
 
-public class PatientsDetailsRegistrationDataObject implements Serializable {
+public class PatientsDetailsRegistrationDataObject {
 
     public String image;
     public String fullName;
