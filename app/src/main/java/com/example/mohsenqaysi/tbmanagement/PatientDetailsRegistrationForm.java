@@ -228,6 +228,8 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     snackBarMessages.googleServicesCheck(parentLayout,R.string.Profile_Failed_TO_Create);
+                    mProgressDialog.dismiss();
+
                 }
             });
         } else {
@@ -356,5 +358,6 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
             return false;
         }
     }
+
 
 }

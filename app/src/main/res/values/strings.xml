@@ -25,12 +25,12 @@
     </style>
 
     <!-- Fragment Text -->
-    <string name="Today_fragment">Hello Today fragment</string>
+    <string name="Today_fragment">Hello ... I will be working on the future</string>
     <string name="Patient_fragment">Hello Patient fragment</string>
 
     <!-- Action Menu Text -->
     <string name="action_signOut">Sign Out</string>
-    <string name="action_about">About Us</string>
+    <string name="action_about">About Tuberculosis</string>
 
     <!-- Registration Form-->
     <string name="Full_Name">Full Name</string>

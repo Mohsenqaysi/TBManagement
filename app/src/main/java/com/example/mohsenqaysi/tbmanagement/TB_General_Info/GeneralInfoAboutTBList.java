@@ -24,11 +24,7 @@ public class GeneralInfoAboutTBList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_general_info_about_tb_list);
-//        webView = (WebView) findViewById(R.id.webView_ID);
-//        WebSettings webSettings = webView.getSettings();
-//        webSettings.setJavaScriptEnabled(true);
-//        webView.loadUrl(url);
-//        webView.setWebViewClient(new WebViewClient());
+
 
 
 

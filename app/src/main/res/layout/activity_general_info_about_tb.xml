@@ -61,5 +61,19 @@
             android:layout_below="@+id/InfoTitle_ID"
             android:layout_centerHorizontal="true" />
 
+        <Button
+            android:text="Read more..."
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button2"
+            android:onClick="openWebPage"
+            android:background="?android:attr/selectableItemBackground"
+            android:textColor="@color/linkColor"
+            android:layout_below="@+id/tb_info_ID"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignRight="@+id/tb_info_ID"
+            android:layout_alignEnd="@+id/tb_info_ID" />
+
     </RelativeLayout>
 </ScrollView>
