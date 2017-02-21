@@ -10,7 +10,7 @@ import com.example.mohsenqaysi.tbmanagement.Helper.RoundedTransformation;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
-public class PatientsDetails extends AppCompatActivity {
+public class PatientDetails extends AppCompatActivity {
 
     private String image;
     private String fullName;

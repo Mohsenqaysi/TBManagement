@@ -36,7 +36,7 @@
             android:name=".Fragments.PatientFragment"
             android:theme="@style/MyMaterialTheme" />
         <activity
-            android:name=".PatientsDetails"
+            android:name=".PatientDetails"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Authatications.ResetPassword"

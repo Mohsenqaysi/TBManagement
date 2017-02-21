@@ -18,7 +18,7 @@ import android.widget.TextView;
 import com.example.mohsenqaysi.tbmanagement.CustomCardView.Patients;
 import com.example.mohsenqaysi.tbmanagement.Helper.RoundedTransformation;
 import com.example.mohsenqaysi.tbmanagement.PatientDetailsRegistrationForm;
-import com.example.mohsenqaysi.tbmanagement.PatientsDetails;
+import com.example.mohsenqaysi.tbmanagement.PatientDetails;
 import com.example.mohsenqaysi.tbmanagement.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -97,7 +97,7 @@ public class PatientFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
 
-                        Intent intent = new Intent(getContext(), PatientsDetails.class);
+                        Intent intent = new Intent(getContext(), PatientDetails.class);
                         intent.putExtra("image",model.getImage());
                         intent.putExtra("fullName", model.getFullName());
                         intent.putExtra("dataOfBirth",model.getDateOfBirth());
