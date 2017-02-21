@@ -12,12 +12,19 @@
 
         </android.support.v7.widget.RecyclerView>
 
-    <android.support.design.widget.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/FloatingActionButton_ID2"
-        android:layout_margin="16dp"
-        app:backgroundTint="@color/tw__solid_white"
-        android:src="@drawable/plus"
-        android:layout_gravity="bottom|right" />
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fabSize="normal"
+            android:id="@+id/FloatingActionButton_ID2"
+            app:backgroundTint="@color/tw__solid_white"
+            android:src="@drawable/plus"
+            android:layout_gravity="bottom|end"
+            app:layout_anchorGravity="bottom|right|end"
+            android:layout_margin="20dp"
+            android:clickable="true" />
+
+
+
+
 </FrameLayout>
