@@ -115,6 +115,7 @@
                 android:layout_margin="0dp"
                 android:background="@color/signInButtonColor"
                 android:text="@string/sign_in"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:textAllCaps="false"
                 android:textColor="#fff"
                 android:textSize="18sp" />
@@ -125,6 +126,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:background="@null"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:onClick="resetPassword"
                 android:paddingTop="5dp"
                 android:text="@string/forgot_password" />
