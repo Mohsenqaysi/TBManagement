@@ -83,6 +83,9 @@ public class MainActivity extends AppCompatActivity {
         } else if (id == R.id.about_ID) {
             startActivity(new Intent(this, GeneralInfoAboutTBList.class));
             return true;
+        } else if (id == R.id.terms_ID){
+            startActivity(new Intent(this, TermsAndConditions.class));
+
         }
 
         return super.onOptionsItemSelected(item);

@@ -8,6 +8,9 @@
         android:icon="@android:drawable/ic_menu_share"
         android:title="@string/action_signOut" />
     <item
+        android:id="@+id/terms_ID"
+        android:title="@string/action_Terms" />
+    <item
         android:id="@+id/about_ID"
         android:title="@string/action_about" />
 </menu>
