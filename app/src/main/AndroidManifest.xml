@@ -3,12 +3,11 @@
     package="com.example.mohsenqaysi.tbmanagement">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-    <!--         android:name=".FirebaseDataObjects.TBManagement"
--->
+    <!--          android:name=".FirebaseDataObjects.TBManagement" -->
     <application
         android:name=".FirebaseDataObjects.TBManagement"
         android:allowBackup="true"
@@ -16,9 +15,10 @@
         android:label="@string/app_name"
         android:supportsRtl="false"
         android:theme="@style/MyMaterialTheme">
-
-        <meta-data android:name="com.google.android.gms.version"
+        <meta-data
+            android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
         <activity
             android:name=".Authatications.Login"
             android:screenOrientation="portrait">
@@ -32,9 +32,11 @@
             android:name=".MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme" />
+
         <Fragment
             android:name=".Fragments.PatientFragment"
             android:theme="@style/MyMaterialTheme" />
+
         <activity
             android:name=".PatientDetails"
             android:screenOrientation="portrait" />
@@ -49,8 +51,10 @@
             android:name=".TB_General_Info.GeneralInfoAboutTB"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <activity android:name=".PatientDetailsRegistrationForm"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".PatientDetailsRegistrationForm"
+            android:screenOrientation="portrait" />
+        <activity android:name=".TermsAndConditions"></activity>
     </application>
 
 </manifest>
