@@ -62,7 +62,6 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
     private ImageView profileImage;
     private Uri ImageUri;
     private File ImagePath;
-    private Uri downladUri;
     private String URL_PATH;
     private EditText fullname;
     private String genderType;
@@ -218,9 +217,9 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     // get the download URL for the image back from the fireBase storgae
-                     downladUri = taskSnapshot.getDownloadUrl();
-                     URL_PATH = downladUri.toString();
-                     Log.w("URL: ", downladUri.toString());
+
+                     URL_PATH = taskSnapshot.getDownloadUrl().toString(); // <- The red line is a bug in the current version of Fire Base
+                     Log.w("URL: ", URL_PATH);
 
                     // Upload the patient profile with the image
                     writeNewPost(URL_PATH , Patient_full_Name,Patient_dateOfBirth, Patient_gender, Patient_phone_Number, Patient_stage_Diagnosis,
@@ -267,11 +266,11 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
         childUpdates.put("/patients/" + patient_ID, patientData);
         patientsRef.updateChildren(childUpdates);
 
-//         Pass a list of all patients info onto patientsList so Admin can read them all
+        // Pass a list of all patients info onto patientsList so Admin can read them all
         // Path: "https://tbmanagement-aff8e.firebaseio.com/patientsList"
         DatabaseReference patientsList = FirebaseDatabase.getInstance().getReferenceFromUrl(FIREBASE_ROOT_PATH).child("patientsList");
         Log.e("patientsList Path: ", patientsList.toString());
-        Map<String, Object> patientsListChildUpdates = new HashMap<>(); // Push this oject to fire-base
+        Map<String, Object> patientsListChildUpdates = new HashMap<>(); // Create a new object and  Push it tp fire-base
         patientsListChildUpdates.put(patient_ID, patientData);
         patientsList.updateChildren(patientsListChildUpdates);
     }
@@ -360,18 +359,14 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
                     });
         }
     }
-
-    // cehck for interent connect.
+    // check for internet connect.
     public boolean isConnected(){
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        boolean oline = connectivityManager.getActiveNetworkInfo() != null;
-        if(oline) {
+        boolean online = connectivityManager.getActiveNetworkInfo() != null;
+        if(online) {
             return  true;
         } else {
             return false;
         }
     }
-
-
 }
