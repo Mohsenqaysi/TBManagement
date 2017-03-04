@@ -17,8 +17,8 @@ import android.widget.TextView;
 
 import com.example.mohsenqaysi.tbmanagement.CustomCardView.Patients;
 import com.example.mohsenqaysi.tbmanagement.Helper.RoundedTransformation;
-import com.example.mohsenqaysi.tbmanagement.PatientDetails;
-import com.example.mohsenqaysi.tbmanagement.PatientDetailsRegistrationForm;
+import com.example.mohsenqaysi.tbmanagement.PatientsDetails.PatientDetails;
+import com.example.mohsenqaysi.tbmanagement.PatientsDetails.PatientDetailsRegistrationForm;
 import com.example.mohsenqaysi.tbmanagement.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;

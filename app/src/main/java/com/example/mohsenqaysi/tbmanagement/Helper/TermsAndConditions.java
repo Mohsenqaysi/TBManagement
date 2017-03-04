@@ -1,9 +1,11 @@
-package com.example.mohsenqaysi.tbmanagement;
+package com.example.mohsenqaysi.tbmanagement.Helper;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+import com.example.mohsenqaysi.tbmanagement.R;
 
 public class TermsAndConditions extends AppCompatActivity {
     WebView webView;

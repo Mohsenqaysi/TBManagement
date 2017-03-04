@@ -5,7 +5,7 @@
     android:id="@+id/activity_terms_and_codtions"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.mohsenqaysi.tbmanagement.TermsAndConditions">
+    tools:context="com.example.mohsenqaysi.tbmanagement.Helper.TermsAndConditions">
 
 
     <Button

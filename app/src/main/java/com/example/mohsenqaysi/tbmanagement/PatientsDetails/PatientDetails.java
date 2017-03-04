@@ -1,4 +1,4 @@
-package com.example.mohsenqaysi.tbmanagement;
+package com.example.mohsenqaysi.tbmanagement.PatientsDetails;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mohsenqaysi.tbmanagement.Helper.RoundedTransformation;
+import com.example.mohsenqaysi.tbmanagement.R;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
@@ -74,10 +75,6 @@ public class PatientDetails extends AppCompatActivity {
 
 
         Log.w("satge: " ,stage);
-
-
-        // TODO: Take in user info and store into in FireBase
-        // TODO: Create an object class to send it to FireBase
 
 
         // TODO: Update in user info and store into in FireBase

@@ -1,4 +1,4 @@
-package com.example.mohsenqaysi.tbmanagement;
+package com.example.mohsenqaysi.tbmanagement.PatientsDetails;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -27,6 +27,8 @@ import android.widget.Toast;
 import com.example.mohsenqaysi.tbmanagement.FirebaseDataObjects.PatientsDetailsRegistrationDataObject;
 import com.example.mohsenqaysi.tbmanagement.Helper.RoundedTransformation;
 import com.example.mohsenqaysi.tbmanagement.Helper.SnackBarMessages;
+import com.example.mohsenqaysi.tbmanagement.MainActivity;
+import com.example.mohsenqaysi.tbmanagement.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;

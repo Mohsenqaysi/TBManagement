@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import com.example.mohsenqaysi.tbmanagement.Authatications.Login;
 import com.example.mohsenqaysi.tbmanagement.Fragments.PatientFragment;
 import com.example.mohsenqaysi.tbmanagement.Fragments.TodayFragment;
+import com.example.mohsenqaysi.tbmanagement.Helper.TermsAndConditions;
 import com.example.mohsenqaysi.tbmanagement.TB_General_Info.GeneralInfoAboutTBList;
 
 import java.util.ArrayList;

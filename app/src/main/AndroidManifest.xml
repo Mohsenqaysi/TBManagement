@@ -9,7 +9,7 @@
 
     <!--          android:name=".FirebaseDataObjects.TBManagement" -->
     <application
-        android:name=".FirebaseDataObjects.TBManagement"
+        android:name=".Helper.TBManagement"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -38,7 +38,7 @@
             android:theme="@style/MyMaterialTheme" />
 
         <activity
-            android:name=".PatientDetails"
+            android:name=".PatientsDetails.PatientDetails"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Authatications.ResetPassword"
@@ -52,9 +52,9 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".PatientDetailsRegistrationForm"
+            android:name=".PatientsDetails.PatientDetailsRegistrationForm"
             android:screenOrientation="portrait" />
-        <activity android:name=".TermsAndConditions"></activity>
+        <activity android:name=".Helper.TermsAndConditions"></activity>
     </application>
 
 </manifest>
