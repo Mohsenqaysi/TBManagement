@@ -5,26 +5,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.mohsenqaysi.tbmanagement.Fragments.PatientFragment">
 
-        <android.support.v7.widget.RecyclerView
-        android:id="@+id/patients_list_ID"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        </android.support.v7.widget.RecyclerView>
-
         <android.support.design.widget.FloatingActionButton
+            android:id="@+id/FloatingActionButton_ID2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:fabSize="normal"
-            android:id="@+id/FloatingActionButton_ID2"
-            app:backgroundTint="@color/tw__solid_white"
-            android:src="@drawable/plus"
             android:layout_gravity="bottom|end"
-            app:layout_anchorGravity="bottom|right|end"
             android:layout_margin="20dp"
-            android:clickable="true" />
+            android:clickable="true"
+            android:src="@drawable/addpatient"
+            app:backgroundTint="@color/colorPrimary"
+            app:fabSize="normal"
+            app:layout_anchorGravity="bottom|right|end" />
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/patients_list_ID"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+        </android.support.v7.widget.RecyclerView>
 
 
 </FrameLayout>
