@@ -194,6 +194,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void MainActivityPage() {
+        Log.w("userFirebaseAuth_ID: ", userFirebaseAuth_ID);
+
         startActivity(new Intent(this, MainActivity.class).putExtra("ID", userFirebaseAuth_ID));
         finish();
     }

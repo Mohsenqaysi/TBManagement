@@ -30,6 +30,7 @@ import com.example.mohsenqaysi.tbmanagement.Helper.SnackBarMessages;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -42,6 +43,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import static android.os.Build.ID;
 import static com.example.mohsenqaysi.tbmanagement.R.array.gender;
 import static com.example.mohsenqaysi.tbmanagement.R.array.india_states;
 
@@ -50,8 +52,10 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
     SnackBarMessages snackBarMessages = new SnackBarMessages();
     private ConstraintLayout parentLayout;
     private static final int REQUEST_IMAGE_LOAD = 1; // request code used in the call EXTERNAL_CONTENT_URI
-    //Permision code that will be checked in the method onRequestPermissionsResult
+    //Permission code that will be checked in the method onRequestPermissionsResult
     private static final int STORAGE_PERMISSION_CODE = 2;
+    private String FIREBASE_URL_PATH = "https://tbmanagement-aff8e.firebaseio.com/FR";
+
     ProgressDialog mProgressDialog;
 
     // init all the inputs fields
@@ -76,6 +80,7 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
     private DatabaseReference rootRef;
     private StorageReference mStorage;
     private FirebaseAuth mAuth;
+    private String FR_ID ="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,7 +123,6 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String genderSelectedType = parent.getItemAtPosition(position).toString();
                 genderType = genderSelectedType;
-//                Toast.makeText(getApplicationContext(),"You clicked on: "+ genderSelectedType ,Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -140,7 +144,6 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String stateSelectedName = parent.getItemAtPosition(position).toString();
                 state = stateSelectedName;
-//                Toast.makeText(getApplicationContext(),"You clicked on: "+ stateSelectedName ,Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -202,8 +205,10 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
                 && !Patient_flat_Number.isEmpty() && !Patient_address.isEmpty() && !Patient_city.isEmpty() &&
                 !Patient_area.isEmpty() && !Patient_postalCode.isEmpty()){
 
-//           String id =  mAuth.getCurrentUser().getUid();
-//            Log.w("ImagePath ID: ", id);
+            mAuth = FirebaseAuth.getInstance();
+            FirebaseUser fristResponder = mAuth.getCurrentUser();
+            FR_ID = fristResponder.getUid();
+            Log.e("FR_ID: ", FR_ID);
 
             StorageReference firebase_File_Path = mStorage.child("Patients_Images").child(ImageUri.getLastPathSegment());
 
@@ -242,12 +247,13 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
     private void writeNewPost(String Patient_Profile_Image, String fullName,String Patient_dateOfBirth, String gender, String phoneNumber,
                                String stageDiagnosis, String flatNumber, String address, String city, String area, String postalCode) {
 
-        rootRef = FirebaseDatabase.getInstance().getReference();
+        rootRef = FirebaseDatabase.getInstance().getReferenceFromUrl(FIREBASE_URL_PATH).child(FR_ID);
         rootRef.keepSynced(true);
         /* push() generates a unique key for the new added patient
         String key = rootRef.child("info").push().getKey();
         */
-        String key = rootRef.child("patients").push().getKey();
+        String key = rootRef.push().getKey();
+
         Log.w("Hi", "I am working ;)");
 
         PatientsDetailsRegistrationDataObject newPatient = new PatientsDetailsRegistrationDataObject(Patient_Profile_Image,fullName,Patient_dateOfBirth, gender, phoneNumber,
@@ -258,6 +264,8 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
         /* childUpdates takes in  (key) as the unique key and patientData as the object
          "/patients/" + key is the path where  patientData is add into
         */
+
+
         childUpdates.put("/patients/" + key, patientData);
         rootRef.updateChildren(childUpdates);
     }
