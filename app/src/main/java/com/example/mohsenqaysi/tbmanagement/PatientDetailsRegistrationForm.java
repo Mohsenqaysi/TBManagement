@@ -43,7 +43,6 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import static android.os.Build.ID;
 import static com.example.mohsenqaysi.tbmanagement.R.array.gender;
 import static com.example.mohsenqaysi.tbmanagement.R.array.india_states;
 
@@ -55,6 +54,7 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
     //Permission code that will be checked in the method onRequestPermissionsResult
     private static final int STORAGE_PERMISSION_CODE = 2;
     private String FIREBASE_URL_PATH = "https://tbmanagement-aff8e.firebaseio.com/FR";
+    private String FIREBASE_ROOT_PATH = "https://tbmanagement-aff8e.firebaseio.com/";
 
     ProgressDialog mProgressDialog;
 
@@ -77,7 +77,7 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
     private Button saveData_button;
 
     // FireBase reference
-    private DatabaseReference rootRef;
+    private DatabaseReference patientsRef;
     private StorageReference mStorage;
     private FirebaseAuth mAuth;
     private String FR_ID ="";
@@ -247,27 +247,33 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
     private void writeNewPost(String Patient_Profile_Image, String fullName,String Patient_dateOfBirth, String gender, String phoneNumber,
                                String stageDiagnosis, String flatNumber, String address, String city, String area, String postalCode) {
 
-        rootRef = FirebaseDatabase.getInstance().getReferenceFromUrl(FIREBASE_URL_PATH).child(FR_ID);
-        rootRef.keepSynced(true);
+        // Path: "https://tbmanagement-aff8e.firebaseio.com/FR" + FR_ID
+        patientsRef = FirebaseDatabase.getInstance().getReferenceFromUrl(FIREBASE_URL_PATH).child(FR_ID);
+        patientsRef.keepSynced(true);
         /* push() generates a unique key for the new added patient
-        String key = rootRef.child("info").push().getKey();
+        String key = patientsRef.child("info").push().getKey();
         */
-        String key = rootRef.push().getKey();
-
+        String patient_ID = patientsRef.push().getKey();
         Log.w("Hi", "I am working ;)");
 
         PatientsDetailsRegistrationDataObject newPatient = new PatientsDetailsRegistrationDataObject(Patient_Profile_Image,fullName,Patient_dateOfBirth, gender, phoneNumber,
                 stageDiagnosis, flatNumber, address, city, area, postalCode);
-        Map<String, Object> patientData = newPatient.toMapObject(); // patientData object
+        Map<String, Object> patientData = newPatient.toMapObject(); // Prepare patientData object
 
-        Map<String, Object> childUpdates = new HashMap<>();
+        Map<String, Object> childUpdates = new HashMap<>(); // Push this oject to fire-base
         /* childUpdates takes in  (key) as the unique key and patientData as the object
          "/patients/" + key is the path where  patientData is add into
         */
+        childUpdates.put("/patients/" + patient_ID, patientData);
+        patientsRef.updateChildren(childUpdates);
 
-
-        childUpdates.put("/patients/" + key, patientData);
-        rootRef.updateChildren(childUpdates);
+//         Pass a list of all patients info onto patientsList so Admin can read them all
+        // Path: "https://tbmanagement-aff8e.firebaseio.com/patientsList"
+        DatabaseReference patientsList = FirebaseDatabase.getInstance().getReferenceFromUrl(FIREBASE_ROOT_PATH).child("patientsList");
+        Log.e("patientsList Path: ", patientsList.toString());
+        Map<String, Object> patientsListChildUpdates = new HashMap<>(); // Push this oject to fire-base
+        patientsListChildUpdates.put(patient_ID, patientData);
+        patientsList.updateChildren(patientsListChildUpdates);
     }
 
     @Override
