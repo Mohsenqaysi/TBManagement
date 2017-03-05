@@ -71,12 +71,10 @@ public class PatientDetails extends AppCompatActivity {
         patient_DataOfBirht.setText("Date of birth: "+ dataOfBirth);
         patient_stage.setText("Stage: " + stage);
 
-
-
-
         Log.w("satge: " ,stage);
 
 
+        // TODO: Read
         // TODO: Update in user info and store into in FireBase
 
     }

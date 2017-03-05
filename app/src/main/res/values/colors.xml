@@ -8,8 +8,8 @@
     <color name="textColorPrimary">#fcfcfc</color>
     <color name="windowBackground">#FFFFFF</color>
     <color name="navigationBarColor">#000000</color>
-    <color name="signInButtonColor">#FE0000</color>
-    <color name="AgreeButtonColor">#209637</color>
+    <color name="signInButtonColor">#fe0000</color>
+    <color name="AgreeButtonColor">#f0f0f0</color>
 
     <color name="saveDatanButtonColor">#429B58</color>
     <color name="textEditorColor">#6585A8</color>

@@ -88,7 +88,7 @@ public class PatientFragment extends Fragment {
         // load the data when the app is started.
         FirebaseRecyclerAdapter<Patients, PatientsViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Patients, PatientsViewHolder>(
                 Patients.class,
-                R.layout.patients_row, // this is the custom layout
+                R.layout.patients_row, // this is a custom layout
                 PatientsViewHolder.class,
                 mDatabase
 
