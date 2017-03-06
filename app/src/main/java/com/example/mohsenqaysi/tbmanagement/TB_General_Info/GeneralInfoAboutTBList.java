@@ -26,14 +26,8 @@ public class GeneralInfoAboutTBList extends AppCompatActivity {
         setContentView(R.layout.activity_general_info_about_tb_list);
 
 
-
-
-        /* TODO: Read data from a fire base into a string
-           TODO: populate a list view with Title as the cell name and
-           TODO pass the description in and intent put extra to another view for the user to read it
-        */
-
         Info_ListView = (ListView) findViewById(R.id.Info_ListView_ID);
+
 
         ref = FirebaseDatabase.getInstance().getReferenceFromUrl(FIREBASE_URL_PATH);
         ref.keepSynced(true);

@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.mohsenqaysi.tbmanagement.Helper.SnackBarMessages;
+import com.example.mohsenqaysi.tbmanagement.Helper.TermsAndConditions;
 import com.example.mohsenqaysi.tbmanagement.MainActivity;
 import com.example.mohsenqaysi.tbmanagement.R;
 import com.google.android.gms.common.ConnectionResult;
@@ -24,6 +25,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
@@ -44,12 +50,24 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     private String resetemailAddress = "";
     private ConstraintLayout parentLayout;
 
+    // fire-base init
+    private DatabaseReference ref;
+    private String FIREBASE_URL_PATH = "https://tbmanagement-aff8e.firebaseio.com/patientsList/admins";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Hide the top part of the screen
 //        hideNavigationBar();
         setContentView(R.layout.activity_login);
+
+
+//        mAuth = FirebaseAuth.getInstance();
+//        FirebaseUser fristResponder = mAuth.getCurrentUser();
+//        String ID = fristResponder.getUid();
+//        Log.e("PatientFragment_ID: ", ID);
+
+
         parentLayout = (ConstraintLayout) findViewById(R.id.activity_login_ID);
 
         // init the inputs fields
@@ -61,7 +79,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
         signIn.setOnClickListener(this);
 
-        //init FirebseAuth
+        //init Fire-bseAuth
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -187,7 +205,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                         } else {
 //                            showToast("Log in successful");
                             progressDialog.dismiss();
-                            MainActivityPage();
+
+                            isAdmin();
+//                            if (isAdmin() == true) {
+//                                AdminActivityPage();
+//                            } else {
+//                                MainActivityPage();
+//                            }
                         }
                     }
                 });
@@ -195,8 +219,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
     private void MainActivityPage() {
         Log.w("userFirebaseAuth_ID: ", userFirebaseAuth_ID);
-
         startActivity(new Intent(this, MainActivity.class).putExtra("ID", userFirebaseAuth_ID));
+        finish();
+    }
+
+    private void AdminActivityPage() {
+        Log.w("userFirebaseAuth_ID: ", userFirebaseAuth_ID);
+        startActivity(new Intent(this, TermsAndConditions.class).putExtra("ID", userFirebaseAuth_ID));
         finish();
     }
 
@@ -224,5 +253,31 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         startActivity(new Intent(this, ResetPassword.class));
     }
 
+    Boolean flag = false;
+    public Boolean isAdmin(){
+
+        //TODO: check is the user isAdmin
+        ref = FirebaseDatabase.getInstance().getReferenceFromUrl(FIREBASE_URL_PATH).child(userFirebaseAuth_ID);
+        ref.keepSynced(true);
+
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                Log.e("AdminValue: ", String.valueOf(dataSnapshot));
+                if (dataSnapshot.hasChild("isAdmin")) { // if true
+                    AdminActivityPage();
+                } else {
+                    MainActivityPage();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        return  flag;
+    }
 
 }

@@ -34,11 +34,9 @@ public class PatientDetails extends AppCompatActivity {
     // init fire-base
     private RecyclerView drugsList;
     private DatabaseReference mDatabase;
-    private String FIREBASE_URL_PATH_VISITS = "https://tbmanagement-aff8e.firebaseio.com/FR";
+    private String FIREBASE_URL_PATH_VISITS = "https://tbmanagement-aff8e.firebaseio.com/PatientsVisits";
     private FirebaseAuth mAuth;
-
-
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +48,7 @@ public class PatientDetails extends AppCompatActivity {
         Log.e("PatientFragment_ID: ", ID);
 
 
-        mDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl(FIREBASE_URL_PATH_VISITS).child(ID).child("patients");
+        mDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl(FIREBASE_URL_PATH_VISITS).child(ID).child("visit");
         mDatabase.keepSynced(true);
 
 
