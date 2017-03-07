@@ -268,7 +268,7 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
         childUpdates.put("/patients/" + patient_ID, patientData);
         patientsRef.updateChildren(childUpdates);
 
-        // Pass a list of all patients info onto patientsList so Admin can read them all
+        // Pass a list of all patients info onto patientsList so AdminActivity can read them all
         // Path: "https://tbmanagement-aff8e.firebaseio.com/patientsList"
         DatabaseReference patientsList = FirebaseDatabase.getInstance().getReferenceFromUrl(FIREBASE_ROOT_PATH).child("patientsList");
         Log.e("patientsList Path: ", patientsList.toString());

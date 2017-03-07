@@ -90,7 +90,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     userFirebaseAuth_ID = user.getUid();
                     Log.e(TAG, "onAuthStateChanged:signed_in:" + userFirebaseAuth_ID);
                     // TODO: Check is the user is logged in for the first time and ask the to fill their full details
-                    MainActivityPage();
+//                    MainActivityPage();
+                    isAdmin();
                 } else {
                     // PatientsDataObject is signed out
                     Log.e(TAG, "onAuthStateChanged:signed_out");
@@ -254,7 +255,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
 
     Boolean flag = false;
-    public Boolean isAdmin(){
+    public void isAdmin(){
 
         //TODO: check is the user isAdmin
         ref = FirebaseDatabase.getInstance().getReferenceFromUrl(FIREBASE_URL_PATH).child(userFirebaseAuth_ID);
@@ -267,17 +268,16 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 Log.e("AdminValue: ", String.valueOf(dataSnapshot));
                 if (dataSnapshot.hasChild("isAdmin")) { // if true
                     AdminActivityPage();
-                } else {
-                    MainActivityPage();
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                Log.e("databaseError: ",  databaseError.getMessage());
+                MainActivityPage();
             }
         });
-        return  flag;
+
     }
 
 }
