@@ -93,7 +93,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
     }
 
-
     private void hideNavigationBar() {
         // Hide the action bar and set the screen size to full
         getSupportActionBar().hide();
