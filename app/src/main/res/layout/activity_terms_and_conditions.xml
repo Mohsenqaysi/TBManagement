@@ -30,8 +30,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:buttonTint="@color/saveDatanButtonColor"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        android:textStyle="italic"
         android:text="@string/Iagree"
         app:layout_constraintBottom_toTopOf="@+id/termsAndConditions_ID"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -41,23 +47,22 @@
         android:id="@+id/termsAndConditions_ID"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/AgreeButtonColor"
-        android:text="@string/agree"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:textAllCaps="false"
-        android:textColor="#fff"
-        android:textSize="18sp"
+        android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginStart="16dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="16dp"
+        android:background="@color/saveDatanButtonColor"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:text="@string/agree"
+        android:textAllCaps="false"
+        android:textColor="@color/tw__solid_white"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_constraintRight_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintHorizontal_bias="0.5" />
+        tools:layout_constraintRight_creator="1" />
 
     <WebView
         android:id="@+id/webView_ID"
@@ -73,6 +78,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/checkBox" />
+        app:layout_constraintBottom_toTopOf="@+id/checkBox_ID" />
 
 </android.support.constraint.ConstraintLayout>

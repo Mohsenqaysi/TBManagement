@@ -60,14 +60,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         // Hide the top part of the screen
 //        hideNavigationBar();
         setContentView(R.layout.activity_login);
-
-
-//        mAuth = FirebaseAuth.getInstance();
-//        FirebaseUser fristResponder = mAuth.getCurrentUser();
-//        String ID = fristResponder.getUid();
-//        Log.e("PatientFragment_ID: ", ID);
-
-
         parentLayout = (ConstraintLayout) findViewById(R.id.activity_login_ID);
 
         // init the inputs fields
@@ -90,7 +82,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     userFirebaseAuth_ID = user.getUid();
                     Log.e(TAG, "onAuthStateChanged:signed_in:" + userFirebaseAuth_ID);
                     // TODO: Check is the user is logged in for the first time and ask the to fill their full details
-//                    MainActivityPage();
                     isAdmin();
                 } else {
                     // PatientsDataObject is signed out
@@ -154,6 +145,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
 
     private void signInIntoFirebase() {
+
         final TextInputLayout errorEmail = (TextInputLayout) findViewById(R.id.emailWrapper_ID);
         errorEmail.setErrorEnabled(true);
         final TextInputLayout errorPassword = (TextInputLayout) findViewById(R.id.passwordWrapper_ID);
@@ -163,7 +155,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         userPassword = this.password.getText().toString().trim();
 
         if (TextUtils.isEmpty(userEmail) || !isEmailValid(userEmail)) {
-            errorEmail.setError("Please enter a valid email");
+           errorEmail.setError("Please enter a valid email");
             // stop function execution
             return;
         } else {
@@ -191,7 +183,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
-
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
@@ -204,15 +195,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                             errorEmail.setError("Email or Password is wrong");
                             errorPassword.setError("Email or Password is wrong");
                         } else {
-//                            showToast("Log in successful");
                             progressDialog.dismiss();
-
                             isAdmin();
-//                            if (isAdmin() == true) {
-//                                AdminActivityPage();
-//                            } else {
-//                                MainActivityPage();
-//                            }
                         }
                     }
                 });
@@ -237,7 +221,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view == signIn) {
-
             GoogleApiAvailability api = GoogleApiAvailability.getInstance();
             int code = api.isGooglePlayServicesAvailable(this);
             if (code == ConnectionResult.SUCCESS) {
@@ -254,9 +237,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         startActivity(new Intent(this, ResetPassword.class));
     }
 
-    Boolean flag = false;
     public void isAdmin(){
-
         //TODO: check is the user isAdmin
         ref = FirebaseDatabase.getInstance().getReferenceFromUrl(FIREBASE_URL_PATH).child(userFirebaseAuth_ID);
         ref.keepSynced(true);
@@ -264,13 +245,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
                 Log.e("AdminValue: ", String.valueOf(dataSnapshot));
                 if (dataSnapshot.hasChild("isAdmin")) { // if true
                     AdminActivityPage();
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.e("databaseError: ",  databaseError.getMessage());

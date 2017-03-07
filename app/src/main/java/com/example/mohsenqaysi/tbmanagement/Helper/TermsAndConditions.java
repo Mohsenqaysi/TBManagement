@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.CheckBox;
 
@@ -22,39 +21,36 @@ public class TermsAndConditions extends AppCompatActivity implements View.OnClic
         agree = (Button) findViewById(R.id.termsAndConditions_ID);
         agree.setOnClickListener(this);
         checkBox = (CheckBox) findViewById(R.id.checkBox_ID);
+        disableSignInButton();
         checkBox.setOnClickListener(this);
 
         webView = (WebView) findViewById(R.id.webView_ID);
-        webView.getSettings().setJavaScriptEnabled(true);
-
-        webView.setWebViewClient(new WebViewClient() {
-            public void onReceivedError(WebView view, int errorCode, String description, String   failingUrl) {
-
-            }
-        });
-        webView.loadUrl("http://mohsenqaysi.github.io/webpage/Terms.html");
-//        webView.loadUrl("http://www.ucd.ie/cookie-policy/");
-
-
-//        String summary = "";
-//        webView.loadData(summary, "text/html", null);
+// path /Users/mohsenqaysi/Documents/TBManagement/app/src/main/java/com/example/mohsenqaysi/tbmanagement/Helper/web.html
+        webView.loadUrl("file:///android_asset/web.html");
 
     }
 
-
-
-
-
-
-
-
     @Override
     public void onClick(View view) {
-        if (view == agree && checkBox.isChecked()){
-            // TODO: save date
-        } else {
-            // TODO: do something
+
+        if (view == checkBox){
+
+            if (checkBox.isChecked()){
+                enableSignInButton();
+            } else {
+                disableSignInButton();
+            }
         }
+    }
+
+    public void disableSignInButton() {
+        agree.setClickable(false);
+        agree.setAlpha(.5f);
+    }
+
+    public void enableSignInButton() {
+        agree.setClickable(true);
+        agree.setAlpha(1);
     }
 
 
