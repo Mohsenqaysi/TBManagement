@@ -2,21 +2,15 @@ package com.example.mohsenqaysi.tbmanagement.PatientsDetails;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.mohsenqaysi.tbmanagement.CustomCardView.DrugsInfo;
 import com.example.mohsenqaysi.tbmanagement.Helper.RoundedTransformation;
 import com.example.mohsenqaysi.tbmanagement.R;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
@@ -41,21 +35,21 @@ public class PatientDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patients_details);
-
-        mAuth = FirebaseAuth.getInstance();
-        FirebaseUser fristResponder = mAuth.getCurrentUser();
-        String ID = fristResponder.getUid();
-        Log.e("PatientFragment_ID: ", ID);
-
-
-        mDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl(FIREBASE_URL_PATH_VISITS).child(ID).child("visit");
-        mDatabase.keepSynced(true);
-
-
-
-        drugsList = (RecyclerView) findViewById(R.id.drugList_ID);
-        drugsList.setHasFixedSize(true);
-        drugsList.setLayoutManager(new LinearLayoutManager(this));
+//
+//        mAuth = FirebaseAuth.getInstance();
+//        FirebaseUser fristResponder = mAuth.getCurrentUser();
+//        String ID = fristResponder.getUid();
+//        Log.e("PatientFragment_ID: ", ID);
+//
+//
+//        mDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl(FIREBASE_URL_PATH_VISITS).child(ID).child("visit");
+//        mDatabase.keepSynced(true);
+//
+//
+//
+//        drugsList = (RecyclerView) findViewById(R.id.drugList_ID);
+//        drugsList.setHasFixedSize(true);
+//        drugsList.setLayoutManager(new LinearLayoutManager(this));
 
         patient_Iamge = (ImageView) findViewById(R.id.patientsDetails_Image_ID);
         patient_fullName = (TextView) findViewById(R.id.patientDetails_fullName_ID);
@@ -109,56 +103,56 @@ public class PatientDetails extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        FirebaseRecyclerAdapter<DrugsInfo,DrugInfoViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<DrugsInfo, DrugInfoViewHolder>(
-
-                DrugsInfo.class,
-                R.layout.drugs_info_row,
-                DrugInfoViewHolder.class,
-                mDatabase
-
-        ) {
-            @Override
-            protected void populateViewHolder(DrugInfoViewHolder viewHolder, DrugsInfo model, int position) {
-                viewHolder.setDrugName(model.getDrugname());
-                viewHolder.setStartDate(model.getSartdate());
-                viewHolder.setSchedule(model.getSchedule());
-                viewHolder.setEndDate(model.getEnddate());
-
-            }
-        };
-
-        drugsList.setAdapter(firebaseRecyclerAdapter);
-
-    }
-
-    public  static class DrugInfoViewHolder extends RecyclerView.ViewHolder {
-
-        View mView;
-
-        public DrugInfoViewHolder(View itemView) {
-            super(itemView);
-            mView = itemView;
-        }
-
-        public  void setDrugName(String drungNmae){
-            TextView display_drugname = (TextView) mView.findViewById(R.id.drugName_ID);
-            display_drugname.setText(drungNmae);
-        }
-        public  void setStartDate(String startDate){
-            TextView display_drugname = (TextView) mView.findViewById(R.id.startDateValue_ID);
-            display_drugname.setText(startDate);
-        }
-        public  void setSchedule(String schedule){
-            TextView display_drugname = (TextView) mView.findViewById(R.id.scheduleDateValue_ID);
-            display_drugname.setText(schedule);
-        }
-        public  void setEndDate(String endDate){
-            TextView display_drugname = (TextView) mView.findViewById(R.id.endDateValue_ID);
-            display_drugname.setText(endDate);
-        }
-    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//
+//        FirebaseRecyclerAdapter<DrugsInfo,DrugInfoViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<DrugsInfo, DrugInfoViewHolder>(
+//
+//                DrugsInfo.class,
+//                R.layout.drugs_info_row,
+//                DrugInfoViewHolder.class,
+//                mDatabase
+//
+//        ) {
+//            @Override
+//            protected void populateViewHolder(DrugInfoViewHolder viewHolder, DrugsInfo model, int position) {
+//                viewHolder.setDrugName(model.getDrugname());
+//                viewHolder.setStartDate(model.getSartdate());
+//                viewHolder.setSchedule(model.getSchedule());
+//                viewHolder.setEndDate(model.getEnddate());
+//
+//            }
+//        };
+//
+//        drugsList.setAdapter(firebaseRecyclerAdapter);
+//
+//    }
+//
+//    public  static class DrugInfoViewHolder extends RecyclerView.ViewHolder {
+//
+//        View mView;
+//
+//        public DrugInfoViewHolder(View itemView) {
+//            super(itemView);
+//            mView = itemView;
+//        }
+//
+//        public  void setDrugName(String drungNmae){
+//            TextView display_drugname = (TextView) mView.findViewById(R.id.drugName_ID);
+//            display_drugname.setText(drungNmae);
+//        }
+//        public  void setStartDate(String startDate){
+//            TextView display_drugname = (TextView) mView.findViewById(R.id.startDateValue_ID);
+//            display_drugname.setText(startDate);
+//        }
+//        public  void setSchedule(String schedule){
+//            TextView display_drugname = (TextView) mView.findViewById(R.id.scheduleDateValue_ID);
+//            display_drugname.setText(schedule);
+//        }
+//        public  void setEndDate(String endDate){
+//            TextView display_drugname = (TextView) mView.findViewById(R.id.endDateValue_ID);
+//            display_drugname.setText(endDate);
+//        }
+//    }
 }
