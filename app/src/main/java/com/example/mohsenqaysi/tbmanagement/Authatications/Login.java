@@ -14,8 +14,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.mohsenqaysi.tbmanagement.AdminActivity;
 import com.example.mohsenqaysi.tbmanagement.Helper.SnackBarMessages;
-import com.example.mohsenqaysi.tbmanagement.Helper.TermsAndConditions;
 import com.example.mohsenqaysi.tbmanagement.MainActivity;
 import com.example.mohsenqaysi.tbmanagement.R;
 import com.google.android.gms.common.ConnectionResult;
@@ -209,7 +209,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
     private void AdminActivityPage() {
         Log.w("userFirebaseAuth_ID: ", userFirebaseAuth_ID);
-        startActivity(new Intent(this, TermsAndConditions.class).putExtra("ID", userFirebaseAuth_ID));
+        startActivity(new Intent(this, AdminActivity.class).putExtra("ID", userFirebaseAuth_ID));
         finish();
     }
 

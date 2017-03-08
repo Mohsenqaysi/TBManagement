@@ -15,7 +15,6 @@ import android.view.MenuItem;
 import com.example.mohsenqaysi.tbmanagement.Authatications.Login;
 import com.example.mohsenqaysi.tbmanagement.Fragments.PatientFragment;
 import com.example.mohsenqaysi.tbmanagement.Fragments.TodayFragment;
-import com.example.mohsenqaysi.tbmanagement.Helper.TermsAndConditions;
 import com.example.mohsenqaysi.tbmanagement.TB_General_Info.GeneralInfoAboutTBList;
 
 import java.util.ArrayList;
@@ -84,9 +83,6 @@ public class MainActivity extends AppCompatActivity {
         } else if (id == R.id.about_ID) {
             startActivity(new Intent(this, GeneralInfoAboutTBList.class));
             return true;
-        } else if (id == R.id.terms_ID){
-            startActivity(new Intent(this, TermsAndConditions.class));
-
         }
 
         return super.onOptionsItemSelected(item);
