@@ -52,7 +52,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
     // fire-base init
     private DatabaseReference ref;
-    private String FIREBASE_URL_PATH = "https://tbmanagement-aff8e.firebaseio.com/patientsList/admins";
+    private String FIREBASE_URL_PATH = "https://tbmanagement-aff8e.firebaseio.com/admins";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

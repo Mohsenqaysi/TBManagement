@@ -38,7 +38,6 @@ public class PatientFragment extends Fragment {
     private String FIREBASE_URL_PATH = "https://tbmanagement-aff8e.firebaseio.com/FR";
     private static Activity viewContext;
 
-
     public PatientFragment() {
         // Required empty public constructor
     }
@@ -63,6 +62,8 @@ public class PatientFragment extends Fragment {
                 startActivity(new Intent(getContext(), PatientDetailsRegistrationForm.class));
             }
         });
+
+
         mPatientList = (RecyclerView) view.findViewById(R.id.patients_list_ID);
 
         // @param hasFixedSize true if adapter changes cannot affect the size of the RecyclerView.

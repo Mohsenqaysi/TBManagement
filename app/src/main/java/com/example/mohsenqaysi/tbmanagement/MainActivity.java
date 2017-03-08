@@ -84,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, GeneralInfoAboutTBList.class));
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
