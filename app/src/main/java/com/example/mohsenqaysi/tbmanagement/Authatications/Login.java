@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -57,8 +56,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Hide the top part of the screen
-//        hideNavigationBar();
+
         setContentView(R.layout.activity_login);
         parentLayout = (ConstraintLayout) findViewById(R.id.activity_login_ID);
 
@@ -93,12 +91,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
     }
 
-    private void hideNavigationBar() {
-        // Hide the action bar and set the screen size to full
-        getSupportActionBar().hide();
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-    }
 
     @Override
     public void onStart() {
@@ -249,6 +241,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     AdminActivityPage();
                 }
             }
+
+            // if permission denied that means he/she is a normal user, so go to the MainActivityPage
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.e("databaseError: ",  databaseError.getMessage());
