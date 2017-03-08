@@ -13,6 +13,10 @@
 
     <color name="saveDatanButtonColor">#429B58</color>
     <color name="textEditorColor">#6585A8</color>
-    <color name="tabTextColor">#e6e4e4</color>
+    <color name="tabTextColor">#bec0c8</color>
     <color name="tabSelectedTextColor">#ffffff</color>
+
+
+    <!-- Navigation bar color-->
+    <color name="navigationBG">#ECEDEF</color>
 </resources>
