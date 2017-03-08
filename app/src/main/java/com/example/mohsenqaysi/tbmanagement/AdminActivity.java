@@ -54,6 +54,12 @@ public class AdminActivity extends AppCompatActivity {
         mPatientList.setHasFixedSize(true);
         mPatientList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
+        // Reverse the order of the RecyclerView list: new on top
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+        mPatientList.setLayoutManager(layoutManager);
+
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser fristResponder = mAuth.getCurrentUser();
         String ID = fristResponder.getUid();

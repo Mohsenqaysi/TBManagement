@@ -70,6 +70,12 @@ public class PatientFragment extends Fragment {
         mPatientList.setHasFixedSize(true);
         mPatientList.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        // Reverse the order of the RecyclerView list: new on top
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+        mPatientList.setLayoutManager(layoutManager);
+
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser fristResponder = mAuth.getCurrentUser();
         String ID = fristResponder.getUid();
