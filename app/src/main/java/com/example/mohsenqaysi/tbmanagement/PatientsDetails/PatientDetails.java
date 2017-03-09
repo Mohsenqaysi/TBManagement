@@ -1,24 +1,29 @@
 package com.example.mohsenqaysi.tbmanagement.PatientsDetails;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.mohsenqaysi.tbmanagement.Fragments.GraphFragment;
+import com.example.mohsenqaysi.tbmanagement.DrungsinfoAndDates;
 import com.example.mohsenqaysi.tbmanagement.Helper.RoundedTransformation;
 import com.example.mohsenqaysi.tbmanagement.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
@@ -32,24 +37,34 @@ public class PatientDetails extends AppCompatActivity {
     private TextView patient_fullName;
     private TextView patient_DataOfBirht;
     private TextView patient_stage;
+    private TextView patient_drugName;
+    private TextView patient_startDate;
+    private TextView patient_endDate;
+    private TextView patient_schedule;
 
+    private FloatingActionButton addDrugInfo;
     // init fire-base
     private RecyclerView drugsList;
     private DatabaseReference mDatabase;
     private String FIREBASE_URL_PATH_VISITS = "https://tbmanagement-aff8e.firebaseio.com/PatientsVisits";
     private FirebaseAuth mAuth;
 
-    // Fragment
-    private Fragment fragment;
-    private FragmentManager fragmentManager;
-    
+
+    private String currentChild_pushKey;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patients_details);
 
+        addDrugInfo = (FloatingActionButton) findViewById(R.id.FloatingActionButton_ID2);
+        addDrugInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), DrungsinfoAndDates.class));
+            }
+        });
 
-        fragmentManager = getSupportFragmentManager();
         // BottomNavigationView Buttons
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.navigation_ID);
@@ -66,24 +81,12 @@ public class PatientDetails extends AppCompatActivity {
                             case R.id.action_graph:
                                 Toast.makeText(getApplicationContext(),"action_graph",Toast.LENGTH_LONG).show();
 //                                startActivity(new Intent(getApplicationContext(), GeneralInfoAboutTBList.class));
-                                 fragment = new GraphFragment();
-                                break;
-//                                return  true;
+                                return  true;
                         }
-                        final FragmentTransaction transaction = fragmentManager.beginTransaction();
-                        transaction.replace(R.id.patientFragment_ID, fragment).commit();
                         return true;
                     }
                 });
-//
-//        mAuth = FirebaseAuth.getInstance();
-//        FirebaseUser fristResponder = mAuth.getCurrentUser();
-//        String ID = fristResponder.getUid();
-//        Log.e("PatientFragment_ID: ", ID);
-//
-//
-//        mDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl(FIREBASE_URL_PATH_VISITS).child(ID).child("visit");
-//        mDatabase.keepSynced(true);
+
 
         patient_Iamge = (ImageView) findViewById(R.id.patientsDetails_Image_ID);
         patient_fullName = (TextView) findViewById(R.id.patientDetails_fullName_ID);
@@ -94,6 +97,9 @@ public class PatientDetails extends AppCompatActivity {
         fullName = getIntent().getExtras().getString("fullName");
         dataOfBirth = getIntent().getExtras().getString("dataOfBirth");
         stage = getIntent().getExtras().getString("stage");
+        currentChild_pushKey = getIntent().getExtras().getString("currentChild_pushKey");
+        Log.e("currentChild_pushKey: ",currentChild_pushKey);
+
 
         // if the images are not alread saved offline load them
         Picasso.with(getApplicationContext()).load(image).networkPolicy(NetworkPolicy.OFFLINE).centerCrop().resize(440,440).
@@ -114,15 +120,48 @@ public class PatientDetails extends AppCompatActivity {
         patient_fullName.setText(fullName);
         patient_DataOfBirht.setText("Date of birth: "+ dataOfBirth);
         patient_stage.setText("Stage: " + stage);
-
+        patient_drugName = (TextView) findViewById(R.id.drugName_ID);
+        patient_startDate = (TextView) findViewById(R.id.startDateValue_ID);
+        patient_endDate =  (TextView) findViewById(R.id.endDateValue_ID);
+        patient_schedule = (TextView) findViewById(R.id.scheduleDateValue_ID);
         Log.w("satge: " ,stage);
 
 
         // TODO: Read
         // TODO: Update in user info and store into in FireBase
-
-
-
-
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser fristResponder = mAuth.getCurrentUser();
+        String ID = fristResponder.getUid();
+        Log.e("PatientFragment_ID: ", ID);
+
+        mDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl(FIREBASE_URL_PATH_VISITS).child(ID).child(currentChild_pushKey).child("visit");
+        mDatabase.keepSynced(true);
+
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                patient_drugName.setText(dataSnapshot.child("drungNmae").getValue().toString());
+                patient_startDate.setText(dataSnapshot.child("startDate").getValue().toString());
+                patient_schedule.setText(dataSnapshot.child("schedule").getValue().toString());
+                patient_endDate.setText(dataSnapshot.child("endDate").getValue().toString());
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+                patient_drugName.setText(databaseError.getMessage());
+                patient_startDate.setText(databaseError.getMessage());
+                patient_schedule.setText(databaseError.getMessage());
+                patient_endDate.setText(databaseError.getMessage());
+            }
+        });
+    }
+
 }

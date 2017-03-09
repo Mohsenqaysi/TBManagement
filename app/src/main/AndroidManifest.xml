@@ -54,10 +54,14 @@
         <activity
             android:name=".PatientsDetails.PatientDetailsRegistrationForm"
             android:screenOrientation="portrait" />
-        <activity android:name=".Helper.TermsAndConditions"
+        <activity
+            android:name=".Helper.TermsAndConditions"
             android:screenOrientation="portrait" />
-        <activity android:name=".AdminActivity"
-            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".AdminActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".VisitsGraph" />
+        <activity android:name=".DrungsinfoAndDates"></activity>
     </application>
 
 </manifest>

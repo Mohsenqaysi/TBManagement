@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="schedule">
+        <item>Daily - ones</item>
+        <item>Daily - Twice</item>
+        <item>Daily - Three times</item>
+        <item>Weekly - ones</item>
+        <item>Weekly - Twice</item>
+        <item>Weekly - Three times</item>
+        <item>Monthly - ones</item>
+        <item>Monthly - Twice</item>
+        <item>Monthly - Three times</item>
+
+</string-array>
+</resources>

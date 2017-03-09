@@ -101,7 +101,7 @@ public class PatientFragment extends Fragment {
 
         ) {
             @Override
-            protected void populateViewHolder(PatientsViewHolder viewHolder, final Patients model, int position) {
+            protected void populateViewHolder(final PatientsViewHolder viewHolder, final Patients model, final int position) {
                 viewHolder.setName(model.getFullName());
                 viewHolder.setStage(model.getStageDiagnosis());
                 viewHolder.setImage(model.getImage());
@@ -121,6 +121,8 @@ public class PatientFragment extends Fragment {
                         intent.putExtra("city", model.getCity());
                         intent.putExtra("area", model.getArea());
                         intent.putExtra("postCode",model.getPostalCode());
+                        intent.putExtra("currentChild_pushKey", getRef(position).getKey().toString());
+
                         startActivity(intent);
                     }
                 });
