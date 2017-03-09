@@ -1,12 +1,20 @@
 package com.example.mohsenqaysi.tbmanagement.PatientsDetails;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.mohsenqaysi.tbmanagement.Fragments.GraphFragment;
 import com.example.mohsenqaysi.tbmanagement.Helper.RoundedTransformation;
 import com.example.mohsenqaysi.tbmanagement.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,11 +38,43 @@ public class PatientDetails extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private String FIREBASE_URL_PATH_VISITS = "https://tbmanagement-aff8e.firebaseio.com/PatientsVisits";
     private FirebaseAuth mAuth;
+
+    // Fragment
+    private Fragment fragment;
+    private FragmentManager fragmentManager;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patients_details);
+
+
+        fragmentManager = getSupportFragmentManager();
+        // BottomNavigationView Buttons
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)
+                findViewById(R.id.navigation_ID);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.action_home:
+                                Toast.makeText(getApplicationContext(),"action_home",Toast.LENGTH_LONG).show();
+//                                startActivity(new Intent(getApplicationContext(), PatientDetails.class));
+                                return  true;
+                            case R.id.action_graph:
+                                Toast.makeText(getApplicationContext(),"action_graph",Toast.LENGTH_LONG).show();
+//                                startActivity(new Intent(getApplicationContext(), GeneralInfoAboutTBList.class));
+                                 fragment = new GraphFragment();
+                                break;
+//                                return  true;
+                        }
+                        final FragmentTransaction transaction = fragmentManager.beginTransaction();
+                        transaction.replace(R.id.patientFragment_ID, fragment).commit();
+                        return true;
+                    }
+                });
 //
 //        mAuth = FirebaseAuth.getInstance();
 //        FirebaseUser fristResponder = mAuth.getCurrentUser();
@@ -44,29 +84,12 @@ public class PatientDetails extends AppCompatActivity {
 //
 //        mDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl(FIREBASE_URL_PATH_VISITS).child(ID).child("visit");
 //        mDatabase.keepSynced(true);
-//
-//
-//
-//        drugsList = (RecyclerView) findViewById(R.id.drugList_ID);
-//        drugsList.setHasFixedSize(true);
-//        drugsList.setLayoutManager(new LinearLayoutManager(this));
 
         patient_Iamge = (ImageView) findViewById(R.id.patientsDetails_Image_ID);
         patient_fullName = (TextView) findViewById(R.id.patientDetails_fullName_ID);
         patient_DataOfBirht = (TextView) findViewById(R.id.patientDetails_BirthDay_ID);
         patient_stage = (TextView) findViewById(R.id.patientDetails_Stage_ID);
-//        Intent intent = new Intent(getContext(), PatientsDetails.class);
-//        intent.putExtra("image",model.getImage());
-//        intent.putExtra("fullName", model.getFullName());
-//        intent.putExtra("dataOfBirth",model.getDateOfBirth());
-//        intent.putExtra("gender", model.getGender());
-//        intent.putExtra("phoneNumber",model.getPhoneNumber());
-//        intent.putExtra("satge", model.getStageDiagnosis());
-//        intent.putExtra("flatNumber", model.getFlatNumber());
-//        intent.putExtra("address",model.getAddress());
-//        intent.putExtra("city", model.getCity());
-//        intent.putExtra("area", model.getArea());
-//        intent.putExtra("postCode",model.getPostalCode());
+
          image =  getIntent().getExtras().getString("image");
         fullName = getIntent().getExtras().getString("fullName");
         dataOfBirth = getIntent().getExtras().getString("dataOfBirth");
@@ -102,57 +125,4 @@ public class PatientDetails extends AppCompatActivity {
 
 
     }
-
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//
-//        FirebaseRecyclerAdapter<DrugsInfo,DrugInfoViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<DrugsInfo, DrugInfoViewHolder>(
-//
-//                DrugsInfo.class,
-//                R.layout.drugs_info_row,
-//                DrugInfoViewHolder.class,
-//                mDatabase
-//
-//        ) {
-//            @Override
-//            protected void populateViewHolder(DrugInfoViewHolder viewHolder, DrugsInfo model, int position) {
-//                viewHolder.setDrugName(model.getDrugname());
-//                viewHolder.setStartDate(model.getSartdate());
-//                viewHolder.setSchedule(model.getSchedule());
-//                viewHolder.setEndDate(model.getEnddate());
-//
-//            }
-//        };
-//
-//        drugsList.setAdapter(firebaseRecyclerAdapter);
-//
-//    }
-//
-//    public  static class DrugInfoViewHolder extends RecyclerView.ViewHolder {
-//
-//        View mView;
-//
-//        public DrugInfoViewHolder(View itemView) {
-//            super(itemView);
-//            mView = itemView;
-//        }
-//
-//        public  void setDrugName(String drungNmae){
-//            TextView display_drugname = (TextView) mView.findViewById(R.id.drugName_ID);
-//            display_drugname.setText(drungNmae);
-//        }
-//        public  void setStartDate(String startDate){
-//            TextView display_drugname = (TextView) mView.findViewById(R.id.startDateValue_ID);
-//            display_drugname.setText(startDate);
-//        }
-//        public  void setSchedule(String schedule){
-//            TextView display_drugname = (TextView) mView.findViewById(R.id.scheduleDateValue_ID);
-//            display_drugname.setText(schedule);
-//        }
-//        public  void setEndDate(String endDate){
-//            TextView display_drugname = (TextView) mView.findViewById(R.id.endDateValue_ID);
-//            display_drugname.setText(endDate);
-//        }
-//    }
 }

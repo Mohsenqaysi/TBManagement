@@ -58,7 +58,7 @@ public class PatientFragment extends Fragment {
         NewRegistaration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Go the PatientDetailsRegistrationForm to add new patient to the list
+                // Go the TermsAndConditions and than to PatientDetailsRegistrationForm to add new patient to the list
                 startActivity(new Intent(getContext(), TermsAndConditions.class));
             }
         });

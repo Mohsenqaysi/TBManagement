@@ -187,6 +187,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                             errorPassword.setError("Email or Password is wrong");
                         } else {
                             progressDialog.dismiss();
+
                             isAdmin();
                         }
                     }
@@ -241,7 +242,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     AdminActivityPage();
                 }
             }
-
             // if permission denied that means he/she is a normal user, so go to the MainActivityPage
             @Override
             public void onCancelled(DatabaseError databaseError) {
