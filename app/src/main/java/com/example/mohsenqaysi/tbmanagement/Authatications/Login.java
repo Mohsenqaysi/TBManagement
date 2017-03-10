@@ -81,6 +81,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     Log.e(TAG, "onAuthStateChanged:signed_in:" + userFirebaseAuth_ID);
                     // TODO: Check is the user is logged in for the first time and ask the to fill their full details
                     isAdmin();
+
                 } else {
                     // PatientsDataObject is signed out
                     Log.e(TAG, "onAuthStateChanged:signed_out");
@@ -181,14 +182,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                             Log.w(TAG, "signInWithEmail:failed", task.getException());
                             snackBarMessages.SnackBarMessages(parentLayout, R.string.Log_in_failed);
                             snackBarMessages.showToast();
-                            Log.w(TAG, task.getException().fillInStackTrace());
                             progressDialog.hide();
                             errorEmail.setError("Email or Password is wrong");
                             errorPassword.setError("Email or Password is wrong");
                         } else {
+                            isAdmin();
                             progressDialog.dismiss();
 
-                            isAdmin();
                         }
                     }
                 });
@@ -230,16 +230,20 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
 
     public void isAdmin(){
-        //TODO: check is the user isAdmin
+        progressDialog.setMessage("Re-Login in user...");
+        progressDialog.show();
+        // check is the user isAdmin
         ref = FirebaseDatabase.getInstance().getReferenceFromUrl(FIREBASE_URL_PATH).child(userFirebaseAuth_ID);
         ref.keepSynced(true);
-
+//        progressDialog.show();
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 Log.e("AdminValue: ", String.valueOf(dataSnapshot));
                 if (dataSnapshot.hasChild("isAdmin")) { // if true
                     AdminActivityPage();
+                    progressDialog.dismiss();
                 }
             }
             // if permission denied that means he/she is a normal user, so go to the MainActivityPage
@@ -247,8 +251,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             public void onCancelled(DatabaseError databaseError) {
                 Log.e("databaseError: ",  databaseError.getMessage());
                 MainActivityPage();
+                progressDialog.dismiss();
             }
         });
+
 
     }
 

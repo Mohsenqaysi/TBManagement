@@ -57,7 +57,7 @@ public class PatientDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patients_details);
 
-        addDrugInfo = (FloatingActionButton) findViewById(R.id.FloatingActionButton_ID2);
+        addDrugInfo = (FloatingActionButton) findViewById(R.id.FloatingActionButtonPatientDetails_ID);
         addDrugInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,7 +80,7 @@ public class PatientDetails extends AppCompatActivity {
                                 return  true;
                             case R.id.action_graph:
                                 Toast.makeText(getApplicationContext(),"action_graph",Toast.LENGTH_LONG).show();
-//                                startActivity(new Intent(getApplicationContext(), GeneralInfoAboutTBList.class));
+                                startActivity(new Intent(getApplicationContext(), DrungsinfoAndDates.class));
                                 return  true;
                         }
                         return true;

@@ -337,7 +337,7 @@
     <!-- This is the bottom navigation bar-->
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/FloatingActionButton_ID2"
+        android:id="@+id/FloatingActionButtonPatientDetails_ID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
@@ -347,7 +347,6 @@
         android:src="@drawable/addpatient"
         app:backgroundTint="@color/colorPrimary"
         app:fabSize="normal"
-        android:onClick="GoToDrungInfoActivity"
         app:layout_anchorGravity="bottom|right|end"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginBottom="8dp"
