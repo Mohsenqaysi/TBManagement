@@ -1,16 +1,19 @@
-package com.example.mohsenqaysi.tbmanagement;
+package com.example.mohsenqaysi.tbmanagement.PatientsDetails;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.example.mohsenqaysi.tbmanagement.R;
 
 
 public class DrungsinfoAndDates extends AppCompatActivity {
@@ -20,6 +23,7 @@ public class DrungsinfoAndDates extends AppCompatActivity {
     private ImageButton startDate;
     private ImageButton endDate;
     private Button saveDate;
+
 
     private DatePickerDialog datePickerDialog;
     private int mYear, mMonth, mDay;

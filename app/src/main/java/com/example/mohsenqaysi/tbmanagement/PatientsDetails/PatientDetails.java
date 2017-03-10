@@ -10,13 +10,14 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.mohsenqaysi.tbmanagement.DrungsinfoAndDates;
 import com.example.mohsenqaysi.tbmanagement.Helper.RoundedTransformation;
 import com.example.mohsenqaysi.tbmanagement.R;
+import com.example.mohsenqaysi.tbmanagement.ViewInfoDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -41,6 +42,7 @@ public class PatientDetails extends AppCompatActivity {
     private TextView patient_startDate;
     private TextView patient_endDate;
     private TextView patient_schedule;
+    private ImageButton info;
 
     private FloatingActionButton addDrugInfo;
     // init fire-base
@@ -92,7 +94,7 @@ public class PatientDetails extends AppCompatActivity {
         patient_fullName = (TextView) findViewById(R.id.patientDetails_fullName_ID);
         patient_DataOfBirht = (TextView) findViewById(R.id.patientDetails_BirthDay_ID);
         patient_stage = (TextView) findViewById(R.id.patientDetails_Stage_ID);
-
+        info = (ImageButton) findViewById(R.id.infoImageButton_ID);
          image =  getIntent().getExtras().getString("image");
         fullName = getIntent().getExtras().getString("fullName");
         dataOfBirth = getIntent().getExtras().getString("dataOfBirth");
@@ -100,6 +102,13 @@ public class PatientDetails extends AppCompatActivity {
         currentChild_pushKey = getIntent().getExtras().getString("currentChild_pushKey");
         Log.e("currentChild_pushKey: ",currentChild_pushKey);
 
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ViewInfoDialog alert = new ViewInfoDialog();
+                alert.showDialog(PatientDetails.this, "Error de conexión al servidor");
+            }
+        });
 
         // if the images are not alread saved offline load them
         Picasso.with(getApplicationContext()).load(image).networkPolicy(NetworkPolicy.OFFLINE).centerCrop().resize(440,440).
@@ -155,11 +164,10 @@ public class PatientDetails extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
-                patient_drugName.setText(databaseError.getMessage());
-                patient_startDate.setText(databaseError.getMessage());
-                patient_schedule.setText(databaseError.getMessage());
-                patient_endDate.setText(databaseError.getMessage());
+                patient_drugName.setText(R.string.No_date);
+                patient_startDate.setText(R.string.No_date);
+                patient_schedule.setText(R.string.No_date);
+                patient_endDate.setText(R.string.No_date);
             }
         });
     }

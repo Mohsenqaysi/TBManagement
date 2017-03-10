@@ -61,7 +61,8 @@
             android:name=".AdminActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".VisitsGraph" />
-        <activity android:name=".DrungsinfoAndDates"></activity>
+        <activity android:name=".PatientsDetails.DrungsinfoAndDates" />
+        <activity android:name=".ViewInfoDialog"></activity>
     </application>
 
 </manifest>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/com_facebook_button_login_silver_background"
-    tools:context="com.example.mohsenqaysi.tbmanagement.DrungsinfoAndDates">
+    tools:context="com.example.mohsenqaysi.tbmanagement.PatientsDetails.DrungsinfoAndDates">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="0dp"
