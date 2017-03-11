@@ -1,42 +1,54 @@
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent">
+
+
+<android.support.constraint.ConstraintLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#ffffffff"
-    android:orientation="vertical"
-    tools:layout_editor_absoluteX="0dp"
-    tools:layout_editor_absoluteY="25dp">
+    android:orientation="vertical">
 
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/constraintLayout6"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-1dp"
             android:background="@color/colorPrimary"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.47"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/dialogProfileImage_ID"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:foregroundGravity="fill"
+                    android:scaleType="centerInside"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/place" />
 
                 <TextView
                     android:id="@+id/dialogInfoName_ID"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@color/AgreeButtonColor"
                     android:text="Full Name"
                     android:textColor="@color/tw__solid_white"
                     android:textSize="30sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@+id/dialogProfileImage_ID"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintRight_toRightOf="parent" />
 
         </android.support.constraint.ConstraintLayout>
 
@@ -46,25 +58,25 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
             android:background="@null"
             android:clickable="true"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:srcCompat="@drawable/call"
-            android:layout_marginTop="32dp"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout6" />
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout6"
+            app:srcCompat="@drawable/call" />
 
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/daialogPhoneIconButton_ID"
             app:srcCompat="@drawable/place"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="16dp"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
@@ -82,7 +94,8 @@
             app:layout_constraintLeft_toRightOf="@+id/daialogPhoneIconButton_ID"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@+id/daialogPhoneIconButton_ID"
-            app:layout_constraintVertical_bias="0.666" />
+            app:layout_constraintVertical_bias="0.51"
+            app:layout_constraintHorizontal_bias="0.52" />
 
         <TextView
             android:id="@+id/dialogInfoAdress_ID"
@@ -92,15 +105,16 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="4dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="10dp"
             android:text="Address"
             android:textSize="18sp"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toRightOf="@+id/imageView4"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imageView4"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintVertical_bias="0.541" />
+            android:layout_marginBottom="8dp" />
 
 </android.support.constraint.ConstraintLayout>
+
+</ScrollView>
