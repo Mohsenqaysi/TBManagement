@@ -113,14 +113,19 @@ public class PatientFragment extends Fragment {
                         intent.putExtra("image",model.getImage());
                         intent.putExtra("fullName", model.getFullName());
                         intent.putExtra("dataOfBirth",model.getDateOfBirth());
-                        intent.putExtra("gender", model.getGender());
-                        intent.putExtra("phoneNumber",model.getPhoneNumber());
                         intent.putExtra("stage", model.getStageDiagnosis());
-                        intent.putExtra("flatNumber", model.getFlatNumber());
-                        intent.putExtra("address",model.getAddress());
-                        intent.putExtra("city", model.getCity());
-                        intent.putExtra("area", model.getArea());
-                        intent.putExtra("postCode",model.getPostalCode());
+
+                        intent.putExtra("phoneNumber",model.getPhoneNumber());
+                        intent.putExtra("gender", model.getGender());
+
+                        String address = model.getFlatNumber()
+                                +" , "+ model.getAddress()
+                                +"\n"+ model.getCity()
+                                +"\n"+ model.getPostalCode()
+                                +"\n"+  model.getArea();
+                        Log.e("address:",address);
+                        intent.putExtra("fullAddress", address);
+
                         intent.putExtra("currentChild_pushKey", getRef(position).getKey().toString());
 
                         startActivity(intent);

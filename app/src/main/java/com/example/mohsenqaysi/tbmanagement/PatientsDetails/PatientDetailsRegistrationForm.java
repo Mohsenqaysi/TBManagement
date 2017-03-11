@@ -233,6 +233,7 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
+                    Log.e("onFailure: ", e.fillInStackTrace().toString());
                     snackBarMessages.googleServicesCheck(parentLayout,R.string.Profile_Failed_TO_Create);
                     mProgressDialog.dismiss();
 

@@ -95,6 +95,7 @@ public class PatientDetails extends AppCompatActivity {
         patient_DataOfBirht = (TextView) findViewById(R.id.patientDetails_BirthDay_ID);
         patient_stage = (TextView) findViewById(R.id.patientDetails_Stage_ID);
         info = (ImageButton) findViewById(R.id.infoImageButton_ID);
+
          image =  getIntent().getExtras().getString("image");
         fullName = getIntent().getExtras().getString("fullName");
         dataOfBirth = getIntent().getExtras().getString("dataOfBirth");
@@ -105,8 +106,13 @@ public class PatientDetails extends AppCompatActivity {
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // show the patient info on a dialog box
                 ViewInfoDialog alert = new ViewInfoDialog();
-                alert.showDialog(PatientDetails.this, "Error de conexión al servidor");
+
+//                fullAddress
+                alert.showDialog(PatientDetails.this, image, fullName
+                        ,getIntent().getExtras().getString("phoneNumber")
+                        ,getIntent().getExtras().getString("fullAddress"));
             }
         });
 
