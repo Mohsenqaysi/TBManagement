@@ -2,18 +2,14 @@ package com.example.mohsenqaysi.tbmanagement.PatientsDetails;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.mohsenqaysi.tbmanagement.Helper.RoundedTransformation;
 import com.example.mohsenqaysi.tbmanagement.R;
@@ -59,7 +55,7 @@ public class PatientDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patients_details);
 
-        addDrugInfo = (FloatingActionButton) findViewById(R.id.FloatingActionButtonPatientDetails_ID);
+        addDrugInfo = (FloatingActionButton) findViewById(R.id.FloatingActionButtonPatientDetailsDrugInfo_ID);
         addDrugInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,27 +63,6 @@ public class PatientDetails extends AppCompatActivity {
             }
         });
 
-        // BottomNavigationView Buttons
-        BottomNavigationView bottomNavigationView = (BottomNavigationView)
-                findViewById(R.id.navigation_ID);
-
-        bottomNavigationView.setOnNavigationItemSelectedListener(
-                new BottomNavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.action_home:
-                                Toast.makeText(getApplicationContext(),"action_home",Toast.LENGTH_LONG).show();
-//                                startActivity(new Intent(getApplicationContext(), PatientDetails.class));
-                                return  true;
-                            case R.id.action_graph:
-                                Toast.makeText(getApplicationContext(),"action_graph",Toast.LENGTH_LONG).show();
-                                startActivity(new Intent(getApplicationContext(), DrungsinfoAndDates.class));
-                                return  true;
-                        }
-                        return true;
-                    }
-                });
 
 
         patient_Iamge = (ImageView) findViewById(R.id.patientsDetails_Image_ID);

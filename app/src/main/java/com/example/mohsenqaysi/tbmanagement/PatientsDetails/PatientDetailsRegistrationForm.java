@@ -89,7 +89,7 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
         setContentView(R.layout.activity_patients_details_registration_form);
         parentLayout = (ConstraintLayout) findViewById(R.id.activity_patients_details_registration_form);
 
-        requestionPermission();
+        requestingPermission();
 
         mStorage = FirebaseStorage.getInstance().getReference(); // RootRef
         mProgressDialog = new ProgressDialog(this);
@@ -155,7 +155,7 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
 
     }
 
-    private void requestionPermission() {
+    private void requestingPermission() {
 
         int permissionCheck = ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE);
 
@@ -284,11 +284,11 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
         switch (id){
             case R.id.prifileImage_ID:
                 Log.w("Hi", "I am profile Image_ID ;)");
-                    loadImage();
+                    loadImage(); // load and display the image picked.
                 break;
             case R.id.saveData_PatientForm_ID:
                 Log.w("Internet Status: ", String.valueOf(isConnected()));
-                if (isConnected() != false) {
+                if (isConnected()) {
                     saveUserDataToFirebaseDatabase();
                 } else {
                     snackBarMessages.googleServicesCheck(parentLayout,R.string.you_are_NOT_Connected);

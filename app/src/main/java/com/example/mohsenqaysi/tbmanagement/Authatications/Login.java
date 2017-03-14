@@ -230,7 +230,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
 
     public void isAdmin(){
-        progressDialog.setMessage("Re-Login in user...");
+        progressDialog.setMessage("Re-logging user...");
         progressDialog.show();
         // check is the user isAdmin
         ref = FirebaseDatabase.getInstance().getReferenceFromUrl(FIREBASE_URL_PATH).child(userFirebaseAuth_ID);
