@@ -12,14 +12,15 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
-public class ViewInfoDialog  extends AppCompatActivity {
-//    private ImageView patient_Iamge;
+public class ViewInfoDialog extends AppCompatActivity {
+    //    private ImageView patient_Iamge;
     private String URL;
     private ImageButton call_button;
 
-    public void showDialog(Activity activity, String image, String fullNmae, String phoneNumber , String fullAddress ){
+    public void showDialog(Activity activity, final String image, String fullNmae, String phoneNumber, String fullAddress) {
         final Dialog dialog = new Dialog(activity);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.activity_view_info_dialog);
@@ -34,14 +35,39 @@ public class ViewInfoDialog  extends AppCompatActivity {
         TextView phone = (TextView) dialog.findViewById(R.id.dialogInfoPhoneNumber_ID);
         phone.setText(phoneNumber);
 
-        ImageView profileImage = (ImageView) dialog.findViewById(R.id.dialogProfileImage_ID);
-        Picasso.with(dialog.getContext()).load(image).into(profileImage);
+        final ImageView profileImage = (ImageView) dialog.findViewById(R.id.dialogProfileImage_ID);
+//        Picasso.with(dialog.getContext()).load(image).into(profileImage);
+
+        Picasso.with(dialog.getContext()).load(image).networkPolicy(NetworkPolicy.OFFLINE).placeholder(R.drawable.profileplcaeholder).into(profileImage,
+                new com.squareup.picasso.Callback() {
+                    @Override
+                    public void onSuccess() {
+                    }
+
+                    @Override
+                    public void onError() {
+                        Picasso.with(getApplicationContext()).load(image).placeholder(R.drawable.profileplcaeholder).into(profileImage);
+                    }
+                });
 
         call_button = (ImageButton) dialog.findViewById(R.id.daialogPhoneIconButton_ID);
         call_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.e("call_button: ", "I am call_button");
+//                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "Your Phone_number"));
+//                if (ActivityCompat.checkSelfPermission(dialog.getContext(), android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+//                    // TODO: Consider calling
+//                    //    ActivityCompat#requestPermissions
+//                    // here to request the missing permissions, and then overriding
+//                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+//                    //                                          int[] grantResults)
+//                    // to handle the case where the user grants the permission. See the documentation
+//                    // for ActivityCompat#requestPermissions for more details.
+//                    return;
+//                }
+//                startActivity(intent);
+
             }
         });
         dialog.show();
