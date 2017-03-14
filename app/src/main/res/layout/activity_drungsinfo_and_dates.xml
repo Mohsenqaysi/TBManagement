@@ -136,7 +136,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
-        android:text="Please Enter the date about the drug the patient going to use"
+        android:text="Please enter the drug name and dates"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"

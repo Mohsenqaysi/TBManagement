@@ -46,7 +46,7 @@ public class PatientDetails extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
 
-    public static String currentChild_pushKey;
+    public static String currentChild;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +65,8 @@ public class PatientDetails extends AppCompatActivity {
         fullName = getIntent().getExtras().getString("fullName");
         dataOfBirth = getIntent().getExtras().getString("dataOfBirth");
         stage = getIntent().getExtras().getString("stage");
-        currentChild_pushKey = getIntent().getExtras().getString("currentChild_pushKey");
-        Log.e("currentChild_pushKey: ",currentChild_pushKey);
+        currentChild = getIntent().getExtras().getString("currentChild");
+        Log.e("currentChild: ", currentChild);
 
         info.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,7 +114,7 @@ public class PatientDetails extends AppCompatActivity {
         addDrugInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), DrugsInfoAndDates.class).putExtra(currentChild_pushKey,"currentChild_pushKey"));
+                startActivity(new Intent(getApplicationContext(), DrugsInfoAndDates.class).putExtra("currentChild",currentChild));
             }
         });
     }
@@ -128,7 +128,7 @@ public class PatientDetails extends AppCompatActivity {
         String ID = firstResponder.getUid();
         Log.e("PatientFragment_ID: ", ID);
 
-        mDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl(FIREBASE_URL_PATH_VISITS).child(ID).child(currentChild_pushKey).child("drug");
+        mDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl(FIREBASE_URL_PATH_VISITS).child(ID).child(currentChild).child("drug");
         mDatabase.keepSynced(true);
 
         mDatabase.addValueEventListener(new ValueEventListener() {

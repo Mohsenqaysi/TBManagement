@@ -57,7 +57,8 @@ public class DrugsInfoAndDates extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drungsinfo_and_dates);
 
-        currentChild = getIntent().getExtras().getString("currentChild_pushKey");
+        currentChild = getIntent().getExtras().getString("currentChild");
+
         final Calendar c = Calendar.getInstance();
         mYear  = c.get(Calendar.YEAR);
         mMonth = c.get(Calendar.MONTH);
@@ -161,14 +162,14 @@ public class DrugsInfoAndDates extends AppCompatActivity {
         String ID = fristResponder.getUid();
         Log.e("PatientFragment_ID: ", ID);
 
-        mDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl(FIREBASE_URL_PATH_VISITS).child(ID);
+        mDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl(FIREBASE_URL_PATH_VISITS).child(ID).child(currentChild);
 
         PatientDrugInfoObject patientDrugInfoObject = new PatientDrugInfoObject(drugName,startDate,schedule,endDate);
         Map<String, Object> drugData = patientDrugInfoObject.toMapObject(); // Prepare patientData object
 
         Map<String, Object> childUpdates = new HashMap<>(); // Push this object to fire-base
 
-        childUpdates.put("-KfC1ptS4NlMium9dQMc"  + "/drug/" , drugData);
+        childUpdates.put("/drug/" , drugData);
         mDatabase.updateChildren(childUpdates);
 
 

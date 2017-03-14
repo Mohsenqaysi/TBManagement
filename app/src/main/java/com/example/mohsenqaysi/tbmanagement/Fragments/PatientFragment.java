@@ -126,7 +126,7 @@ public class PatientFragment extends Fragment {
                         Log.e("address:",address);
                         intent.putExtra("fullAddress", address);
 
-                        intent.putExtra("currentChild_pushKey", getRef(position).getKey().toString());
+                        intent.putExtra("currentChild", getRef(position).getKey().toString());
                         startActivity(intent);
                     }
                 });
