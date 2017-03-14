@@ -27,7 +27,7 @@
 
                         <ImageView
                             android:id="@+id/dialogProfileImage_ID"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:adjustViewBounds="true"
                             android:foregroundGravity="fill"
@@ -118,17 +118,17 @@
 
                 <ImageView
                     android:id="@+id/imageView3"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:layout_marginLeft="8dp"
-                    android:layout_marginRight="0dp"
                     android:layout_marginTop="8dp"
                     app:layout_constraintBottom_toTopOf="@+id/dialogInfoAdress_ID"
                     app:layout_constraintLeft_toRightOf="@+id/imageView4"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/dialogInfoPhoneNumber_ID"
-                    app:srcCompat="@drawable/line" />
+                    app:srcCompat="@drawable/line"
+                    android:layout_marginStart="8dp" />
 
         </android.support.constraint.ConstraintLayout>
 

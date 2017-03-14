@@ -8,8 +8,8 @@ import com.google.firebase.database.IgnoreExtraProperties;
 @IgnoreExtraProperties
 public class PatientsDataObject {
 
-    public String name;
-    public String email;
+    private String name;
+    private String email;
 
     public PatientsDataObject() {
         // Default constructor required for calls to DataSnapshot.getValue(PatientsDataObject.class)

@@ -9,21 +9,18 @@ import java.util.Map;
 
 public class PatientsDetailsRegistrationDataObject {
 
-    public String image;
-    public String fullName;
-    public String dateOfBirth;
-    public String gender;
-    public String phoneNumber;
-    public String stageDiagnosis;
-    public String flatNumber;
-    public String address;
-    public String city;
-    public String area;
-    public String postalCode;
+    private String image;
+    private String fullName;
+    private String dateOfBirth;
+    private String gender;
+    private String phoneNumber;
+    private String stageDiagnosis;
+    private String flatNumber;
+    private String address;
+    private String city;
+    private String area;
+    private String postalCode;
 
-    //TODO: Add area variable and Image URL from Firebase Storge
-
-    public Map<String, Object> UserDetails = new HashMap<>();
 
     public PatientsDetailsRegistrationDataObject() {
     }
@@ -60,12 +57,6 @@ public class PatientsDetailsRegistrationDataObject {
         result.put("postalCode", postalCode);
         return  result;
     }
-
-    // TODO: concatenate the address into one line
-    public String fullAdress(){
-       return  "Flat NO. "+flatNumber +"-" + address + " " + city + " "+ area + " "+ postalCode;
-    }
-
 
 
 }

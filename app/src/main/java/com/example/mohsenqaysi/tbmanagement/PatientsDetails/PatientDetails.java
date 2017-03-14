@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -42,13 +41,12 @@ public class PatientDetails extends AppCompatActivity {
 
     private FloatingActionButton addDrugInfo;
     // init fire-base
-    private RecyclerView drugsList;
     private DatabaseReference mDatabase;
     private String FIREBASE_URL_PATH_VISITS = "https://tbmanagement-aff8e.firebaseio.com/PatientsVisits";
     private FirebaseAuth mAuth;
 
 
-    private String currentChild_pushKey;
+    public static String currentChild_pushKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,14 +54,6 @@ public class PatientDetails extends AppCompatActivity {
         setContentView(R.layout.activity_patients_details);
 
         addDrugInfo = (FloatingActionButton) findViewById(R.id.FloatingActionButtonPatientDetailsDrugInfo_ID);
-        addDrugInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), DrungsinfoAndDates.class));
-            }
-        });
-
-
 
         patient_Iamge = (ImageView) findViewById(R.id.patientsDetails_Image_ID);
         patient_fullName = (TextView) findViewById(R.id.patientDetails_fullName_ID);
@@ -71,7 +61,7 @@ public class PatientDetails extends AppCompatActivity {
         patient_stage = (TextView) findViewById(R.id.patientDetails_Stage_ID);
         info = (ImageButton) findViewById(R.id.infoImageButton_ID);
 
-         image =  getIntent().getExtras().getString("image");
+         image = getIntent().getExtras().getString("image");
         fullName = getIntent().getExtras().getString("fullName");
         dataOfBirth = getIntent().getExtras().getString("dataOfBirth");
         stage = getIntent().getExtras().getString("stage");
@@ -82,6 +72,7 @@ public class PatientDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // show the patient info on a dialog box
+                Log.e("InfoButton: ", "clicked");
                 ViewInfoDialog alert = new ViewInfoDialog();
 
 //                fullAddress
@@ -119,6 +110,13 @@ public class PatientDetails extends AppCompatActivity {
 
         // TODO: Read
         // TODO: Update in user info and store into in FireBase
+
+        addDrugInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), DrugsInfoAndDates.class).putExtra(currentChild_pushKey,"currentChild_pushKey"));
+            }
+        });
     }
 
     @Override
@@ -126,29 +124,33 @@ public class PatientDetails extends AppCompatActivity {
         super.onStart();
 
         mAuth = FirebaseAuth.getInstance();
-        FirebaseUser fristResponder = mAuth.getCurrentUser();
-        String ID = fristResponder.getUid();
+        FirebaseUser firstResponder = mAuth.getCurrentUser();
+        String ID = firstResponder.getUid();
         Log.e("PatientFragment_ID: ", ID);
 
-        mDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl(FIREBASE_URL_PATH_VISITS).child(ID).child(currentChild_pushKey).child("visit");
+        mDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl(FIREBASE_URL_PATH_VISITS).child(ID).child(currentChild_pushKey).child("drug");
         mDatabase.keepSynced(true);
 
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                patient_drugName.setText(dataSnapshot.child("drungNmae").getValue().toString());
-                patient_startDate.setText(dataSnapshot.child("startDate").getValue().toString());
-                patient_schedule.setText(dataSnapshot.child("schedule").getValue().toString());
-                patient_endDate.setText(dataSnapshot.child("endDate").getValue().toString());
+               if(dataSnapshot.exists()) {
+                   patient_drugName.setText(dataSnapshot.child("drugName").getValue().toString());
+                   patient_startDate.setText(dataSnapshot.child("startDate").getValue().toString());
+                   patient_schedule.setText(dataSnapshot.child("schedule").getValue().toString());
+                   patient_endDate.setText(dataSnapshot.child("endDate").getValue().toString());
+               } else {
+                   patient_drugName.setText(R.string.No_date);
+                   patient_startDate.setText(R.string.No_date);
+                   patient_schedule.setText(R.string.No_date);
+                   patient_endDate.setText(R.string.No_date);
+               }
 
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                patient_drugName.setText(R.string.No_date);
-                patient_startDate.setText(R.string.No_date);
-                patient_schedule.setText(R.string.No_date);
-                patient_endDate.setText(R.string.No_date);
+
             }
         });
     }

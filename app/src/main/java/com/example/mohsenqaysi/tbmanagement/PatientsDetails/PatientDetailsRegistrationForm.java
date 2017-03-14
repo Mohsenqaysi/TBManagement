@@ -262,7 +262,7 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
                 stageDiagnosis, flatNumber, address, city, area, postalCode);
         Map<String, Object> patientData = newPatient.toMapObject(); // Prepare patientData object
 
-        Map<String, Object> childUpdates = new HashMap<>(); // Push this oject to fire-base
+        Map<String, Object> childUpdates = new HashMap<>(); // Push this object to fire-base
         /* childUpdates takes in  (key) as the unique key and patientData as the object
          "/patients/" + key is the path where  patientData is add into
         */
