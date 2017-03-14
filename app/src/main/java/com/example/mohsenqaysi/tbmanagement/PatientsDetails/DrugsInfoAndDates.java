@@ -47,6 +47,8 @@ public class DrugsInfoAndDates extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
     private String FIREBASE_URL_PATH_VISITS = "https://tbmanagement-aff8e.firebaseio.com/PatientsVisits";
+    private String FIREBASE_ROOT_PATH = "https://tbmanagement-aff8e.firebaseio.com/";
+
     private FirebaseAuth mAuth;
 
     PatientDetails patientDetails = new PatientDetails();
@@ -171,6 +173,14 @@ public class DrugsInfoAndDates extends AppCompatActivity {
 
         childUpdates.put("/drug/" , drugData);
         mDatabase.updateChildren(childUpdates);
+
+        // Pass a list of all patients info onto patientsList so AdminActivity can read them all
+        // Path: "https://tbmanagement-aff8e.firebaseio.com/patientsList"
+        DatabaseReference patientsList = FirebaseDatabase.getInstance().getReferenceFromUrl(FIREBASE_ROOT_PATH).child("patientsListDrugs").child(currentChild);
+        Log.e("patientsListDrugs : ", patientsList.toString());
+        Map<String, Object> patientsDrugsChildUpdates = new HashMap<>(); // Create a new object and  Push it tp fire-base
+        patientsDrugsChildUpdates.put("/drug/", patientDrugInfoObject);
+        patientsList.updateChildren(patientsDrugsChildUpdates);
 
 
     }

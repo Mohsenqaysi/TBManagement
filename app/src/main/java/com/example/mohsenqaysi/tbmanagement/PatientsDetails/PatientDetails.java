@@ -38,13 +38,20 @@ public class PatientDetails extends AppCompatActivity {
     private TextView patient_endDate;
     private TextView patient_schedule;
     private ImageButton info;
+    private Boolean isAdmin;
 
     private FloatingActionButton addDrugInfo;
+    private FloatingActionButton addVisitInfo;  //FloatingActionButtonPatientDetailsVisitInfo_ID
     // init fire-base
     private DatabaseReference mDatabase;
     private String FIREBASE_URL_PATH_VISITS = "https://tbmanagement-aff8e.firebaseio.com/PatientsVisits";
+    private String FIREBASE_URL_PATH_ADMINS = "https://tbmanagement-aff8e.firebaseio.com/admins";
+    private String FIREBASE_URL_PATH_ROOT = "https://tbmanagement-aff8e.firebaseio.com/";
+
+
     private FirebaseAuth mAuth;
 
+    private String firstResponder_ID;
 
     public static String currentChild;
 
@@ -54,6 +61,7 @@ public class PatientDetails extends AppCompatActivity {
         setContentView(R.layout.activity_patients_details);
 
         addDrugInfo = (FloatingActionButton) findViewById(R.id.FloatingActionButtonPatientDetailsDrugInfo_ID);
+        addVisitInfo = (FloatingActionButton) findViewById(R.id.FloatingActionButtonPatientDetailsVisitInfo_ID);
 
         patient_Iamge = (ImageView) findViewById(R.id.patientsDetails_Image_ID);
         patient_fullName = (TextView) findViewById(R.id.patientDetails_fullName_ID);
@@ -66,7 +74,9 @@ public class PatientDetails extends AppCompatActivity {
         dataOfBirth = getIntent().getExtras().getString("dataOfBirth");
         stage = getIntent().getExtras().getString("stage");
         currentChild = getIntent().getExtras().getString("currentChild");
-        Log.e("currentChild: ", currentChild);
+        isAdmin = getIntent().getExtras().getBoolean("isAdmin");
+
+//        Log.e("currentChild: ", currentChild);
 
         info.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,34 +135,63 @@ public class PatientDetails extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser firstResponder = mAuth.getCurrentUser();
-        String ID = firstResponder.getUid();
-        Log.e("PatientFragment_ID: ", ID);
+        firstResponder_ID = firstResponder.getUid();
+        Log.e("PatientFragment_ID: ", firstResponder_ID);
 
-        mDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl(FIREBASE_URL_PATH_VISITS).child(ID).child(currentChild).child("drug");
-        mDatabase.keepSynced(true);
+        if (isAdmin){
+            addDrugInfo.hide();
+            addVisitInfo.hide();
+            mDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl(FIREBASE_URL_PATH_ROOT).child("patientsListDrugs").child(currentChild).child("drug");
+            mDatabase.keepSynced(true);
+            mDatabase.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        patient_drugName.setText(dataSnapshot.child("drugName").getValue().toString());
+                        patient_startDate.setText(dataSnapshot.child("startDate").getValue().toString());
+                        patient_schedule.setText(dataSnapshot.child("schedule").getValue().toString());
+                        patient_endDate.setText(dataSnapshot.child("endDate").getValue().toString());
+                    } else {
+                        patient_drugName.setText(R.string.No_date);
+                        patient_startDate.setText(R.string.No_date);
+                        patient_schedule.setText(R.string.No_date);
+                        patient_endDate.setText(R.string.No_date);
+                    }
+                }
 
-        mDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-               if(dataSnapshot.exists()) {
-                   patient_drugName.setText(dataSnapshot.child("drugName").getValue().toString());
-                   patient_startDate.setText(dataSnapshot.child("startDate").getValue().toString());
-                   patient_schedule.setText(dataSnapshot.child("schedule").getValue().toString());
-                   patient_endDate.setText(dataSnapshot.child("endDate").getValue().toString());
-               } else {
-                   patient_drugName.setText(R.string.No_date);
-                   patient_startDate.setText(R.string.No_date);
-                   patient_schedule.setText(R.string.No_date);
-                   patient_endDate.setText(R.string.No_date);
-               }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            }
+                }
+            });
+        } else {
+            mDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl(FIREBASE_URL_PATH_ROOT).child("patientsListDrugs").child(currentChild).child("drug");
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+//            mDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl(FIREBASE_URL_PATH_VISITS).child(firstResponder_ID).child(currentChild).child("drug");
+            mDatabase.keepSynced(true);
+            mDatabase.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        patient_drugName.setText(dataSnapshot.child("drugName").getValue().toString());
+                        patient_startDate.setText(dataSnapshot.child("startDate").getValue().toString());
+                        patient_schedule.setText(dataSnapshot.child("schedule").getValue().toString());
+                        patient_endDate.setText(dataSnapshot.child("endDate").getValue().toString());
+                    } else {
+                        patient_drugName.setText(R.string.No_date);
+                        patient_startDate.setText(R.string.No_date);
+                        patient_schedule.setText(R.string.No_date);
+                        patient_endDate.setText(R.string.No_date);
+                    }
+                }
 
-            }
-        });
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+
+            });
+        }
     }
 
 }
