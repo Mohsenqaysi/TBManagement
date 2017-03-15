@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.mohsenqaysi.tbmanagement.Helper.RoundedTransformation;
 import com.example.mohsenqaysi.tbmanagement.R;
 import com.example.mohsenqaysi.tbmanagement.ViewInfoDialog;
+import com.example.mohsenqaysi.tbmanagement.VisitsGraph;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -37,6 +38,9 @@ public class PatientDetails extends AppCompatActivity {
     private TextView patient_startDate;
     private TextView patient_endDate;
     private TextView patient_schedule;
+    private TextView donetVisits;
+    private TextView missedVisits;
+
     private ImageButton info;
     private Boolean isAdmin;
 
@@ -69,7 +73,28 @@ public class PatientDetails extends AppCompatActivity {
         patient_stage = (TextView) findViewById(R.id.patientDetails_Stage_ID);
         info = (ImageButton) findViewById(R.id.infoImageButton_ID);
 
-         image = getIntent().getExtras().getString("image");
+        donetVisits = (TextView) findViewById(R.id.done_ID);
+        missedVisits = (TextView) findViewById(R.id.missed_ID);
+
+        donetVisits.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), VisitsGraph.class));
+
+            }
+        });
+
+        missedVisits.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), VisitsGraph.class));
+
+            }
+        });
+
+
+
+        image = getIntent().getExtras().getString("image");
         fullName = getIntent().getExtras().getString("fullName");
         dataOfBirth = getIntent().getExtras().getString("dataOfBirth");
         stage = getIntent().getExtras().getString("stage");

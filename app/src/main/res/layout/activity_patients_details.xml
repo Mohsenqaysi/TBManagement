@@ -131,7 +131,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="80dp"
             android:layout_marginRight="80dp"
-            android:text="2"
+            android:text="0"
             android:textColor="@color/tw__composer_black"
             android:textSize="36sp"
             app:layout_constraintRight_toRightOf="@+id/headerImage_ID"
@@ -140,19 +140,21 @@
 
         <TextView
             android:id="@+id/done_ID"
+            android:clickable="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="80dp"
             android:layout_marginStart="80dp"
             android:layout_marginTop="8dp"
-            android:text="12"
+            android:text="0"
             android:textColor="@color/tw__composer_black"
             android:textSize="36sp"
             app:layout_constraintLeft_toLeftOf="@+id/headerImage_ID"
             app:layout_constraintTop_toTopOf="@+id/headerImage_ID" />
 
         <TextView
-            android:id="@+id/pastVisits_ID"
+            android:id="@+id/missedVisits_ID"
+            android:clickable="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
