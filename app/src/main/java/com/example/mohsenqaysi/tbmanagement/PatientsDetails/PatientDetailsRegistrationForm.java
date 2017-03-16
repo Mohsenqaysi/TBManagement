@@ -227,8 +227,7 @@ public class PatientDetailsRegistrationForm extends AppCompatActivity implements
                     writeNewPost(URL_PATH , Patient_full_Name,Patient_dateOfBirth, Patient_gender, Patient_phone_Number, Patient_stage_Diagnosis,
                             Patient_flat_Number, Patient_address, Patient_city, Patient_area, Patient_postalCode);
                      mProgressDialog.dismiss();
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    finish();
+                    onBackPressed(); // go back to the previous activity
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override

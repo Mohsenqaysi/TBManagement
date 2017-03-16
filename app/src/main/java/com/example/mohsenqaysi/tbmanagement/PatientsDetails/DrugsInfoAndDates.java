@@ -2,6 +2,7 @@ package com.example.mohsenqaysi.tbmanagement.PatientsDetails;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.Bundle;
@@ -38,7 +39,7 @@ public class DrugsInfoAndDates extends AppCompatActivity {
     private ImageButton endDate;
     private Button saveData;
 
-
+    private ProgressDialog progressDialog;
     private String currentChild;
     private int mYear, mMonth, mDay;
     static final int DATE_PICKER_ID = 1111;
@@ -153,9 +154,11 @@ public class DrugsInfoAndDates extends AppCompatActivity {
 
        String name =  drugname.getText().toString();
        writeNewPost(name,todayDate,scheule,todayDate);
-        startActivity(new Intent(getApplicationContext(), PatientDetails.class));
-        finish();
+        onBackPressed();
+    }
 
+    private void DietailsActivity() {
+        startActivity(new Intent(DrugsInfoAndDates.this, PatientDetails.class));
     }
 
     private void writeNewPost(String drugName, String startDate, String schedule,String endDate){
