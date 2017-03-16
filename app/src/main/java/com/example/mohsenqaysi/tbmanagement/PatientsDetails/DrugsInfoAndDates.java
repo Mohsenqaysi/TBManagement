@@ -3,9 +3,9 @@ package com.example.mohsenqaysi.tbmanagement.PatientsDetails;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mohsenqaysi.tbmanagement.FirebaseDataObjects.PatientDrugInfoObject;
 import com.example.mohsenqaysi.tbmanagement.R;
@@ -62,6 +63,8 @@ public class DrugsInfoAndDates extends AppCompatActivity {
 
         currentChild = getIntent().getExtras().getString("currentChild");
 
+        progressDialog = new ProgressDialog(this);
+
         final Calendar c = Calendar.getInstance();
         mYear  = c.get(Calendar.YEAR);
         mMonth = c.get(Calendar.MONTH);
@@ -89,9 +92,21 @@ public class DrugsInfoAndDates extends AppCompatActivity {
         saveData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressDialog.setMessage("Saving Dating...");
+                progressDialog.show();
                 saveData();
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        //Do something after 100ms
+                        progressDialog.dismiss();
+                        onBackPressed();
+                    }
+                }, 1000);
             }
         });
+
 
 
         // Get the type of the gender from the spinner
@@ -151,15 +166,16 @@ public class DrugsInfoAndDates extends AppCompatActivity {
     private void saveData() {
 
         // PatientDrugInfoObject
-
-       String name =  drugname.getText().toString();
-       writeNewPost(name,todayDate,scheule,todayDate);
-        onBackPressed();
+        String name = drugname.getText().toString();
+        if (name.equals("")){
+            name =  "No date available";
+            scheule = "No date available";
+            writeNewPost(name, todayDate, scheule, todayDate);
+        } else {
+            writeNewPost(name, todayDate, scheule, todayDate);
+        }
     }
 
-    private void DietailsActivity() {
-        startActivity(new Intent(DrugsInfoAndDates.this, PatientDetails.class));
-    }
 
     private void writeNewPost(String drugName, String startDate, String schedule,String endDate){
         mAuth = FirebaseAuth.getInstance();

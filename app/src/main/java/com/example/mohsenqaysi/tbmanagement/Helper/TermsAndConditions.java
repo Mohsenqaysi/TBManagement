@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 
 import com.example.mohsenqaysi.tbmanagement.MainActivity;
-import com.example.mohsenqaysi.tbmanagement.PatientsDetails.PatientDetailsRegistrationForm;
 import com.example.mohsenqaysi.tbmanagement.R;
 
 public class TermsAndConditions extends AppCompatActivity implements View.OnClickListener {
@@ -48,13 +47,13 @@ public class TermsAndConditions extends AppCompatActivity implements View.OnClic
         }
 
         if (view == agree){
-            startActivity(new Intent(getApplicationContext(), PatientDetailsRegistrationForm.class));
+//            startActivity(new Intent(getApplicationContext(), PatientDetailsRegistrationForm.class));
             finish();
         }
 
         if (view == cancel){
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            finish();
+           onBackPressed();
         }
     }
 
