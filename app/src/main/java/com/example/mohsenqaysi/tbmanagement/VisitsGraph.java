@@ -1,135 +1,75 @@
 package com.example.mohsenqaysi.tbmanagement;
 
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.RelativeSizeSpan;
-import android.text.style.StyleSpan;
-import android.view.Display;
 import android.view.WindowManager;
 
-import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.formatter.PercentFormatter;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import static com.example.mohsenqaysi.tbmanagement.R.id.chart;
+import static com.github.mikephil.charting.utils.ColorTemplate.rgb;
+/*
+ https://github.com/PhilJay/MPAndroidChart
+ */
 public class VisitsGraph extends AppCompatActivity {
 
-    private PieChart mChart;
+    private PieChart pieChart;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-
-        PieChart pieChart = (PieChart) findViewById(R.id.chart);
-
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_visits_graph);
+        super.onCreate(savedInstanceState);
 
-        mChart = (PieChart) findViewById(R.id.chart);
-        mChart.setBackgroundColor(Color.WHITE);
+        pieChart = (PieChart) findViewById(chart);
+        pieChart.setRotationEnabled(true);
+        pieChart.setCenterText("Patient Visits");
+        pieChart.setCenterTextSize(18f);
+        pieChart.setCenterTextColor(R.color.colorPrimaryDark);
 
-        moveOffScreen();
+        pieChart.setTransparentCircleAlpha(110);
+        pieChart.setHoleRadius(58f);
+        pieChart.setTransparentCircleRadius(61f);
+        pieChart.setEntryLabelTextSize(14f);
 
-        mChart.setUsePercentValues(true);
-        mChart.getDescription().setEnabled(false);
+        List<PieEntry> entries = new ArrayList<>();
 
-        mChart.setCenterText(generateCenterSpannableText());
+        entries.add(new PieEntry(50.0f, "Done"));
+        entries.add(new PieEntry(25.0f, "Missed"));
 
-        mChart.setDrawHoleEnabled(true);
-        mChart.setHoleColor(Color.WHITE);
+        PieDataSet set = new PieDataSet(entries,null);
+        set.setColors(MATERIAL_COLORS); // add color
+        set.setSliceSpace(4f); // add space between the Slices
+        set.setValueTextSize(18f);
 
-        mChart.setTransparentCircleColor(Color.WHITE);
-        mChart.setTransparentCircleAlpha(110);
+        PieData data = new PieData(set);
+        pieChart.setData(data);
+//        pieChart.setUsePercentValues(true);
+        pieChart.invalidate(); // refresh the view
+        pieChart.animateXY(2000,2000); // add animation
+        pieChart.getDescription().setEnabled(false);
 
-        mChart.setHoleRadius(58f);
-        mChart.setTransparentCircleRadius(61f);
+        Legend legend = pieChart.getLegend();
+        legend.setFormSize(10f); // set the size of the legend forms/shapes
+        legend.setForm(Legend.LegendForm.CIRCLE); // set what type of form/shape should be used
+        legend.setTextSize(12f);
+        legend.setTextColor(Color.BLACK);
+        legend.setXEntrySpace(5f); // set the space between the legend entries on the x-axis
+        legend.setYEntrySpace(5f); // set the space between the legend entries on the y-axis
 
-        mChart.setDrawCenterText(true);
-
-        mChart.setRotationEnabled(false);
-        mChart.setHighlightPerTapEnabled(true);
-
-        mChart.setMaxAngle(180f); // HALF CHART
-        mChart.setRotationAngle(180f);
-        mChart.setCenterTextOffset(0, -20);
-
-        setData(4, 100);
-
-        mChart.animateY(1400, Easing.EasingOption.EaseInOutQuad);
-
-        Legend l = mChart.getLegend();
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
-        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
-        l.setDrawInside(false);
-        l.setXEntrySpace(7f);
-        l.setYEntrySpace(0f);
-        l.setYOffset(0f);
-
-        // entry label styling
-        mChart.setEntryLabelColor(Color.WHITE);
-        mChart.setEntryLabelTextSize(12f);
     }
 
-    private void setData(int count, float range) {
-
-        ArrayList<PieEntry> values = new ArrayList<PieEntry>();
-
-        for (int i = 0; i < count; i++) {
-            values.add(new PieEntry((float) ((Math.random() * range) + range / 5), 5));
-        }
-
-        PieDataSet dataSet = new PieDataSet(values, "Election Results");
-        dataSet.setSliceSpace(3f);
-        dataSet.setSelectionShift(5f);
-
-        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
-        //dataSet.setSelectionShift(0f);
-
-        PieData data = new PieData(dataSet);
-        data.setValueFormatter(new PercentFormatter());
-        data.setValueTextSize(11f);
-        data.setValueTextColor(Color.WHITE);
-        mChart.setData(data);
-
-        mChart.invalidate();
-    }
-
-    private SpannableString generateCenterSpannableText() {
-
-        SpannableString s = new SpannableString("MPAndroidChart\ndeveloped by Philipp Jahoda");
-        s.setSpan(new RelativeSizeSpan(1.7f), 0, 14, 0);
-        s.setSpan(new StyleSpan(Typeface.NORMAL), 14, s.length() - 15, 0);
-        s.setSpan(new ForegroundColorSpan(Color.GRAY), 14, s.length() - 15, 0);
-        s.setSpan(new RelativeSizeSpan(.8f), 14, s.length() - 15, 0);
-        s.setSpan(new StyleSpan(Typeface.ITALIC), s.length() - 14, s.length(), 0);
-        s.setSpan(new ForegroundColorSpan(ColorTemplate.getHoloBlue()), s.length() - 14, s.length(), 0);
-        return s;
-    }
-
-    private void moveOffScreen() {
-
-        Display display = getWindowManager().getDefaultDisplay();
-        int height = display.getHeight();  // deprecated
-
-        int offset = (int)(height * 0.65); /* percent to move */
-
-//        RelativeLayout.LayoutParams rlParams =
-//                (RelativeLayout.LayoutParams)mChart.getLayoutParams();
-//        rlParams.setMargins(0, 0, 0, -offset);
-//        mChart.setLayoutParams(rlParams);
-    }
-
-
+    public static final int[] MATERIAL_COLORS = {
+            rgb("#2ecc71"), rgb("#e74c3c")
+    };
 }
