@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.mohsenqaysi.tbmanagement.Helper.RoundedTransformation;
 import com.example.mohsenqaysi.tbmanagement.R;
 import com.example.mohsenqaysi.tbmanagement.ViewInfoDialog;
+import com.example.mohsenqaysi.tbmanagement.VisitsCounter;
 import com.example.mohsenqaysi.tbmanagement.VisitsGraph;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -80,7 +81,6 @@ public class PatientDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), VisitsGraph.class));
-
             }
         });
 
@@ -88,7 +88,6 @@ public class PatientDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), VisitsGraph.class));
-
             }
         });
 
@@ -152,7 +151,16 @@ public class PatientDetails extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), DrugsInfoAndDates.class).putExtra("currentChild",currentChild));
             }
         });
+
+        addVisitInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), VisitsCounter.class));
+            }
+        });
     }
+
+
 
     @Override
     protected void onStart() {

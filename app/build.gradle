@@ -31,7 +31,7 @@ dependencies {
         compile 'com.google.android.gms:play-services-auth:10.0.1'
         compile 'com.android.support:multidex:1.0.1'
 
-         //  Third party open_sources libraries
+        //  Third party open_sources libraries
         // https://github.com/hdodenhof/CircleImageView
         compile 'de.hdodenhof:circleimageview:2.1.0'
         // https://github.com/square/picasso
@@ -57,5 +57,6 @@ dependencies {
     compile 'com.android.support:support-v4:25.2.0'
     testCompile 'junit:junit:4.12'
 }
+
 
 apply plugin: 'com.google.gms.google-services'

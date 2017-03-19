@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <!-- android:name=".FirebaseDataObjects.TBManagement" -->
     <application
@@ -63,7 +63,8 @@
             android:screenOrientation="portrait" />
         <activity android:name=".VisitsGraph" />
         <activity android:name=".PatientsDetails.DrugsInfoAndDates" />
-        <activity android:name=".ViewInfoDialog"></activity>
+        <activity android:name=".ViewInfoDialog" />
+        <activity android:name=".VisitsCounter"></activity>
     </application>
 
 </manifest>
