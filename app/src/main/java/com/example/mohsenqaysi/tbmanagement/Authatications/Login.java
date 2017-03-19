@@ -183,8 +183,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                             snackBarMessages.SnackBarMessages(parentLayout, R.string.Log_in_failed);
                             snackBarMessages.showToast();
                             progressDialog.hide();
-                            errorEmail.setError("Email or Password is wrong");
-                            errorPassword.setError("Email or Password is wrong");
+                            errorEmail.setError(getString(R.string.Email_Password_Wrong));
+                            errorPassword.setError(getString(R.string.Email_Password_Wrong));
                         } else {
                             isAdmin();
                             progressDialog.dismiss();
