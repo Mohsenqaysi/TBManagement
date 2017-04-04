@@ -37,7 +37,7 @@ dependencies {
         // https://github.com/square/picasso
         compile 'com.squareup.picasso:picasso:2.5.2'
         compile 'com.squareup.okhttp:okhttp:2.4.0'
-//        // https://github.com/PhilJay/MPAndroidChart
+        // https://github.com/PhilJay/MPAndroidChart
         compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
 
         compile 'com.jjoe64:graphview:4.2.1'

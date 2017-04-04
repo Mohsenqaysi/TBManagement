@@ -75,15 +75,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
+                // if already logged in
                 if (user != null) {
-                    // PatientsDataObject is signed in
                     userFirebaseAuth_ID = user.getUid();
-                    Log.e(TAG, "onAuthStateChanged:signed_in:" + userFirebaseAuth_ID);
-                    // TODO: Check is the user is logged in for the first time and ask the to fill their full details
-                    isAdmin();
-
+                    Log.e(TAG,"onAuthStateChanged:signed_in:" + userFirebaseAuth_ID);
+                    isAdmin(); // check if the user is an admin or not
                 } else {
-                    // PatientsDataObject is signed out
+                    // if new user trying to log in
                     Log.e(TAG, "onAuthStateChanged:signed_out");
                     signInIntoFirebase();
                 }
@@ -230,12 +228,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
 
     public void isAdmin(){
-        progressDialog.setMessage("Re-logging user...");
+        progressDialog.setMessage("re-logging user...");
         progressDialog.show();
-        // check is the user isAdmin
+        // check if the the user isAdmin
         ref = FirebaseDatabase.getInstance().getReferenceFromUrl(FIREBASE_URL_PATH).child(userFirebaseAuth_ID);
         ref.keepSynced(true);
-//        progressDialog.show();
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -254,8 +251,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 progressDialog.dismiss();
             }
         });
-
-
     }
 
 }
