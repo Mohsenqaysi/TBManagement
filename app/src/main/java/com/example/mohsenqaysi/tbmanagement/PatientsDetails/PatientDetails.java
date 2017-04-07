@@ -200,7 +200,6 @@ public class PatientDetails extends AppCompatActivity {
         } else {
             mDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl(FIREBASE_URL_PATH_ROOT).child("patientsListDrugs").child(currentChild).child("drug");
 
-//            mDatabase = FirebaseDatabase.getInstance().getReferenceFromUrl(FIREBASE_URL_PATH_VISITS).child(firstResponder_ID).child(currentChild).child("drug");
             mDatabase.keepSynced(true);
             mDatabase.addValueEventListener(new ValueEventListener() {
                 @Override

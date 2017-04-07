@@ -17,7 +17,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.mohsenqaysi.tbmanagement.FirebaseDataObjects.PatientDrugInfoObject;
 import com.example.mohsenqaysi.tbmanagement.R;
@@ -29,6 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 import java.util.Map;
 
+import static android.R.attr.data;
 import static com.example.mohsenqaysi.tbmanagement.R.array.schedule;
 
 
@@ -43,8 +43,12 @@ public class DrugsInfoAndDates extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private String currentChild;
     private int mYear, mMonth, mDay;
-    static final int DATE_PICKER_ID = 1111;
-    private String todayDate = "No date available";
+    static final int DATE_PICKER_START_ID = 111;
+    static final int DATE_PICKER_END_ID = 222;
+
+    private String todayDateStart = "No date available";
+    private String todayDateEnd = "No date available";
+
     private String scheule = "No date available";
 
     private DatabaseReference mDatabase;
@@ -75,16 +79,18 @@ public class DrugsInfoAndDates extends AppCompatActivity {
         startDate = (ImageButton) findViewById(R.id.pickStartingDate_ID);
         endDate = (ImageButton) findViewById(R.id.pickEndingDate_ID);
         saveData = (Button) findViewById(R.id.drugInfoSaveButton_ID);
+
         startDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialog(DATE_PICKER_ID);
+                showDialog(DATE_PICKER_START_ID);
             }
         });
+
         endDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialog(DATE_PICKER_ID);
+                showDialog(DATE_PICKER_END_ID);
             }
         });
 
@@ -106,7 +112,6 @@ public class DrugsInfoAndDates extends AppCompatActivity {
                 }, 1000);
             }
         });
-
 
 
         // Get the type of the gender from the spinner
@@ -137,16 +142,24 @@ public class DrugsInfoAndDates extends AppCompatActivity {
     @Override
     protected Dialog onCreateDialog(int id) {
         switch (id) {
-            case DATE_PICKER_ID:
+            case DATE_PICKER_START_ID:
                 // open date-picker dialog.
                 // set date picker for current date
-                // add pickerListener listner to date picker
-                return new DatePickerDialog(this, pickerListener, mYear, mMonth,mDay);
+                // add pickerListener listener to date picker
+                return new DatePickerDialog(this, pickerListenerStart, mYear, mMonth,mDay);
+
+            case DATE_PICKER_END_ID:
+                // open date-picker dialog.
+                // set date picker for current date
+                // add pickerListener listener to date picker
+                return new DatePickerDialog(this, pickerListenerEnd, mYear, mMonth,mDay);
+
         }
         return null;
     }
 
-    private DatePickerDialog.OnDateSetListener pickerListener = new DatePickerDialog.OnDateSetListener() {
+
+    private DatePickerDialog.OnDateSetListener pickerListenerStart = new DatePickerDialog.OnDateSetListener() {
 
         // when dialog box is closed, the below method will be called.
         @Override
@@ -156,9 +169,26 @@ public class DrugsInfoAndDates extends AppCompatActivity {
             mYear  = selectedYear;
             mMonth = selectedMonth;
             mDay   = selectedDay;
+            // the month start from 0 -> January
+            todayDateStart = mDay +"/"+ (mMonth +1) +"/"+ mYear;
+            datepicked.setText(todayDateStart);
 
-            todayDate = mDay +"/"+ (mMonth +1) +"/"+ mYear;
-            datepicked.setText(todayDate);
+        }
+    };
+
+    private DatePickerDialog.OnDateSetListener pickerListenerEnd = new DatePickerDialog.OnDateSetListener() {
+
+        // when dialog box is closed, the below method will be called.
+        @Override
+        public void onDateSet(DatePicker view, int selectedYear,
+                              int selectedMonth, int selectedDay) {
+
+            mYear  = selectedYear;
+            mMonth = selectedMonth;
+            mDay   = selectedDay;
+            // the month start from 0 -> January
+            todayDateEnd = mDay +"/"+ (mMonth +1) +"/"+ mYear;
+            datepicked.setText(todayDateEnd);
 
         }
     };
@@ -170,9 +200,9 @@ public class DrugsInfoAndDates extends AppCompatActivity {
         if (name.equals("")){
             name =  "No date available";
             scheule = "No date available";
-            writeNewPost(name, todayDate, scheule, todayDate);
+            writeNewPost(name, todayDateEnd, scheule, todayDateStart);
         } else {
-            writeNewPost(name, todayDate, scheule, todayDate);
+            writeNewPost(name, todayDateEnd, scheule, todayDateStart);
         }
     }
 
@@ -200,7 +230,6 @@ public class DrugsInfoAndDates extends AppCompatActivity {
         Map<String, Object> patientsDrugsChildUpdates = new HashMap<>(); // Create a new object and  Push it tp fire-base
         patientsDrugsChildUpdates.put("/drug/", patientDrugInfoObject);
         patientsList.updateChildren(patientsDrugsChildUpdates);
-
 
     }
 
