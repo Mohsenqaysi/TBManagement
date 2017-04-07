@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -28,7 +30,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 import java.util.Map;
 
-import static android.R.attr.data;
 import static com.example.mohsenqaysi.tbmanagement.R.array.schedule;
 
 
@@ -138,7 +139,6 @@ public class DrugsInfoAndDates extends AppCompatActivity {
     }
 
 
-
     @Override
     protected Dialog onCreateDialog(int id) {
         switch (id) {
@@ -149,9 +149,6 @@ public class DrugsInfoAndDates extends AppCompatActivity {
                 return new DatePickerDialog(this, pickerListenerStart, mYear, mMonth,mDay);
 
             case DATE_PICKER_END_ID:
-                // open date-picker dialog.
-                // set date picker for current date
-                // add pickerListener listener to date picker
                 return new DatePickerDialog(this, pickerListenerEnd, mYear, mMonth,mDay);
 
         }

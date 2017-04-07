@@ -25,6 +25,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
+import java.util.Random;
+
 public class PatientDetails extends AppCompatActivity {
 
     private String image;
@@ -41,6 +43,10 @@ public class PatientDetails extends AppCompatActivity {
     private TextView patient_schedule;
     private TextView donetVisits;
     private TextView missedVisits;
+    private String numberOfVisits = "0";
+    private String visitsType = "";
+
+
 
     private ImageButton info;
     private Boolean isAdmin;
@@ -77,17 +83,43 @@ public class PatientDetails extends AppCompatActivity {
         donetVisits = (TextView) findViewById(R.id.done_ID);
         missedVisits = (TextView) findViewById(R.id.missed_ID);
 
+
+        numberOfVisits = getIntent().getExtras().getString("numberOfVisits");
+        visitsType = getIntent().getExtras().getString("visitType");
+
+//        if (numberOfVisits == null){
+//            donetVisits.setText("0");
+//            missedVisits.setText("0");
+//        } else {
+            Random rand = new Random();
+
+            final int  done = rand.nextInt(100) + 1;
+//            if (visitsType.equalsIgnoreCase("Done")) {
+                donetVisits.setText(Integer.toString(done));
+//            } else {
+            final int  missed = rand.nextInt(100) + 1;
+
+            missedVisits.setText(Integer.toString(missed));
+//            }
+//        }
+
         donetVisits.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), VisitsGraph.class));
+                Intent intent = new Intent(getApplicationContext(), VisitsGraph.class);
+                intent.putExtra("Done",done);
+                intent.putExtra("Missed",missed);
+                startActivity(intent);
             }
         });
 
         missedVisits.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), VisitsGraph.class));
+                Intent intent = new Intent(getApplicationContext(), VisitsGraph.class);
+                intent.putExtra("done",done);
+                intent.putExtra("missed",missed);
+                startActivity(intent);
             }
         });
 
@@ -99,6 +131,9 @@ public class PatientDetails extends AppCompatActivity {
         stage = getIntent().getExtras().getString("stage");
         currentChild = getIntent().getExtras().getString("currentChild");
         isAdmin = getIntent().getExtras().getBoolean("isAdmin");
+
+
+
 
 //        Log.e("currentChild: ", currentChild);
 
@@ -139,11 +174,8 @@ public class PatientDetails extends AppCompatActivity {
         patient_startDate = (TextView) findViewById(R.id.startDateValue_ID);
         patient_endDate =  (TextView) findViewById(R.id.endDateValue_ID);
         patient_schedule = (TextView) findViewById(R.id.scheduleDateValue_ID);
-        Log.w("satge: " ,stage);
+//        Log.w("satge: " ,stage);
 
-
-        // TODO: Read
-        // TODO: Update in user info and store into in FireBase
 
         addDrugInfo.setOnClickListener(new View.OnClickListener() {
             @Override

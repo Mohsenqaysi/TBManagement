@@ -3,6 +3,7 @@ package com.example.mohsenqaysi.tbmanagement;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.WindowManager;
 
 import com.github.mikephil.charting.charts.PieChart;
@@ -22,6 +23,8 @@ import static com.github.mikephil.charting.utils.ColorTemplate.rgb;
 public class VisitsGraph extends AppCompatActivity {
 
     private PieChart pieChart;
+    private int numberOfVisitsDone;
+    private int numberOfVisitsMissed;
 
 
     @Override
@@ -42,10 +45,19 @@ public class VisitsGraph extends AppCompatActivity {
         pieChart.setTransparentCircleRadius(61f);
         pieChart.setEntryLabelTextSize(14f);
 
+        // Data passed using an intent
         List<PieEntry> entries = new ArrayList<>();
 
-        entries.add(new PieEntry(50.0f, "Done"));
-        entries.add(new PieEntry(25.0f, "Missed"));
+
+        numberOfVisitsDone = getIntent().getExtras().getInt("done");
+        numberOfVisitsMissed = getIntent().getExtras().getInt("missed");
+
+        Log.e("numberOfVisitsDone: ", String.valueOf(numberOfVisitsDone));
+        Log.e("numberOfVisitsMissed: ", String.valueOf(numberOfVisitsMissed));
+
+
+        entries.add(new PieEntry(numberOfVisitsDone, "Done"));
+        entries.add(new PieEntry(numberOfVisitsMissed, "Missed"));
 
         PieDataSet set = new PieDataSet(entries,null);
         set.setColors(MATERIAL_COLORS); // add color
