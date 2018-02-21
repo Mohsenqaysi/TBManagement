@@ -75,12 +75,5 @@ public class PatientsDetails extends AppCompatActivity {
 
         Log.w("satge: " ,stage);
 
-
-        // TODO: Take in user info and store into in FireBase
-        // TODO: Create an object class to send it to FireBase
-
-
-        // TODO: Update in user info and store into in FireBase
-
     }
 }
